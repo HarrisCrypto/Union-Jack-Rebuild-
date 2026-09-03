@@ -8,6 +8,8 @@
 | Workshop stills | Client Wix CDN (`static.wixstatic.com/media/0d4294_*`) | Client-owned. Do not invent owner / year / colour / duration stories for specific cars |
 | `media/shop/healey-arrive.jpg` | Re-hosted from the live Union Jack Wix gallery (`0d4294_19c654a9…`) — Healey on a rollback | Client-owned shop photograph. Arrival / how they come in. Not claimed as the same car as the finished 3000 |
 | `media/shop/healey-finished.jpg` | Re-hosted from the live Union Jack homepage gallery (`0d4294_47c9e453…`) — finished Austin-Healey 3000, UK plate NWJ 14D | Client-owned shop photograph. Finished work they already publish |
+| `media/shop/jaguar-finished.jpg` | Re-hosted from the live Union Jack Wix gallery (`0d4294_a0f10c7c…`) — finished black Jaguar at the San Martin shop (white roll-up door). Same scene as their Facebook still; Wix original used so Facebook UI is not in the file | Client-owned shop photograph |
+| `media/shop/mg-t-finished.jpg` | Re-hosted from the live Union Jack Wix gallery (`0d4294_da5333c8…`) — finished red MG T-series they already publish | Client-owned shop photograph. Not claimed as the same frame as any Facebook screenshot |
 | `logo.png` | Recovered raster from existing signage | Obtain vector before print |
 | Fonts EB Garamond / IBM Plex Sans | Google Fonts | OFL |
 | GSAP / Lenis | npm, bundled in `assets/app.js` | MIT / GreenSock standard — verify GSAP production licence |
