@@ -26,6 +26,8 @@ So the hero is the brief’s stated alternative: a **pre-rendered photoreal cine
 
 The old Ken-Burns / morph mp4 is **not** used.
 
+**iPhone / Safari:** scroll-scrub of a paused video is a black void on iOS (Safari will not paint frames when you only set `currentTime`). The poster stays stacked on top of the `<video>` until a real frame exists (`videoWidth > 0` and a `timeupdate` / `seeked` / `playing` after a successful muted `play()`). On iPhone, iPad, coarse-pointer phones, and viewports ≤760px the film **autoplays muted and loops**. Desktop keeps Lenis + GSAP `scrub: 1`. `prefers-reduced-motion` removes the video entirely.
+
 ## Design system
 
 `--ink #12203F`, `--brass #B8912E` / `--brass-l #E2C56F`, `--paper #EDE9DF`, `--green #12352A`. EB Garamond + IBM Plex Sans. Marques as chassis plates. Sentence case. Concours d'Elegance.

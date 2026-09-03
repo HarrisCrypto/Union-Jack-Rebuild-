@@ -4,8 +4,8 @@ import './compare.js'
 import './site.js'
 
 function boot() {
-  initHero()
   initMotion()
+  initHero()
 }
 
 if (document.readyState === 'loading') {
