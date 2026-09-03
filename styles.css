@@ -110,11 +110,12 @@ p{margin:0 0 1em;max-width:62ch}
 @media(min-width:980px){
   .nav-links{display:flex}
   .nav-toggle{display:none}
-  /* Homepage: logo + Menu on first paint, same as phone. The old
-     hide-until-scroll rule left no way to reach sections at land. */
-  .nav-home .nav-toggle{display:inline-block}
-  .nav-home .nav-links{display:none}
-  .nav-home .nav-phone-hero{display:none}
+  /* Full desktop chrome on first paint — do not hide links until scroll
+     and do not replace them with a phone Menu. */
+  html.home .nav-home{
+    background:rgba(8,14,28,.92);
+    border-bottom-color:rgba(255,255,255,.08)
+  }
 }
 
 /* ---------- HERO (photoreal film, scroll-scrubbed) ---------- */
