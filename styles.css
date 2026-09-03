@@ -350,19 +350,19 @@ html.home .nav-home{
   }
 }
 /* After the 760px plane so desktop wins the cascade vs --ink.
-   #2A4064 still read as the section. Lift further so tiles are cards. */
+   Mid-slate so a photographed Mac screen still shows cards, not hairlines. */
 @media(min-width:980px){
   .marque-grid{
-    gap:1.1rem
+    gap:1.15rem
   }
   .marque-grid a{
-    background:#3A5680;
-    border:1px solid rgba(232,228,218,.55);
-    box-shadow:0 1px 0 rgba(255,255,255,.08)
+    background:#4E719E;
+    border:1.5px solid rgba(232,228,218,.7);
+    box-shadow:0 1px 0 rgba(255,255,255,.1)
   }
   .marque-grid a:hover{
-    background:#45648C;
-    border-color:rgba(226,197,111,.58);
+    background:#5A7EAB;
+    border-color:rgba(226,197,111,.7);
     transform:translateY(-2px)
   }
 }
