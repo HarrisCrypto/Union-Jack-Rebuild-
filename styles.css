@@ -310,12 +310,17 @@ p{margin:0 0 1em;max-width:62ch}
 }
 .folio img{
   display:block;
-  width:auto;height:auto;
+  width:100%;
+  height:auto;
   max-width:100%;
-  max-height:calc(100svh - var(--nav-offset) - var(--call-bar) - 6.5rem);
+  max-height:calc(100svh - var(--nav-offset) - var(--call-bar) - 7rem);
   object-fit:contain;object-position:center;
   margin-inline:auto;
   background:transparent
+}
+/* Marque feature: heading + lede sit above the still — keep wheels on the first screen. */
+.feature-band .folio img{
+  max-height:min(28rem, calc(100svh - var(--nav-offset) - var(--call-bar) - 17rem));
 }
 .folio figcaption{
   margin:.7rem .15rem 0;font-size:.92rem;color:var(--ink-2);max-width:62ch
@@ -457,6 +462,7 @@ footer.site-foot{
 .hero-m .kicker{font-size:.9rem;color:var(--brass-l);margin:0 0 .85rem}
 .hero-m .meta{color:#A8B3C6;font-size:.95rem;margin:1.1rem 0 0}
 .band{padding-block:clamp(3rem,6.5vw,5.5rem)}
+.band.feature-band{padding-top:clamp(1.5rem, 3.2vw, 2.5rem);padding-bottom:clamp(2.5rem, 5vw, 4.5rem)}
 .two{display:grid;gap:clamp(1.5rem,4vw,3.5rem)}
 @media(min-width:880px){.two{grid-template-columns:1.15fr .85fr}}
 .models{border-top:2px solid var(--ink);padding-top:1rem;margin:0}
