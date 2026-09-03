@@ -67,20 +67,16 @@ p{margin:0 0 1em;max-width:62ch}
   backdrop-filter:saturate(140%) blur(12px);
   border-bottom-color:rgba(255,255,255,.08);
 }
-/* Open phone menu is an opaque sheet. At scrollY=0 the header is still
-   transparent over the hero; the drawer inherited that and the film
-   showed through. Glass/blur also fails on iOS Safari. Closed header
-   stays as-is (transparent at top, solid after scroll). */
-@media(max-width:979px){
-  .nav.is-open,
-  .nav:has(#navToggle[aria-expanded="true"]){
-    bottom:0;
-    background:#080E1C;
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    overflow:auto;
-    overscroll-behavior:contain;
-  }
+/* Open menu is an opaque sheet on every viewport. Closed homepage
+   header stays transparent over the hero. */
+.nav.is-open,
+.nav:has(#navToggle[aria-expanded="true"]){
+  bottom:0;
+  background:#080E1C;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  overflow:auto;
+  overscroll-behavior:contain;
 }
 .nav-inner{
   width:var(--shell);margin-inline:auto;
@@ -114,10 +110,11 @@ p{margin:0 0 1em;max-width:62ch}
 @media(min-width:980px){
   .nav-links{display:flex}
   .nav-toggle{display:none}
-  /* Quiet chrome over the film until scroll */
-  .nav-home:not(.is-solid) .nav-links{opacity:0;visibility:hidden;pointer-events:none}
-  .nav-home:not(.is-solid) .nav-phone-hero{display:inline}
-  .nav-home.is-solid .nav-phone-hero{display:none}
+  /* Homepage: logo + Menu on first paint, same as phone. The old
+     hide-until-scroll rule left no way to reach sections at land. */
+  .nav-home .nav-toggle{display:inline-block}
+  .nav-home .nav-links{display:none}
+  .nav-home .nav-phone-hero{display:none}
 }
 
 /* ---------- HERO (photoreal film, scroll-scrubbed) ---------- */
