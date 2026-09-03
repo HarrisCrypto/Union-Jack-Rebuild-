@@ -67,7 +67,9 @@ p{margin:0 0 1em;max-width:62ch}
   backdrop-filter:saturate(140%) blur(12px);
   border-bottom-color:rgba(255,255,255,.08);
 }
-/* Homepage: solid ink bar from first paint. Do not wait for scroll. */
+/* Homepage: solid ink bar from first paint on every viewport so the
+   phone path does not wait for scroll either. Desktop repeats this
+   inside the 980px query so a later rule cannot go transparent. */
 html.home .nav-home{
   background:var(--ink);
   border-bottom-color:rgba(255,255,255,.08)
@@ -111,11 +113,40 @@ html.home .nav-home{
 }
 .nav-drawer a{color:#EDE4D2;text-decoration:none;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .nav-drawer[hidden]{display:none!important}
+/* Windowed / zoomed Mac Safari often lands just under 980px.
+   Homepage headings stay visible there. Phone (max 760) stays Menu-only. */
+@media(min-width:860px){
+  html.home .nav-home .nav-links,
+  html.home .nav-home.is-solid .nav-links,
+  html.home .nav-home:not(.is-solid) .nav-links{
+    display:flex;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    gap:clamp(.65rem,1.5vw,1.35rem)
+  }
+}
 @media(min-width:980px){
-  .nav-links{display:flex}
+  /* Undo .nav-home .nav-links{display:none} and any hide-until-scroll.
+     Homepage uses the same desktop row as every other page. */
+  .nav-links,
+  .nav-home .nav-links,
+  html.home .nav-home .nav-links,
+  html.home .nav-home.is-solid .nav-links,
+  html.home .nav-home:not(.is-solid) .nav-links{
+    display:flex;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto
+  }
   .nav-toggle{display:none}
-  /* Desktop homepage: headings stay. Menu is extra, not a replacement. */
+  /* Menu is extra on the desktop homepage, not a replacement. */
   html.home .nav-home .nav-toggle{display:inline-block}
+  html.home .nav-home,
+  html.home .nav-home.is-solid{
+    background:var(--ink);
+    border-bottom-color:rgba(255,255,255,.08)
+  }
 }
 
 /* ---------- HERO (photoreal film, scroll-scrubbed) ---------- */
@@ -315,6 +346,18 @@ html.home .nav-home{
   .marque-grid a:hover{
     background:#243A58;
     border-color:rgba(226,197,111,.42);
+    transform:translateY(-2px)
+  }
+}
+/* After the 760px plane so desktop wins the cascade vs --ink. */
+@media(min-width:980px){
+  .marque-grid a{
+    background:#2A4064;
+    border-color:rgba(232,228,218,.45)
+  }
+  .marque-grid a:hover{
+    background:#334A70;
+    border-color:rgba(226,197,111,.5);
     transform:translateY(-2px)
   }
 }
