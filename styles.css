@@ -425,7 +425,9 @@ footer.site-foot{
 .foot-fine a{color:#D5DCE8;text-decoration:underline;text-underline-offset:2px}
 .foot-fine a:hover{color:var(--brass-l)}
 
-/* Sticky call — hidden over the homepage hero so it cannot cover the quote CTA */
+/* Sticky call — hidden over the homepage hero so it cannot cover the quote CTA.
+   Homepage uses transform/opacity only. Toggling display + Lenis.resize()
+   was flashing the bar at the phone-hero boundary. */
 .sticky-call{
   display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;
   background:var(--brass);color:#16130A;text-align:center;text-decoration:none;font-weight:600;
@@ -435,9 +437,25 @@ footer.site-foot{
   :root{--call-bar:calc(3.6rem + env(safe-area-inset-bottom,0px))}
   .sticky-call{display:block}
   body{padding-bottom:var(--call-bar)}
-  html.home .sticky-call{display:none}
   html.home .call-spacer{height:var(--call-bar)}
-  html.home.call-docked .sticky-call{display:block}
+  html.home .sticky-call{
+    transform:translate3d(0,110%,0);
+    opacity:0;
+    pointer-events:none;
+    visibility:hidden;
+    transition:transform .32s ease, opacity .32s ease, visibility 0s linear .32s
+  }
+  html.home.call-docked .sticky-call{
+    transform:translate3d(0,0,0);
+    opacity:1;
+    pointer-events:auto;
+    visibility:visible;
+    transition:transform .32s ease, opacity .32s ease, visibility 0s linear 0s
+  }
+}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+  html.home .sticky-call,
+  html.home.call-docked .sticky-call{transition:none}
 }
 .call-spacer{height:0;pointer-events:none}
 

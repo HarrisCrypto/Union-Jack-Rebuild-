@@ -3947,20 +3947,26 @@ function Fs() {
 function Sc() {
   const s = document.querySelector(".sticky-call");
   if (!s) return;
-  const t = document.documentElement, i = document.querySelector(".hero-pin"), e = (n) => {
-    s.classList.toggle("is-away", n), t.classList.toggle("call-docked", n), window.__ujLenis?.resize();
+  const t = document.documentElement, i = document.querySelector(".hero-pin");
+  let e = t.classList.contains("call-docked");
+  const r = (o) => {
+    o !== e && (e = o, s.classList.toggle("is-away", o), t.classList.toggle("call-docked", o));
   };
   if (!i || !t.classList.contains("home")) {
-    e(!0);
+    r(!0);
     return;
   }
   if (!("IntersectionObserver" in window)) {
-    e(!0);
+    r(!0);
     return;
   }
   new IntersectionObserver(
-    ([n]) => e(!n.isIntersecting),
-    { threshold: 0.08 }
+    ([o]) => {
+      if (!o) return;
+      const a = o.intersectionRatio;
+      e ? a > 0.16 && r(!1) : a < 0.03 && r(!0);
+    },
+    { threshold: [0, 0.03, 0.08, 0.16, 1] }
   ).observe(i);
 }
 document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", Fs) : Fs();

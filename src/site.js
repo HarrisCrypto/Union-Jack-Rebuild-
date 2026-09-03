@@ -38,11 +38,13 @@ function initStickyCall() {
 
   const root = document.documentElement
   const pin = document.querySelector('.hero-pin')
+  let docked = root.classList.contains('call-docked')
 
   const dock = (on) => {
+    if (on === docked) return
+    docked = on
     sticky.classList.toggle('is-away', on)
     root.classList.toggle('call-docked', on)
-    window.__ujLenis?.resize()
   }
 
   if (!pin || !root.classList.contains('home')) {
@@ -55,9 +57,20 @@ function initStickyCall() {
     return
   }
 
+  /* Hysteresis: show only when the pin is nearly gone; hide only when
+     it is clearly back. A single 0.08 threshold + Lenis.resize() was
+     flipping call-docked at the 100svh phone-hero edge. */
   const io = new IntersectionObserver(
-    ([entry]) => dock(!entry.isIntersecting),
-    { threshold: 0.08 }
+    ([entry]) => {
+      if (!entry) return
+      const ratio = entry.intersectionRatio
+      if (docked) {
+        if (ratio > 0.16) dock(false)
+      } else if (ratio < 0.03) {
+        dock(true)
+      }
+    },
+    { threshold: [0, 0.03, 0.08, 0.16, 1] }
   )
   io.observe(pin)
 }
