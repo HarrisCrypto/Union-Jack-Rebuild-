@@ -16,6 +16,7 @@
 <meta name="theme-color" content="#12203F">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="preload" href="media/drive-poster.jpg" as="image">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -59,25 +60,14 @@
   </div>
 </header>
 
-<!-- Photoreal full-bleed drive — movie opens mid-scene, no title card -->
-<section class="hero" id="top" aria-label="Cinematic drive — British roadster on a country lane at golden hour">
-  <div class="hero-media">
-    <video
-      id="heroVideo"
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      poster="media/drive-poster.jpg"
-      aria-hidden="true">
-      <source src="media/drive-hero.mp4" type="video/mp4">
-    </video>
-    <img class="hero-poster" src="media/drive-poster.jpg" alt="British racing green Austin-Healey on a country lane at golden hour" width="1600" height="900" decoding="async" fetchpriority="high">
+<!-- Real-time WebGL drive — English country lane at dawn. Poster is fallback only. -->
+<section class="hero" id="top" aria-label="Driving an English country lane at dawn">
+  <div class="hero-fallback" aria-hidden="true">
+    <img class="hero-poster" src="media/drive-poster.jpg" alt="" width="1600" height="900" decoding="async" fetchpriority="high">
   </div>
+  <canvas id="drive" class="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-shade" aria-hidden="true"></div>
-  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="bonnet" aria-hidden="true"></div>
   <div class="hero-copy">
     <p class="hero-mark">British Auto Restoration</p>
     <h1>Union Jack</h1>
@@ -107,11 +97,11 @@
   </div>
 </section>
 
-<section class="section section-ink" aria-labelledby="marques" id="marques">
+<section class="section section-ink" aria-labelledby="marques-h" id="marques">
   <div class="shell">
     <header class="section-head">
       <p class="eyebrow light">By marque</p>
-      <h2 id="marques">The cars we know</h2>
+      <h2 id="marques-h">The cars we know</h2>
     </header>
     <div class="marque-grid">
       <a href="jaguar-restoration.html"><strong>Jaguar</strong><span>XK · E-Type · Mark 2 · XJ6</span></a>
@@ -126,11 +116,11 @@
   </div>
 </section>
 
-<section class="section section-paper" aria-labelledby="process" id="process">
+<section class="section section-paper" aria-labelledby="process-h" id="process">
   <div class="shell">
     <header class="section-head">
       <p class="eyebrow">No surprises</p>
-      <h2 id="process">How a restoration runs</h2>
+      <h2 id="process-h">How a restoration runs</h2>
       <p class="section-sub">Written estimates. Parts sourced first. Progress you can see.</p>
     </header>
     <ol class="steps">
@@ -191,22 +181,22 @@
   </div>
 </section>
 
-<section class="section section-paper" aria-labelledby="reviews" id="reviews">
+<section class="section section-paper" aria-labelledby="reviews-h" id="reviews">
   <div class="shell narrow">
     <header class="section-head">
       <p class="eyebrow">Reputation</p>
-      <h2 id="reviews">In the owners' words</h2>
+      <h2 id="reviews-h">In the owners' words</h2>
     </header>
     <blockquote class="pull">Marcello is the one to talk to about British cars. I bought a 1957 MGA with records from Union Jack and he walked me through the whole restoration they had done on it.</blockquote>
     <p class="cite">Google review · <a href="reviews.html">More reviews</a> · <a href="https://www.google.com/maps/place/?q=place_id:ChIJ-zMSKAzgkYARFRQVpqrCt4o" rel="noopener" target="_blank">Google listing</a></p>
   </div>
 </section>
 
-<section class="section section-ink" aria-labelledby="faq" id="faq">
+<section class="section section-ink" aria-labelledby="faq-h" id="faq">
   <div class="shell narrow">
     <header class="section-head">
       <p class="eyebrow light">FAQ</p>
-      <h2 id="faq">Questions owners ask</h2>
+      <h2 id="faq-h">Questions owners ask</h2>
     </header>
     <div class="faq-list">
       <details open><summary>What does a full restoration cost?</summary><p>A body-off restoration of a British sports car generally runs into the tens of thousands of dollars, and a concours-level car can cost more than the finished car is worth. The honest answer is that no one can quote you accurately from a photograph. We assess the car, then give you a written estimate and a stage-by-stage worksheet before any work starts, so you decide what is worth doing.</p></details>
@@ -299,36 +289,11 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does a full restoration cost?","acceptedAnswer":{"@type":"Answer","text":"A body-off restoration of a British sports car generally runs into the tens of thousands of dollars, and a concours-level car can cost more than the finished car is worth. The honest answer is that no one can quote you accurately from a photograph. We assess the car, then give you a written estimate and a stage-by-stage worksheet before any work starts, so you decide what is worth doing."}},{"@type":"Question","name":"How long does a restoration take?","acceptedAnswer":{"@type":"Answer","text":"A full body-off restoration typically takes twelve to twenty-four months. The single biggest variable is parts: a car needing rare trim or a specific gearbox can wait months on one component. We search for parts before starting so the schedule is based on what we can actually get."}},{"@type":"Question","name":"Do you take cars from outside California?","acceptedAnswer":{"@type":"Answer","text":"Yes. We regularly work on cars shipped in from other states and can recommend enclosed transporters. Most of our local work comes from between San Francisco and Monterey Bay, but the shop has built cars for owners across the country."}},{"@type":"Question","name":"What is a rolling restoration?","acceptedAnswer":{"@type":"Answer","text":"A rolling restoration means the car stays usable while it is worked on in stages — brakes and suspension one winter, paint the next. It spreads the cost over years and keeps you driving. It suits a car you want to enjoy rather than show."}},{"@type":"Question","name":"Do you only work on British cars?","acceptedAnswer":{"@type":"Answer","text":"No. British sports cars are what we are known for, but we restore and repair classic American cars and trucks too — Chevrolet, Ford, Plymouth and Buick among them — along with other European makes."}},{"@type":"Question","name":"Can I visit while my car is being built?","acceptedAnswer":{"@type":"Answer","text":"Yes, and we would rather you did. We hold progress reviews at each stage and you are welcome at the shop during opening hours. It is your car."}}]}
 </script>
+<script type="module" src="drive.js"></script>
 <script type="module">
   import './src/motion.js'
   import './src/compare.js'
   import './src/site.js'
-
-  const video = document.getElementById('heroVideo')
-  const poster = document.querySelector('.hero-poster')
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  if (video && !reduced) {
-    const markPlaying = () => {
-      if (video.currentTime < 0.15) return
-      poster?.classList.add('is-hidden')
-      video.classList.add('is-playing')
-    }
-    const start = () => {
-      video.play()?.then(() => {
-        // Keep poster until the first real frame is on screen
-        const tick = () => {
-          if (video.currentTime >= 0.15) markPlaying()
-          else requestAnimationFrame(tick)
-        }
-        requestAnimationFrame(tick)
-      }).catch(() => {})
-    }
-    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 })
-    else setTimeout(start, 500)
-    video.addEventListener('playing', markPlaying)
-    video.addEventListener('timeupdate', markPlaying)
-  }
 </script>
 </body>
 </html>

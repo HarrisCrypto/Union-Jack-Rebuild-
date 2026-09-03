@@ -1,48 +1,35 @@
 # Union Jack British Auto Restoration — site
 
-Static marketing site for Union Jack (San Martin, CA), built against the SEO/AEO brief and the full Grok Cursor prompt.
-
-## Run
+Static site for Union Jack (San Martin, CA). No build step. Serve the repo root.
 
 ```bash
-# simple (no motion modules)
 python3 -m http.server 8000
-
-# recommended (Vite + Lenis/GSAP)
-npm install
-npm run dev      # http://127.0.0.1:5173
-npm run build    # dist/
 ```
 
-## Hero approach (Task 2)
+GitHub Pages publishes from `main` at the branch root:
+https://harriscrypto.github.io/Union-Jack-Rebuild-/
 
-Real-time photoreal Three.js (GLTF roadster + HDRI + GTAO + motion blur + DoF) cannot honestly hit the **60fps / LCP &lt; 2.5s / &lt;8MB** budget without licensed models and KTX2 textures.
+## Hero
 
-Per the prompt’s explicit alternative (Apple-style), the shipped hero is a **photoreal pre-rendered cinematic loop** of a British racing green roadster at golden hour:
+One Three.js scene in `drive.js` (CDN ESM). English country lane at dawn: hedgerows, fence posts, trees, hills, dark bonnet silhouette. Mouse look, scroll speeds the drive, camera faces down the road and stays on the tarmac.
 
-- `media/drive-poster.jpg` paints immediately (~185KB)
-- `media/drive-hero.mp4` (~2.9MB) autoplays muted when ready
-- `prefers-reduced-motion` keeps the poster
-- See `LICENSES.md` and `GROK-SCORECARD.md`
-
-Legacy `drive.js` (r128 procedural) is archive only; not loaded on the homepage.
+- No WebGL → painted dawn gradient + static poster, type still readable
+- `prefers-reduced-motion: reduce` → one still frame, then stop
+- `media/drive-hero.mp4` is **not** the hero (Ken-Burns stills). Poster is fallback only.
 
 ## Design system
 
-Badge-derived tokens: `--ink #12203F`, `--brass #B8912E`, `--paper #EDE9DF`, `--green #12352A`, EB Garamond / IBM Plex Sans. Marques as build plates, not cards.
+Badge tokens: `--ink #12203F`, `--brass #B8912E`, `--paper #EDE9DF`, `--green #12352A`, EB Garamond / IBM Plex Sans. Marques as chassis build plates. Sentence case. Concours d'Elegance.
 
 ## Content / SEO / AEO
 
-- No invented car/owner stories; Concours spelling; NAP on Depot Ave; `info@unionjack.com` flagged as proposed
-- Unique titles/descriptions/canonicals; `tel:` links; FAQ HTML ↔ schema parity; robots allow AI bots
-- Marque pages + Mini + American classics + Journal + Process/FAQ/Reviews/Careers/Services
+- Facts only: John & Marcello Locascio, 1988, 13555 Depot Ave, San Martin CA 95046, (408) 686-1101, Mon–Fri 9–5, Sat by appointment
+- `info@unionjack.com` is proposed — flagged in the footer, not silently swapped to sbcglobal
+- Unique titles, canonicals, one h1, `tel:` links, schema on index + marque pages, FAQ HTML ↔ JSON-LD
 
 ## Before production
 
 - Host photos on own domain (still Wix CDN hotlinks)
-- Drop `.html` via host config
-- Live Google review feed; true same-car before/after frames from Marcello
-- Vector logo; licence any future 3D/HDRI assets
 - Confirm `info@unionjack.com`
-- Authenticate Higgsfield in Cursor Desktop for marque-accurate hero film
-- Grant Cursor GitHub App write on `Union-Jack-Rebuild-` for Pages deploy
+- Drop `.html` via host config
+- Vector logo; live Google review feed; true same-car before/after from the shop

@@ -96,38 +96,54 @@ p{margin:0 0 1em;max-width:62ch}
   .nav-home.is-solid .nav-phone-hero{display:none}
 }
 
-/* ---------- HERO (photoreal video) ---------- */
+/* ---------- HERO (WebGL drive; poster is fallback only) ---------- */
 .hero{
   position:relative;min-height:100svh;min-height:100vh;
-  display:grid;align-items:end;overflow:hidden;background:#0B1428;color:#fff;
+  display:grid;align-items:end;overflow:hidden;color:#fff;
   isolation:isolate;
+  background:
+    linear-gradient(180deg, #061018 0%, #1A2840 32%, #5A6478 58%, #C9B89A 100%);
 }
-.hero-media{position:absolute;inset:0;z-index:0}
-.hero-video,.hero-poster{
-  width:100%;height:100%;object-fit:cover;object-position:center
+.hero-fallback{
+  position:absolute;inset:0;z-index:0;
+  background:
+    linear-gradient(180deg, #061018 0%, #243044 36%, #C9B89A 86%, #9A8A6E 100%);
+  transition:opacity .55s ease;
 }
-.hero-video{opacity:0;transition:opacity 1.2s ease;position:absolute;inset:0}
-.hero-video.is-playing{opacity:1}
-.hero-poster{position:absolute;inset:0;z-index:1;transition:opacity 1s ease}
-.hero-poster.is-hidden{opacity:0;pointer-events:none}
+.hero-fallback.is-hidden{opacity:0;pointer-events:none}
+.hero-poster{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  /* Static wash only — never Ken-Burns on top of the canvas */
+  opacity:.42;transform:none
+}
+.hero-canvas{
+  position:absolute;inset:0;z-index:0;display:block;
+  width:100%;height:100%;opacity:0;background:#C9B89A
+}
+.hero-canvas.is-live{opacity:1}
 .hero-shade{
   position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    linear-gradient(180deg, rgba(5,10,22,.42) 0%, rgba(5,10,22,.08) 32%, rgba(5,10,22,.2) 58%, rgba(5,10,22,.82) 100%),
-    radial-gradient(70% 55% at 70% 40%, transparent 30%, rgba(5,10,22,.25) 100%);
+    linear-gradient(180deg, rgba(5,10,22,.36) 0%, rgba(5,10,22,.04) 34%, rgba(5,10,22,.12) 58%, rgba(5,10,22,.55) 100%);
 }
-.hero-grain{
-  position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+.bonnet{
+  position:absolute;left:50%;bottom:-6%;z-index:2;pointer-events:none;
+  width:165%;height:min(26vh,230px);
+  transform:translateX(-50%);
+  background:
+    linear-gradient(180deg, transparent 0%, #0A0D12 34%, #07090C 100%);
+  border-radius:50% 50% 0 0 / 78% 78% 0 0;
+  box-shadow:inset 0 1px 0 rgba(226,197,111,.18);
 }
 .hero-copy{
   position:relative;z-index:3;
   width:var(--shell);margin-inline:auto;
-  padding:clamp(6rem,14vh,9rem) 0 clamp(5.5rem,12vh,7rem);
+  padding:clamp(6rem,14vh,9rem) 0 clamp(6.5rem,16vh,8.5rem);
 }
 @media(max-width:760px){
-  .hero-copy{padding-bottom:6.5rem}
+  .hero-copy{padding-bottom:8rem}
   .hero h1{font-size:clamp(3rem,15vw,4.2rem)}
+  .bonnet{height:min(22vh,180px)}
 }
 .hero-mark{
   font-family:var(--serif);font-size:clamp(1rem,1.4vw,1.2rem);font-style:italic;
@@ -154,16 +170,22 @@ p{margin:0 0 1em;max-width:62ch}
 }
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){
-  .hero-video{opacity:0!important}
-  .hero-poster{opacity:1!important}
+  .hero-canvas:not(.is-live){opacity:0}
 }
 
 /* ---------- BUTTONS ---------- */
 .btn{
   display:inline-block;font-family:var(--sans);font-weight:500;font-size:1rem;
   padding:.9rem 1.55rem;text-decoration:none;border:1px solid transparent;
-  transition:background .18s,color .18s,border-color .18s;cursor:pointer
+  transition:background .18s,color .18s,border-color .18s;cursor:pointer;
+  background:var(--ink);color:#fff;border-color:var(--ink)
 }
+.btn.ghost,.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.btn.ghost:hover,.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.section-paper .btn.ghost,.prose .btn.ghost,.btn-line-dark{
+  background:transparent;color:var(--ink);border-color:rgba(18,32,63,.4)
+}
+.section-paper .btn.ghost:hover,.prose .btn.ghost:hover,.btn-line-dark:hover{border-color:var(--ink)}
 .btn-brass{background:var(--brass);color:#16130A;border-color:var(--brass)}
 .btn-brass:hover{background:var(--brass-l)}
 .btn-line{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
@@ -173,7 +195,6 @@ p{margin:0 0 1em;max-width:62ch}
 .btn-line-dark{background:transparent;color:var(--ink);border-color:rgba(18,32,63,.4)}
 .btn-line-dark:hover{border-color:var(--ink)}
 .btn-solid{background:var(--brass);color:#16130A;border-color:var(--brass)}
-.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff}
 
 /* ---------- SECTIONS ---------- */
 .section{padding-block:var(--section)}
@@ -450,7 +471,8 @@ footer{background:#0B1428;color:#8E99AC;font-size:.88rem;padding:2.2rem var(--pa
 footer .fine{grid-column:1/-1;margin:1rem 0 0;font-size:.78rem;opacity:.75;max-width:none}
 footer strong{color:#E8E4DA}
 footer a{color:#B9C3D4}
-.plates{display:grid;gap:1px;background:rgba(233,228,214,.22);border:1px solid rgba(233,228,214,.22);margin-top:clamp(2rem,4vw,3rem);
+.plates{display:grid;gap:1px;background:rgba(233,228,214,.22);border:1px solid rgba(233,228,214,.22);
+  margin:clamp(2rem,4vw,3rem) var(--pad) 0;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .plate{background:var(--green);padding:1.6rem 1.5rem 1.4rem;text-decoration:none;display:block}
 .plate:hover{background:#194031}
@@ -463,6 +485,7 @@ footer a{color:#B9C3D4}
 }
 .cta-band h2{color:#fff;margin:0 0 .35rem}
 .cta-band p{margin:0;color:#C3CAD7}
+.cta-band .btn:not(.btn-brass):not(.ghost):not(.btn-ghost){background:var(--brass);color:#16130A;border-color:var(--brass)}
 .journal-list{list-style:none;padding:0;margin:clamp(1.5rem,3vw,2.5rem) 0 0;border-top:2px solid var(--ink)}
 .journal-list li{padding:1.25rem 0;border-bottom:1px solid rgba(18,32,63,.16)}
 .journal-list time{display:block;font-size:.88rem;color:var(--ink-3);margin-bottom:.25rem}
