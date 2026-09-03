@@ -296,13 +296,27 @@ p{margin:0 0 1em;max-width:62ch}
 .marque-grid a{
   background:var(--ink);padding:1.5rem 1.35rem;text-decoration:none;
   display:flex;flex-direction:column;gap:.35rem;min-height:8.5rem;
-  transition:background .18s;
+  transition:background .18s, border-color .18s, transform .18s;
   opacity:1;
   border:1px solid rgba(232,228,218,.18)
 }
 .marque-grid a:hover{background:#1A2F52}
 .marque-grid strong{font-family:var(--serif);font-size:1.45rem;font-weight:500;color:#fff}
 .marque-grid span{color:#A8B3C4;font-size:.92rem;line-height:1.45}
+/* Desktop: same-navy tiles read as hairlines. Lift each marque into a
+   slightly lighter inner plane. Phone stacking already reads as cards. */
+@media(min-width:760px){
+  .marque-grid{gap:.85rem}
+  .marque-grid a{
+    background:#1A2C4A;
+    border-color:rgba(232,228,218,.34)
+  }
+  .marque-grid a:hover{
+    background:#243A58;
+    border-color:rgba(226,197,111,.42);
+    transform:translateY(-2px)
+  }
+}
 
 /* Process steps */
 .steps{list-style:none;margin:0 0 2rem;padding:0;display:grid;gap:0}
@@ -378,6 +392,20 @@ p{margin:0 0 1em;max-width:62ch}
 }
 .faq-list details[open] summary::after{content:"\2013"}
 .faq-list details p{color:#C3CAD7;padding:0 0 1.2rem;margin:0;max-width:62ch}
+@media(min-width:760px){
+  .section-ink .faq-list details{
+    background:#1A2C4A;
+    border:1px solid rgba(232,228,218,.3);
+    margin:0 0 .65rem;
+    padding:0 1.15rem
+  }
+  .section-ink .faq-list details:first-child{border-top:1px solid rgba(232,228,218,.3)}
+  .section-ink .quote-form{
+    background:#1A2C4A;
+    border:1px solid rgba(232,228,218,.3);
+    padding:1.45rem 1.35rem
+  }
+}
 
 /* Contact */
 .contact-grid{display:grid;gap:clamp(1.5rem,4vw,3rem)}
