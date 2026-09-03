@@ -440,11 +440,11 @@ footer.site-foot{
 }
 .foot-social a{
   display:inline-flex;align-items:center;justify-content:center;
-  width:1.7rem;height:1.7rem;color:#C3CDDD
+  width:28px;height:28px;color:#C3CDDD
 }
 .foot-social a:hover,
 .foot-social a:focus-visible{color:#E8E4DA}
-.foot-social svg{display:block;width:1.15rem;height:1.15rem}
+.foot-social svg{display:block;width:28px;height:28px}
 .foot-fine{margin-top:1.75rem}
 .foot-fine p{max-width:none;margin:0}
 .foot-fine a{color:#D5DCE8;text-decoration:underline;text-underline-offset:2px}
