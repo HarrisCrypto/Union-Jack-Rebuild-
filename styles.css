@@ -368,8 +368,12 @@ p{margin:0 0 1em;max-width:62ch}
 .contact-aside a{color:var(--brass-l)}
 .contact-aside p{color:#C3CAD7}
 @media(max-width:760px){
-  #faq.section{padding-bottom:1rem;padding-top:clamp(2.75rem,8vw,4rem)}
-  #contact.section{padding-top:1rem;padding-bottom:clamp(2.5rem,8vw,4rem)}
+  #faq.section{padding-bottom:1rem;padding-top:max(3.75rem, calc(var(--nav-offset) - 1.25rem))}
+  #contact.section{
+    padding-top:calc(1rem + var(--nav-offset));
+    margin-top:calc(-1 * var(--nav-offset));
+    padding-bottom:clamp(2.5rem,8vw,4rem)
+  }
   #contact .section-head{margin-bottom:1rem}
   .contact-grid{gap:1.1rem}
   .contact-aside h3{margin-top:.85rem}

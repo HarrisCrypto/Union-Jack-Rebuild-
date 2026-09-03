@@ -28,14 +28,26 @@ function usesAnchorPad(el) {
   return !!(el && el.matches && el.matches('h2, .lede, .steps h3'))
 }
 
+function lenisOffset(el) {
+  const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0
+  const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0
+  const fakePad = usesAnchorPad(el) ? navClearance() : 0
+  const desiredRectTop = fakePad ? 0 : navClearance()
+  return margin + pad - desiredRectTop
+}
+
 export function scrollToClearNav(el, { immediate = true, duration = 0.9 } = {}) {
   if (!el) return
-  const offset = usesAnchorPad(el) ? 0 : -navClearance()
   const lenis = window.__ujLenis
   if (lenis) {
-    lenis.scrollTo(el, { offset, immediate, duration: immediate ? 0 : duration })
+    lenis.scrollTo(el, {
+      offset: lenisOffset(el),
+      immediate,
+      duration: immediate ? 0 : duration,
+    })
     return
   }
+  const offset = usesAnchorPad(el) ? 0 : -navClearance()
   const y = el.getBoundingClientRect().top + (window.scrollY || 0) + offset
   window.scrollTo({ top: Math.max(0, y), behavior: immediate ? 'auto' : 'smooth' })
 }
