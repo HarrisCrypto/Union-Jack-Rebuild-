@@ -2,8 +2,8 @@
 
 | Asset | Source | Licence / notes |
 |---|---|---|
-| `media/drive-cinematic.mp4` | Higgsfield Cinema Studio Video v2 (`cinematic_studio_video_v2`), job `dec111b8-d635-4c29-aa58-03626edd25d6`, 2026-09-03. Start frame: `drive-poster.jpg`. Encoded 1440×812, GOP 2, silent, 5.6MB. | Generated for this redesign. Prototype only — confirm commercial licence with Higgsfield before production launch. |
-| `media/drive-poster.jpg` | Generated British-racing-green Healey still (chase, golden hour) | **LCP / reduced-motion / no-video fallback.** Not Ken-Burned. |
+| `media/drive-cinematic.mp4` | Higgsfield Cinema Studio Video 3.0 (`cinematic_studio_3_0`), job `6fe850bb-ac6f-4c1a-8e9c-e7cc59e569cf`, 2026-09-03. Start frame: occupied Healey still (`nano_banana_pro` job `c0a5b3e9-4eed-4024-89b8-de8214c2cef9`, from previous empty-cockpit poster). Encoded 1440×812, GOP 48, silent, ~5.3MB. Driver seen from behind — not a likeness of John or Marcello Locascio. | Generated for this redesign. Prototype only — confirm commercial licence with Higgsfield before production launch. |
+| `media/drive-poster.jpg` | First frame of the occupied Cinema Studio clip | **LCP / reduced-motion / no-video fallback.** Driver visible. |
 | `media/hero-chase.jpg`, `hero-bonnet.jpg`, `hero-side.jpg` | Earlier still set | Unused by the live hero |
 | Workshop stills | Client Wix CDN (`static.wixstatic.com/media/0d4294_*`) | Client-owned. Do not invent owner / year / colour / duration stories for specific cars |
 | `media/shop/healey-before.jpg`, `healey-after.jpg` | Re-hosted from Wix (`0d4294_200d81e…`, `0d4294_99bd54f…`), warmed toward the hero grade | Client-owned shop photographs. Two stages — not a claimed concours finish |

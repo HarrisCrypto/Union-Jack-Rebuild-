@@ -22,7 +22,7 @@ That budget cannot be hit honestly in this repo:
 - The full post list (GTAO, velocity blur, bokeh, bloom, CA, grain, SMAA, god rays, CSM) will not hold 30fps in iPhone Safari. That is the device he looked at.
 - Shipping a Lambert-sphere lane, or a half-post WebGL car, would look like a game demo. He already rejected that.
 
-So the hero is the brief’s stated alternative: a **pre-rendered photoreal cinematic, scroll-scrubbed frame by frame** (Apple product-page pattern). Poster paints first. Scroll (Lenis + GSAP `scrub: 1`) drives `video.currentTime`. `prefers-reduced-motion` keeps the poster and turns every motion effect off. No mouse-look.
+So the hero is the brief’s stated alternative: a **pre-rendered photoreal cinematic, scroll-scrubbed frame by frame** (Apple product-page pattern). Poster paints first. Scroll (Lenis + GSAP `scrub: 1`) drives `video.currentTime`. `prefers-reduced-motion` keeps the poster and turns every motion effect off. No mouse-look. The cockpit is occupied: a period driver seen from behind, not a likeness of John or Marcello Locascio.
 
 The old Ken-Burns / morph mp4 is **not** used.
 
