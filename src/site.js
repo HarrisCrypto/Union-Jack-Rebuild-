@@ -13,7 +13,10 @@ export function initNav() {
 
   function onScroll() {
     if (!nav) return
-    if (nav.classList.contains('page-nav')) return
+    if (nav.classList.contains('page-nav') || nav.classList.contains('nav-home')) {
+      nav.classList.add('is-solid')
+      return
+    }
     nav.classList.toggle('is-solid', (window.scrollY || 0) > 40)
   }
   window.addEventListener('scroll', onScroll, { passive: true })

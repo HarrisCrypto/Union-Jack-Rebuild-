@@ -3907,7 +3907,13 @@ function Fs() {
   const s = document.getElementById("nav"), t = document.getElementById("navToggle"), i = document.getElementById("navDrawer");
   xc();
   function e() {
-    s && (s.classList.contains("page-nav") || s.classList.toggle("is-solid", (window.scrollY || 0) > 40));
+    if (s) {
+      if (s.classList.contains("page-nav") || s.classList.contains("nav-home")) {
+        s.classList.add("is-solid");
+        return;
+      }
+      s.classList.toggle("is-solid", (window.scrollY || 0) > 40);
+    }
   }
   window.addEventListener("scroll", e, { passive: !0 }), e(), t && i && t.addEventListener("click", () => {
     const n = !(t.getAttribute("aria-expanded") === "true");

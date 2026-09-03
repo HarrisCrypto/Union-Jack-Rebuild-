@@ -67,8 +67,12 @@ p{margin:0 0 1em;max-width:62ch}
   backdrop-filter:saturate(140%) blur(12px);
   border-bottom-color:rgba(255,255,255,.08);
 }
-/* Open menu is an opaque sheet on every viewport. Closed homepage
-   header stays transparent over the hero. */
+/* Homepage: solid ink bar from first paint. Do not wait for scroll. */
+html.home .nav-home{
+  background:var(--ink);
+  border-bottom-color:rgba(255,255,255,.08)
+}
+/* Open menu is an opaque sheet on every viewport. */
 .nav.is-open,
 .nav:has(#navToggle[aria-expanded="true"]){
   bottom:0;
@@ -110,12 +114,8 @@ p{margin:0 0 1em;max-width:62ch}
 @media(min-width:980px){
   .nav-links{display:flex}
   .nav-toggle{display:none}
-  /* Full desktop chrome on first paint — do not hide links until scroll
-     and do not replace them with a phone Menu. */
-  html.home .nav-home{
-    background:rgba(8,14,28,.92);
-    border-bottom-color:rgba(255,255,255,.08)
-  }
+  /* Desktop homepage: headings stay. Menu is extra, not a replacement. */
+  html.home .nav-home .nav-toggle{display:inline-block}
 }
 
 /* ---------- HERO (photoreal film, scroll-scrubbed) ---------- */
