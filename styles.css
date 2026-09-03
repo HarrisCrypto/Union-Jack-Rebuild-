@@ -437,7 +437,7 @@ footer.site-foot{
 .call-spacer{height:0;pointer-events:none}
 
 /* ===== Marque / interior pages (shared) ===== */
-.page-nav{position:sticky;top:0}
+/* Keep .nav position:fixed. Sticky here stacked a second offset on body padding. */
 .page-pad{padding-top:0}
 .page-pad .crumb{margin-top:0}
 .crumb{background:var(--paper-2);font-size:.87rem;padding:.7rem 0;color:var(--ink-2)}

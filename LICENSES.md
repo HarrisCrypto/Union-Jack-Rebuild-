@@ -9,7 +9,7 @@
 | `media/shop/healey-arrive.jpg` | Re-hosted from the live Union Jack Wix gallery (`0d4294_19c654a9…`) — Healey on a rollback | Client-owned shop photograph. Arrival / how they come in. Not claimed as the same car as the finished 3000 |
 | `media/shop/healey-finished.jpg` | Re-hosted from the live Union Jack homepage gallery (`0d4294_47c9e453…`) — finished Austin-Healey 3000, UK plate NWJ 14D | Client-owned shop photograph. Finished work they already publish |
 | `media/shop/jaguar-finished.jpg` | Re-hosted from Union Jack Wix (`0d4294_a0f10c7c…`) at native 4:3 — finished Jaguar saloon at the San Martin shop | Client-owned. Full vehicle, no Facebook UI |
-| `media/shop/mg-t-finished.jpg` | Re-hosted from Union Jack Wix (`0d4294_da5333c8…`) at native ratio — finished red MG T-series | Client-owned |
+| `media/shop/mgb-finished.jpg` | Re-hosted from Union Jack Wix (`0d4294_1a87ccca…`) at native 4:3 — finished MGB roadster | Client-owned. Full vehicle, no Facebook UI |
 | `media/shop/triumph-tr3.jpg` | Re-hosted from Union Jack Wix (`0d4294_993ba683…`) at native 4:3 — Triumph TR3 | Client-owned |
 | `media/shop/morris-minor.jpg` | Re-hosted from Union Jack Wix (`0d4294_d80e6208…`) at native 4:3 — Morris Minor | Client-owned |
 | `logo.png` | Recovered raster from existing signage | Obtain vector before print |
