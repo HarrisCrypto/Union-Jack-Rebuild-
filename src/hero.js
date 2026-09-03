@@ -21,7 +21,6 @@ export function initHero() {
   const poster = document.querySelector('.hero-fallback')
   const pin = document.querySelector('.hero-pin')
   const copy = document.querySelector('.hero-copy')
-  const sticky = document.querySelector('.sticky-call')
   if (!video || !pin) return
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -79,16 +78,6 @@ export function initHero() {
     video.classList.remove('is-ready')
     poster?.classList.remove('is-behind')
   })
-
-  if (sticky && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        sticky.classList.toggle('is-away', !entry.isIntersecting)
-      },
-      { threshold: 0.05 }
-    )
-    io.observe(pin)
-  }
 
   const tryPlay = () => {
     const play = video.play()
