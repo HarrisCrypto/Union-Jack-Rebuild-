@@ -17,7 +17,7 @@
   --shell:min(1120px, calc(100% - 2 * var(--pad)));
   --pad:clamp(1.25rem, 4vw, 3rem);
   --section:clamp(4.5rem, 10vw, 8rem);
-  --nav-offset:6.75rem;
+  --nav-offset:7.5rem;
   --call-bar:0px;
 }
 
@@ -367,11 +367,12 @@ p{margin:0 0 1em;max-width:62ch}
 .contact-aside a{color:var(--brass-l)}
 .contact-aside p{color:#C3CAD7}
 @media(max-width:760px){
-  #faq.section{padding-bottom:1.25rem}
-  #contact.section{padding-top:1.25rem}
-  #contact .section-head{margin-bottom:1.15rem}
-  .contact-grid{gap:1.25rem}
-  .contact-aside h3{margin-top:1rem}
+  #faq.section{padding-bottom:1rem;padding-top:clamp(2.75rem,8vw,4rem)}
+  #contact.section{padding-top:1rem;padding-bottom:clamp(2.5rem,8vw,4rem)}
+  #contact .section-head{margin-bottom:1rem}
+  .contact-grid{gap:1.1rem}
+  .contact-aside h3{margin-top:.85rem}
+  #reviews.section{padding-bottom:clamp(2.75rem,8vw,4rem)}
 }
 
 .quote-form{display:grid;gap:1rem}
@@ -419,23 +420,14 @@ footer.site-foot{
   padding:.9rem 1rem calc(.9rem + env(safe-area-inset-bottom,0px))
 }
 @media(max-width:760px){
-  :root{--call-bar:calc(3.35rem + env(safe-area-inset-bottom,0px))}
+  :root{--call-bar:calc(3.6rem + env(safe-area-inset-bottom,0px))}
   .sticky-call{display:block}
   body{padding-bottom:var(--call-bar)}
-  html.home{--call-bar:0px}
   html.home .sticky-call{display:none}
-  html.home.call-docked{
-    --call-bar:calc(3.35rem + env(safe-area-inset-bottom,0px))
-  }
+  html.home .call-spacer{height:var(--call-bar)}
   html.home.call-docked .sticky-call{display:block}
-  html.home.call-docked body,
-  html.home.call-docked main{
-    padding-bottom:var(--call-bar)
-  }
-  html.home.call-docked .site-foot{
-    padding-bottom:calc(2.25rem + var(--call-bar))
-  }
 }
+.call-spacer{height:0;pointer-events:none}
 
 /* ===== Marque / interior pages (shared) ===== */
 .page-nav{position:sticky;top:0}

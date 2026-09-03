@@ -34,6 +34,7 @@ function initStickyCall() {
   const dock = (on) => {
     sticky.classList.toggle('is-away', on)
     root.classList.toggle('call-docked', on)
+    window.__ujLenis?.resize()
   }
 
   if (!pin || !root.classList.contains('home')) {
