@@ -156,11 +156,11 @@ p{margin:0 0 1em;max-width:62ch}
   padding:clamp(6rem,14vh,9rem) 0 clamp(5.5rem,12vh,7.5rem);
 }
 @media(max-width:760px){
-  .hero-copy{padding-bottom:clamp(4.5rem,10vh,6rem)}
-  .hero h1{font-size:clamp(3rem,15vw,4.2rem)}
+  .hero-copy{padding-bottom:clamp(3.25rem,8vh,4.5rem)}
+  .hero h1{font-size:clamp(3rem,15vw,4.2rem);color:#fff}
   .hero-shade{
     background:
-      linear-gradient(180deg, rgba(5,10,22,.5) 0%, rgba(5,10,22,.16) 28%, rgba(5,10,22,.5) 58%, rgba(5,10,22,.94) 100%);
+      linear-gradient(180deg, rgba(5,10,22,.5) 0%, rgba(5,10,22,.16) 28%, rgba(5,10,22,.55) 58%, rgba(5,10,22,.92) 100%);
   }
 }
 .hero-mark{
@@ -170,7 +170,7 @@ p{margin:0 0 1em;max-width:62ch}
 }
 .hero h1{
   color:#fff;max-width:10ch;margin:0 0 .35em;
-  text-shadow:0 2px 8px rgba(0,0,0,.55), 0 8px 40px rgba(0,0,0,.5);
+  text-shadow:0 1px 0 rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.55), 0 10px 40px rgba(0,0,0,.55);
 }
 .hero-line{
   font-size:clamp(1.1rem,1.5vw,1.35rem);
@@ -184,9 +184,8 @@ p{margin:0 0 1em;max-width:62ch}
   .hero-mark{animation:rise .9s ease both}
   .hero h1{animation:rise .9s ease .08s both}
   .hero-line{animation:rise .9s ease .16s both}
-  .hero-actions{animation:rise .9s ease .24s both}
 }
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes rise{from{transform:translateY(12px)}to{transform:none}}
 @media(prefers-reduced-motion:reduce){
   .hero-pin{height:100vh}
   .hero-film{display:none!important;opacity:0}
