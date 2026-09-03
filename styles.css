@@ -27,7 +27,7 @@ html{scroll-behavior:auto;-webkit-text-size-adjust:100%;scroll-padding-top:var(-
 .case,
 #quote,
 .section-head,
-h2,h3,.lede,.steps li{scroll-margin-top:var(--nav-offset)}
+h1,h2,h3,.lede,.steps li{scroll-margin-top:var(--nav-offset)}
 .hero-pin{scroll-margin-top:0}
 html:not(.home) body:has(.nav){padding-top:var(--nav-offset)}
 body{
@@ -305,17 +305,22 @@ p{margin:0 0 1em;max-width:62ch}
 
 /* Portfolio stills — whole car visible. Cover is reserved for the cinematic hero only. */
 .folio{
-  margin:1.35rem 0 0;padding:clamp(.65rem,1.8vw,1.1rem);
+  margin:1.35rem 0 0;padding:clamp(.85rem,2.4vw,1.5rem);
   background:var(--paper-2);border:1px solid rgba(18,32,63,.12)
 }
 .folio img{
-  width:100%;height:auto;max-width:100%;
+  display:block;
+  width:auto;height:auto;
+  max-width:100%;
+  max-height:calc(100svh - var(--nav-offset) - var(--call-bar) - 6.5rem);
   object-fit:contain;object-position:center;
-  background:#0B1428
+  margin-inline:auto;
+  background:transparent
 }
 .folio figcaption{
   margin:.7rem .15rem 0;font-size:.92rem;color:var(--ink-2);max-width:62ch
 }
+.feature-band h1{font-size:clamp(2.15rem, 8vw, 3.5rem)}
 .pair{
   display:grid;gap:clamp(1rem,2.5vw,1.5rem);
   padding:0 var(--pad) var(--section);
