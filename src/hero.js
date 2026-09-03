@@ -80,6 +80,7 @@ export function initHero() {
   })
 
   const tryPlay = () => {
+    if (playedOk && !video.paused) return
     const play = video.play()
     if (play && typeof play.then === 'function') {
       play.then(onPlayOk).catch(() => {})
@@ -94,10 +95,25 @@ export function initHero() {
     video.autoplay = true
     video.setAttribute('loop', '')
     video.setAttribute('autoplay', '')
-    if (video.readyState >= 2) tryPlay()
-    else video.addEventListener('canplay', tryPlay, { once: true })
-    document.addEventListener('touchstart', tryPlay, { once: true, passive: true })
-    document.addEventListener('click', tryPlay, { once: true })
+
+    /* iOS often never fires canplay until a gesture, so waiting on that
+       one event left the film still. The first touch of a scroll then
+       succeeded — it looked like scroll started playback. Kick now, and
+       retry on media/visibility/gesture. Never bind scrub or listen to scroll. */
+    const kick = () => {
+      if (playedOk && !video.paused) return
+      tryPlay()
+    }
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') kick()
+    }
+    video.addEventListener('loadeddata', kick)
+    video.addEventListener('canplay', kick)
+    document.addEventListener('visibilitychange', onVisible)
+    window.addEventListener('pageshow', kick)
+    document.addEventListener('touchstart', kick, { passive: true })
+    document.addEventListener('click', kick)
+    kick()
     return
   }
 
