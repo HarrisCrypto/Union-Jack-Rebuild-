@@ -29,6 +29,7 @@ html{scroll-behavior:auto;-webkit-text-size-adjust:100%;scroll-padding-top:var(-
 .section-head,
 h2,h3,.lede,.steps li{scroll-margin-top:var(--nav-offset)}
 .hero-pin{scroll-margin-top:0}
+html:not(.home) body:has(.nav){padding-top:var(--nav-offset)}
 body{
   margin:0;
   background:var(--paper);
@@ -302,39 +303,35 @@ p{margin:0 0 1em;max-width:62ch}
 .steps h3{margin-top:calc(-1 * var(--nav-offset));margin-bottom:.3rem;padding-top:var(--nav-offset)}
 .steps p{margin:0;color:var(--ink-2)}
 
-/* Before / after */
-.compare{
-  position:relative;overflow:hidden;aspect-ratio:16/10;background:#1A2236;
-  --pos:50%;user-select:none;touch-action:none
+/* Portfolio stills — whole car visible. Cover is reserved for the cinematic hero only. */
+.folio{
+  margin:1.35rem 0 0;padding:clamp(.65rem,1.8vw,1.1rem);
+  background:var(--paper-2);border:1px solid rgba(18,32,63,.12)
 }
-.compare img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;pointer-events:none}
-.compare-after{clip-path:inset(0 50% 0 0)}
-.compare input[type=range]{
-  position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:3
+.folio img{
+  width:100%;height:auto;max-width:100%;
+  object-fit:contain;object-position:center;
+  background:#0B1428
 }
-.compare::after{
-  content:"";position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:#fff;
-  translate:-50% 0;z-index:2;pointer-events:none;box-shadow:0 0 0 1px rgba(0,0,0,.25)
+.folio figcaption{
+  margin:.7rem .15rem 0;font-size:.92rem;color:var(--ink-2);max-width:62ch
 }
-.compare-labels{
-  position:absolute;left:0;right:0;bottom:1rem;z-index:2;display:flex;justify-content:space-between;
-  padding:0 1rem;font-size:.85rem;letter-spacing:.02em;color:#fff;
-  text-shadow:0 1px 8px rgba(0,0,0,.6);pointer-events:none
+.pair{
+  display:grid;gap:clamp(1rem,2.5vw,1.5rem);
+  padding:0 var(--pad) var(--section);
+  max-width:1180px;margin-inline:auto
 }
-.compare-note{font-size:.9rem;color:var(--ink-3);margin:1rem 0 0}
+@media(min-width:800px){.pair{grid-template-columns:1fr 1fr;align-items:start}}
+.pair .folio{margin:0}
+.feature-band .answer{max-width:46ch}
+.feature-band .cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.5rem}
 
 /* Healey case study */
 .case{background:var(--paper-2);color:var(--ink);padding-top:var(--section)}
-.case-copy{padding-bottom:clamp(1.5rem,3vw,2.5rem)}
+.case-copy{padding-bottom:clamp(1.25rem,2.5vw,2rem)}
 .case-copy .lede{max-width:22ch}
-.case-compare{
-  width:100%;max-width:none;aspect-ratio:16/10;
-  min-height:min(68vh, 640px);
-  border:0
-}
 .aside-link{margin-top:1.5rem}
 .aside-link a{color:var(--brass-l)}
-.compare-note{display:none}
 
 /* Reviews */
 .pull{
@@ -442,26 +439,9 @@ footer.site-foot{
 .crumb a{color:var(--ink-2);text-decoration:none}
 .crumb a:hover{color:var(--ink)}
 
-/* Full-bleed marque hero photograph */
-.page-hero{
-  position:relative;min-height:min(78vh,720px);display:grid;align-items:end;
-  overflow:hidden;background:#0B1428;color:#fff;isolation:isolate
-}
-.page-hero-media{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center
-}
-.page-hero-shade{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    linear-gradient(180deg, rgba(5,10,22,.45) 0%, rgba(5,10,22,.15) 35%, rgba(5,10,22,.72) 100%);
-}
-.page-hero-copy{position:relative;z-index:2;padding:clamp(5rem,12vh,8rem) 0 clamp(2.5rem,6vh,4rem)}
-.page-hero h1{color:#fff;max-width:14ch;text-shadow:0 4px 30px rgba(0,0,0,.45)}
-.page-hero .answer{
-  font-family:var(--serif);font-size:clamp(1.2rem,2.1vw,1.65rem);line-height:1.4;
-  color:#EDE4D2;max-width:42ch;margin:0
-}
-.page-hero .cta{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.6rem}
+/* Unused leftover — do not cover-crop cars if a page still has this class */
+.page-hero{background:var(--paper);color:var(--ink)}
+.page-hero-media{width:100%;height:auto;object-fit:contain}
 
 .hero-m{background:linear-gradient(160deg,#12203F 0%,#1D3157 55%,#24406E 100%);color:#fff;
   padding:clamp(2.75rem,6vw,5rem) var(--pad)}
@@ -482,7 +462,7 @@ footer.site-foot{
   grid-template-columns:repeat(2,1fr);margin-top:clamp(1.5rem,3vw,2.5rem)}
 @media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
 .grid figure{margin:0;background:var(--paper)}
-.grid img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.grid img{width:100%;height:auto;object-fit:contain;background:#0B1428}
 .grid figcaption{font-size:.86rem;color:var(--ink-2);padding:.6rem .75rem}
 .faults{background:var(--paper-2)}
 .faults ul{list-style:none;padding:0;margin:clamp(1.5rem,3vw,2.5rem) 0 0;border-top:2px solid var(--ink)}
