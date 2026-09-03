@@ -349,15 +349,20 @@ html.home .nav-home{
     transform:translateY(-2px)
   }
 }
-/* After the 760px plane so desktop wins the cascade vs --ink. */
+/* After the 760px plane so desktop wins the cascade vs --ink.
+   #2A4064 still read as the section. Lift further so tiles are cards. */
 @media(min-width:980px){
+  .marque-grid{
+    gap:1.1rem
+  }
   .marque-grid a{
-    background:#2A4064;
-    border-color:rgba(232,228,218,.45)
+    background:#3A5680;
+    border:1px solid rgba(232,228,218,.55);
+    box-shadow:0 1px 0 rgba(255,255,255,.08)
   }
   .marque-grid a:hover{
-    background:#334A70;
-    border-color:rgba(226,197,111,.5);
+    background:#45648C;
+    border-color:rgba(226,197,111,.58);
     transform:translateY(-2px)
   }
 }
