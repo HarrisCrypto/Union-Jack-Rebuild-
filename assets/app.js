@@ -3947,8 +3947,8 @@ function Fs() {
     s && (s.classList.contains("page-nav") || s.classList.toggle("is-solid", (window.scrollY || 0) > 40));
   }
   window.addEventListener("scroll", e, { passive: !0 }), e(), t && i && t.addEventListener("click", () => {
-    const r = t.getAttribute("aria-expanded") === "true";
-    t.setAttribute("aria-expanded", r ? "false" : "true"), r ? i.setAttribute("hidden", "") : i.removeAttribute("hidden"), Ls();
+    const n = !(t.getAttribute("aria-expanded") === "true");
+    t.setAttribute("aria-expanded", n ? "true" : "false"), n ? (i.removeAttribute("hidden"), s?.classList.add("is-open")) : (i.setAttribute("hidden", ""), s?.classList.remove("is-open")), Ls();
   }), Sc();
 }
 function Sc() {

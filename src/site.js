@@ -22,9 +22,15 @@ export function initNav() {
   if (toggle && drawer) {
     toggle.addEventListener('click', () => {
       const open = toggle.getAttribute('aria-expanded') === 'true'
-      toggle.setAttribute('aria-expanded', open ? 'false' : 'true')
-      if (open) drawer.setAttribute('hidden', '')
-      else drawer.removeAttribute('hidden')
+      const next = !open
+      toggle.setAttribute('aria-expanded', next ? 'true' : 'false')
+      if (next) {
+        drawer.removeAttribute('hidden')
+        nav?.classList.add('is-open')
+      } else {
+        drawer.setAttribute('hidden', '')
+        nav?.classList.remove('is-open')
+      }
       syncNavOffset()
     })
   }
