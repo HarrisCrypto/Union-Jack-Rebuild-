@@ -20,6 +20,6 @@
 | One Healey case study + slider | Done — re-hosted shop stills, no five-card grid |
 | Google reviews | One verified quote; no invented testimonials |
 | Badge palette, plates, sentence case | Kept |
-| Concours / NAP / proposed email flagged | Kept |
+| Concours / NAP / live shop email | Kept — unionjack@sbcglobal.net |
 | SEO in HTML | Title 54 chars, canonical, one h1, FAQ ↔ JSON-LD |
 | Not in this run | Mini page, American classics, journal, new quote form |

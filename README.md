@@ -34,4 +34,4 @@ The old Ken-Burns / morph mp4 is **not** used.
 
 ## Facts
 
-John & Marcello Locascio · 1988 · 13555 Depot Ave, San Martin, CA 95046 · (408) 686-1101 · Mon–Fri 9–5, Sat by appointment. `info@unionjack.com` is proposed — flagged in the footer.
+John & Marcello Locascio · 1988 · 13555 Depot Ave, San Martin, CA 95046 · (408) 686-1101 · unionjack@sbcglobal.net · Mon–Fri 9–5, Sat by appointment.
