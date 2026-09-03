@@ -17,16 +17,17 @@
   --shell:min(1120px, calc(100% - 2 * var(--pad)));
   --pad:clamp(1.25rem, 4vw, 3rem);
   --section:clamp(4.5rem, 10vw, 8rem);
-  --nav-offset:7.5rem;
+  --nav-offset:5.75rem;
   --call-bar:0px;
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:var(--nav-offset);scroll-padding-bottom:var(--call-bar)}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%;scroll-padding-top:var(--nav-offset);scroll-padding-bottom:var(--call-bar)}
 .section,
 .case,
-#quote{scroll-margin-top:var(--nav-offset)}
-h2[id]{scroll-margin-top:var(--nav-offset)}
+#quote,
+.section-head,
+h2,h3,.lede,.steps li{scroll-margin-top:var(--nav-offset)}
 .hero-pin{scroll-margin-top:0}
 body{
   margin:0;
@@ -298,7 +299,7 @@ p{margin:0 0 1em;max-width:62ch}
 }
 .steps li:last-child{border-bottom:1px solid rgba(18,32,63,.14)}
 .step-n{font-family:var(--serif);font-size:1.35rem;color:var(--brass-d)}
-.steps h3{margin:0 0 .3rem}
+.steps h3{margin-top:calc(-1 * var(--nav-offset));margin-bottom:.3rem;padding-top:var(--nav-offset)}
 .steps p{margin:0;color:var(--ink-2)}
 
 /* Before / after */
@@ -555,3 +556,10 @@ footer a{color:#B9C3D4}
 .topnav nav a:hover{color:var(--brass-l)}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* offsetTop / start-align: heading glyphs sit below the sticky bar.
+   Negative margin keeps the visual rhythm; later heading margin rules must not win. */
+main h2,main .lede,main .steps h3{
+  padding-top:var(--nav-offset);
+  margin-top:calc(-1 * var(--nav-offset));
+}

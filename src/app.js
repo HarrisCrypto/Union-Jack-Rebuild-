@@ -1,10 +1,11 @@
 import { initHero } from './hero.js'
 import { initMotion } from './motion.js'
+import { initNav } from './site.js'
 import './compare.js'
-import './site.js'
 
 function boot() {
   initMotion()
+  initNav()
   initHero()
 }
 

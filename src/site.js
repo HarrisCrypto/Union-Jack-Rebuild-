@@ -1,8 +1,15 @@
 /* Shared chrome: nav drawer, solid nav on scroll, homepage call bar */
+import { installAnchorScrolling, syncNavOffset } from './nav-offset.js'
+
+let started = false
+
 export function initNav() {
+  if (started) return
+  started = true
   const nav = document.getElementById('nav')
   const toggle = document.getElementById('navToggle')
   const drawer = document.getElementById('navDrawer')
+  installAnchorScrolling()
 
   function onScroll() {
     if (!nav) return
@@ -18,6 +25,7 @@ export function initNav() {
       toggle.setAttribute('aria-expanded', open ? 'false' : 'true')
       if (open) drawer.setAttribute('hidden', '')
       else drawer.removeAttribute('hidden')
+      syncNavOffset()
     })
   }
 
