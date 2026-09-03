@@ -1,11 +1,10 @@
-/* Motion: Lenis + GSAP ScrollTrigger. Off under prefers-reduced-motion. */
-import Lenis from 'https://cdn.jsdelivr.net/npm/lenis@1.3.8/+esm'
-import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/+esm'
-import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/ScrollTrigger/+esm'
-
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+/* Lenis + GSAP ScrollTrigger. Everything off under prefers-reduced-motion. */
+import Lenis from 'lenis'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export function initMotion() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduced) {
     document.documentElement.classList.add('reduced-motion')
     return
@@ -13,44 +12,26 @@ export function initMotion() {
 
   gsap.registerPlugin(ScrollTrigger)
 
-  /* Smooth-scroll + a live WebGL drive fights iPhone Safari. Skip Lenis on touch. */
-  const coarse = window.matchMedia('(pointer: coarse)').matches
-  const lenis = coarse
-    ? null
-    : new Lenis({
-        duration: 1.1,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      })
-
-  if (lenis) {
-    lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => lenis.raf(time * 1000))
-    gsap.ticker.lagSmoothing(0)
-  }
-
-  gsap.to('.hero-shade', {
-    opacity: 1,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1,
-    },
+  const lenis = new Lenis({
+    duration: 1.05,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
   })
+  lenis.on('scroll', ScrollTrigger.update)
+  gsap.ticker.add((time) => lenis.raf(time * 1000))
+  gsap.ticker.lagSmoothing(0)
 
   gsap.utils
     .toArray(
-      '.section-head, .lede, .factsheet, .steps li, .work-card, .marque-grid a, .pull, .faq-list details, .contact-grid > *, .compare'
+      '.section-head, .lede, .factsheet, .steps li, .case-copy, .marque-grid a, .pull, .faq-list details, .contact-grid > *'
     )
     .forEach((el, i) => {
       gsap.from(el, {
-        y: 28,
+        y: 22,
         opacity: 0,
-        duration: 0.85,
+        duration: 0.8,
         ease: 'power2.out',
-        delay: (i % 4) * 0.07,
+        delay: (i % 5) * 0.07,
         scrollTrigger: {
           trigger: el,
           start: 'top 88%',
@@ -59,26 +40,4 @@ export function initMotion() {
       })
     })
 
-  gsap.utils.toArray('.work-photo img').forEach((img) => {
-    gsap.fromTo(
-      img,
-      { yPercent: -5 },
-      {
-        yPercent: 5,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: img.closest('.work-card') || img,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      }
-    )
-  })
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMotion)
-} else {
-  initMotion()
 }

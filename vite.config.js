@@ -1,40 +1,23 @@
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
-const pages = [
-  'index.html',
-  'jaguar-restoration.html',
-  'mg-restoration.html',
-  'triumph-restoration.html',
-  'austin-healey-restoration.html',
-  'mini-restoration.html',
-  'morris-minor-restoration.html',
-  'american-classics-restoration.html',
-  'other-british-marques.html',
-  'services.html',
-  'process.html',
-  'faq.html',
-  'reviews.html',
-  'careers.html',
-  'journal.html',
-  'journal-mini-subframes.html',
-  'engine-rebuilding.html',
-  'paint-bodywork.html',
-  'upholstery.html',
-  'electrical-rewiring.html',
-  'quote-thanks.html',
-]
-
 export default defineConfig({
   root: '.',
+  base: './',
   publicDir: false,
   build: {
-    outDir: 'dist',
-    emptyOutDir: true,
+    outDir: 'assets',
+    emptyOutDir: false,
+    lib: {
+      entry: resolve(__dirname, 'src/app.js'),
+      name: 'UnionJack',
+      formats: ['es'],
+      fileName: () => 'app.js',
+    },
     rollupOptions: {
-      input: Object.fromEntries(
-        pages.map((page) => [page.replace('.html', ''), resolve(__dirname, page)])
-      ),
+      output: {
+        inlineDynamicImports: true,
+      },
     },
   },
   server: {

@@ -1,35 +1,35 @@
 # Union Jack British Auto Restoration — site
 
-Static site for Union Jack (San Martin, CA). No build step. Serve the repo root.
+Static marketing site for Union Jack (San Martin, CA). Vite bundles the homepage motion; GitHub Pages serves the repo root.
 
 ```bash
+npm install
+npm run build    # writes assets/app.js
+npm run dev      # http://127.0.0.1:5173
+# or, after a build:
 python3 -m http.server 8000
 ```
 
-GitHub Pages publishes from `main` at the branch root:
-https://harriscrypto.github.io/Union-Jack-Rebuild-/
+Live: https://harriscrypto.github.io/Union-Jack-Rebuild-/
 
-## Hero
+## Hero — why this is a film, not real-time 3D
 
-One Three.js scene in `drive.js` (CDN ESM). English country lane at dawn: hedgerows, fence posts, trees, hills, dark bonnet silhouette. Mouse look, scroll speeds the drive, camera faces down the road and stays on the tarmac.
+Jason asked for a manufacturer-launch drive: licensed GLTF (E-Type / Healey / MGA), MeshPhysicalMaterial, HDRI + CSM, GTAO, motion blur, bokeh, bloom, under 8MB, 60fps on an M1 Air, 30fps on mid-range Android, LCP &lt; 2.5s, and “must not read as 3D on a website” on iPhone.
 
-- No WebGL → painted dawn gradient + static poster, type still readable
-- `prefers-reduced-motion: reduce` → one still frame, then stop
-- `media/drive-hero.mp4` is **not** the hero (Ken-Burns stills). Poster is fallback only.
+That budget cannot be hit honestly in this repo:
+
+- A redistributable, interior-ready British roadster GLTF with PBR textures is not sitting in the tree, and a photoreal car + HDRI + road + foliage will not stay under 8MB after Draco/KTX2 once the renderer and post stack are counted.
+- The full post list (GTAO, velocity blur, bokeh, bloom, CA, grain, SMAA, god rays, CSM) will not hold 30fps in iPhone Safari. That is the device he looked at.
+- Shipping a Lambert-sphere lane, or a half-post WebGL car, would look like a game demo. He already rejected that.
+
+So the hero is the brief’s stated alternative: a **pre-rendered photoreal cinematic, scroll-scrubbed frame by frame** (Apple product-page pattern). Poster paints first. Scroll (Lenis + GSAP `scrub: 1`) drives `video.currentTime`. `prefers-reduced-motion` keeps the poster and turns every motion effect off. No mouse-look.
+
+The old Ken-Burns / morph mp4 is **not** used.
 
 ## Design system
 
-Badge tokens: `--ink #12203F`, `--brass #B8912E`, `--paper #EDE9DF`, `--green #12352A`, EB Garamond / IBM Plex Sans. Marques as chassis build plates. Sentence case. Concours d'Elegance.
+`--ink #12203F`, `--brass #B8912E` / `--brass-l #E2C56F`, `--paper #EDE9DF`, `--green #12352A`. EB Garamond + IBM Plex Sans. Marques as chassis plates. Sentence case. Concours d'Elegance.
 
-## Content / SEO / AEO
+## Facts
 
-- Facts only: John & Marcello Locascio, 1988, 13555 Depot Ave, San Martin CA 95046, (408) 686-1101, Mon–Fri 9–5, Sat by appointment
-- `info@unionjack.com` is proposed — flagged in the footer, not silently swapped to sbcglobal
-- Unique titles, canonicals, one h1, `tel:` links, schema on index + marque pages, FAQ HTML ↔ JSON-LD
-
-## Before production
-
-- Host photos on own domain (still Wix CDN hotlinks)
-- Confirm `info@unionjack.com`
-- Drop `.html` via host config
-- Vector logo; live Google review feed; true same-car before/after from the shop
+John & Marcello Locascio · 1988 · 13555 Depot Ave, San Martin, CA 95046 · (408) 686-1101 · Mon–Fri 9–5, Sat by appointment. `info@unionjack.com` is proposed — flagged in the footer.

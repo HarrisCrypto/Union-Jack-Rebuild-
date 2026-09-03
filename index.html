@@ -60,20 +60,30 @@
   </div>
 </header>
 
-<!-- Real-time WebGL drive — English country lane at dawn. Poster is fallback only. -->
-<section class="hero" id="top" aria-label="Driving an English country lane at dawn">
-  <div class="hero-fallback" aria-hidden="true">
-    <img class="hero-poster" src="media/drive-poster.jpg" alt="" width="1600" height="900" decoding="async" fetchpriority="high">
-  </div>
-  <canvas id="drive" class="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-shade" aria-hidden="true"></div>
-  <div class="bonnet" aria-hidden="true"></div>
-  <div class="hero-copy">
-    <p class="hero-mark">British Auto Restoration</p>
-    <h1>Union Jack</h1>
-    <p class="hero-line">Concours restoration of Jaguar, MG, Triumph and Healey — San Martin since 1988.</p>
-    <div class="hero-actions">
-      <a class="btn btn-brass" href="#quote">Request a quote</a>
+<!-- Photoreal cinematic drive — scroll scrubs the film. Poster is the first paint. -->
+<section class="hero-pin" id="top" aria-label="Austin-Healey on an English country lane at golden hour">
+  <div class="hero">
+    <div class="hero-fallback">
+      <img class="hero-poster" src="media/drive-poster.jpg" alt="British racing green Austin-Healey 3000 on a narrow country lane at golden hour" width="1600" height="900" decoding="async" fetchpriority="high">
+    </div>
+    <video
+      id="heroFilm"
+      class="hero-film"
+      muted
+      playsinline
+      preload="auto"
+      poster="media/drive-poster.jpg"
+      aria-hidden="true">
+      <source src="media/drive-cinematic.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="hero-mark">British Auto Restoration</p>
+      <h1>Union Jack</h1>
+      <p class="hero-line">Concours restoration of Jaguar, MG, Triumph and Healey — San Martin since 1988.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brass" href="#quote">Request a quote</a>
+      </div>
     </div>
   </div>
 </section>
@@ -134,50 +144,20 @@
   </div>
 </section>
 
-<section class="section section-mute" aria-labelledby="work" id="work">
-  <div class="shell">
-    <header class="section-head">
+<section class="case" aria-labelledby="work-h" id="work">
+  <div class="case-copy">
+    <div class="shell">
       <p class="eyebrow">From the shop</p>
-      <h2 id="work">Cars that have come through</h2>
-    </header>
-    <div class="work-grid">
-      <article class="work-card work-feature">
-        <div class="work-photo"><img src="https://static.wixstatic.com/media/0d4294_99bd54f309c04345866c42c6d4d37f6b.jpg/v1/fill/w_1400,h_900,al_c,q_85,enc_auto/0d4294_99bd54f309c04345866c42c6d4d37f6b.jpg" alt="Austin-Healey 3000 Mk III BJ8, Union Jack, San Martin CA" loading="lazy" decoding="async"></div>
-        <div class="work-copy"><h3>Austin-Healey 3000</h3><p class="meta">Mk III BJ8 · full restoration</p><p>The big Healey rots in the sills and the rear shroud — structural work long before it is cosmetic.</p></div>
-      </article>
-      <article class="work-card">
-        <div class="work-photo"><img src="https://static.wixstatic.com/media/0d4294_bd421b2b8db345f4baa1457ba80cc475.jpg/v1/fill/w_1100,h_825,al_c,q_85,enc_auto/0d4294_bd421b2b8db345f4baa1457ba80cc475.jpg" alt="MGA roadster, Union Jack, San Martin CA" loading="lazy" decoding="async"></div>
-        <div class="work-copy"><h3>MGA</h3><p class="meta">Roadster · panel work and paint</p><p>That shape shows every ripple in the metal.</p></div>
-      </article>
-      <article class="work-card">
-        <div class="work-photo"><img src="https://static.wixstatic.com/media/0d4294_993ba6831e7d47348993c007b4246606.jpg/v1/fill/w_1100,h_825,al_c,q_85,enc_auto/0d4294_993ba6831e7d47348993c007b4246606.jpg" alt="Triumph TR3, Union Jack, San Martin CA" loading="lazy" decoding="async"></div>
-        <div class="work-copy"><h3>Triumph TR3</h3><p class="meta">Separate chassis · bare-frame</p><p>The body lifts off whole — back to bare frame and up again.</p></div>
-      </article>
-      <article class="work-card">
-        <div class="work-photo"><img src="https://static.wixstatic.com/media/0d4294_06ea89db24214ba28267d8154bbc26d9.jpg/v1/fill/w_1100,h_825,al_c,q_85,enc_auto/0d4294_06ea89db24214ba28267d8154bbc26d9.jpg" alt="MG TC, Union Jack, San Martin CA" loading="lazy" decoding="async"></div>
-        <div class="work-copy"><h3>MG TC</h3><p class="meta">Ash frame · coachbuilt body</p><p>Timber-framed body on a separate chassis.</p></div>
-      </article>
-      <article class="work-card">
-        <div class="work-photo"><img src="https://static.wixstatic.com/media/0d4294_a0f10c7ca8284e2aabc2ffe88cd08079.jpg/v1/fill/w_1100,h_825,al_c,q_85,enc_auto/0d4294_a0f10c7ca8284e2aabc2ffe88cd08079.jpg" alt="Jaguar S-Type, Union Jack, San Martin CA" loading="lazy" decoding="async"></div>
-        <div class="work-copy"><h3>Jaguar S-Type</h3><p class="meta">Saloon · paint and brightwork</p><p>Panel gaps and chrome tell whether the shell was supported properly.</p></div>
-      </article>
+      <h2 id="work-h">Austin-Healey 3000</h2>
+      <p class="lede">The big Healey rots in the sills and the rear shroud. Steel first. Paint later.</p>
+      <p>These frames are from the San Martin floor — two stages of an Austin-Healey 3000 in the shop. Drag the handle. A matched finished pair from Marcello still belongs here; we will not invent one.</p>
     </div>
   </div>
-</section>
-
-<section class="section section-paper" aria-labelledby="compare" id="compare">
-  <div class="shell">
-    <header class="section-head">
-      <p class="eyebrow">In the workshop</p>
-      <h2 id="compare">Progress you can see</h2>
-      <p class="section-sub">Austin-Healey 3000 — bodywork in progress, then finished paint. Drag the handle.</p>
-    </header>
-    <div class="compare" data-compare>
-      <img class="compare-before" src="https://static.wixstatic.com/media/0d4294_200d81e5988149939ec610c2d78f9aa4.jpg/v1/fill/w_1100,h_825,al_c,q_85,enc_auto/0d4294_200d81e5988149939ec610c2d78f9aa4.jpg" alt="Austin-Healey 3000 bodywork in progress, Union Jack, San Martin CA" width="1100" height="825" loading="lazy" decoding="async">
-      <img class="compare-after" src="https://static.wixstatic.com/media/0d4294_99bd54f309c04345866c42c6d4d37f6b.jpg/v1/fill/w_1100,h_825,al_c,q_85,enc_auto/0d4294_99bd54f309c04345866c42c6d4d37f6b.jpg" alt="Austin-Healey 3000 Mk III BJ8 finished paint, Union Jack, San Martin CA" width="1100" height="825" loading="lazy" decoding="async">
-      <input type="range" min="0" max="100" value="50" aria-label="Reveal workshop progress">
-      <div class="compare-labels" aria-hidden="true"><span>In progress</span><span>Finished</span></div>
-    </div>
+  <div class="compare case-compare" data-compare>
+    <img class="compare-before" src="media/shop/healey-before.jpg" alt="Austin-Healey 3000 on the lift during restoration, Union Jack, San Martin CA" width="1600" height="1000" loading="lazy" decoding="async">
+    <img class="compare-after" src="media/shop/healey-after.jpg" alt="Austin-Healey 3000 further along in the shop, Union Jack, San Martin CA" width="1600" height="1000" loading="lazy" decoding="async">
+    <input type="range" min="0" max="100" value="50" aria-label="Compare two stages of the Healey">
+    <div class="compare-labels" aria-hidden="true"><span>On the lift</span><span>Further along</span></div>
   </div>
 </section>
 
@@ -188,7 +168,7 @@
       <h2 id="reviews-h">In the owners' words</h2>
     </header>
     <blockquote class="pull">Marcello is the one to talk to about British cars. I bought a 1957 MGA with records from Union Jack and he walked me through the whole restoration they had done on it.</blockquote>
-    <p class="cite">Google review · <a href="reviews.html">More reviews</a> · <a href="https://www.google.com/maps/place/?q=place_id:ChIJ-zMSKAzgkYARFRQVpqrCt4o" rel="noopener" target="_blank">Google listing</a></p>
+    <p class="cite">Google review · <a href="https://www.google.com/maps/place/?q=place_id:ChIJ-zMSKAzgkYARFRQVpqrCt4o" rel="noopener" target="_blank">Read the listing</a>. Live dated feed still to come — no invented quotes.</p>
   </div>
 </section>
 
@@ -289,11 +269,6 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does a full restoration cost?","acceptedAnswer":{"@type":"Answer","text":"A body-off restoration of a British sports car generally runs into the tens of thousands of dollars, and a concours-level car can cost more than the finished car is worth. The honest answer is that no one can quote you accurately from a photograph. We assess the car, then give you a written estimate and a stage-by-stage worksheet before any work starts, so you decide what is worth doing."}},{"@type":"Question","name":"How long does a restoration take?","acceptedAnswer":{"@type":"Answer","text":"A full body-off restoration typically takes twelve to twenty-four months. The single biggest variable is parts: a car needing rare trim or a specific gearbox can wait months on one component. We search for parts before starting so the schedule is based on what we can actually get."}},{"@type":"Question","name":"Do you take cars from outside California?","acceptedAnswer":{"@type":"Answer","text":"Yes. We regularly work on cars shipped in from other states and can recommend enclosed transporters. Most of our local work comes from between San Francisco and Monterey Bay, but the shop has built cars for owners across the country."}},{"@type":"Question","name":"What is a rolling restoration?","acceptedAnswer":{"@type":"Answer","text":"A rolling restoration means the car stays usable while it is worked on in stages — brakes and suspension one winter, paint the next. It spreads the cost over years and keeps you driving. It suits a car you want to enjoy rather than show."}},{"@type":"Question","name":"Do you only work on British cars?","acceptedAnswer":{"@type":"Answer","text":"No. British sports cars are what we are known for, but we restore and repair classic American cars and trucks too — Chevrolet, Ford, Plymouth and Buick among them — along with other European makes."}},{"@type":"Question","name":"Can I visit while my car is being built?","acceptedAnswer":{"@type":"Answer","text":"Yes, and we would rather you did. We hold progress reviews at each stage and you are welcome at the shop during opening hours. It is your car."}}]}
 </script>
-<script type="module" src="drive.js"></script>
-<script type="module">
-  import './src/motion.js'
-  import './src/compare.js'
-  import './src/site.js'
-</script>
+<script type="module" src="assets/app.js"></script>
 </body>
 </html>

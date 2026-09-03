@@ -6,7 +6,7 @@ export function initCompare(root = document) {
     if (!after || !range) return
 
     const set = (v) => {
-      after.style.clipPath = `inset(0 0 0 ${v}%)`
+      after.style.clipPath = `inset(0 ${100 - v}% 0 0)`
       el.style.setProperty('--pos', `${v}%`)
     }
     set(Number(range.value) || 50)
