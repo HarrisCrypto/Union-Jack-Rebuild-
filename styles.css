@@ -434,7 +434,17 @@ footer.site-foot{
     align-items:start
   }
 }
-.foot-links{display:flex;flex-wrap:wrap;gap:.65rem 1.1rem}
+.foot-social{
+  display:flex;align-items:center;gap:.55rem;
+  margin:.7rem 0 0
+}
+.foot-social a{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:1.7rem;height:1.7rem;color:#C3CDDD
+}
+.foot-social a:hover,
+.foot-social a:focus-visible{color:#E8E4DA}
+.foot-social svg{display:block;width:1.15rem;height:1.15rem}
 .foot-fine{margin-top:1.75rem}
 .foot-fine p{max-width:none;margin:0}
 .foot-fine a{color:#D5DCE8;text-decoration:underline;text-underline-offset:2px}
