@@ -23,9 +23,32 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["meta", "tiktok", "youtube", "google_display", "linkedin", "organic_short"]
+        "enum": [
+          "meta",
+          "tiktok",
+          "youtube",
+          "youtube_shorts",
+          "google_display",
+          "linkedin",
+          "snapchat",
+          "pinterest",
+          "x_twitter",
+          "organic_short",
+          "ctv_ott",
+          "influencer_seed"
+        ]
       },
       "minItems": 1
+    },
+    "production_tier": {
+      "type": "string",
+      "enum": ["native_ugc", "hybrid_polished", "high_production", "premium_cinema"],
+      "description": "Expected craft/budget level of the creative."
+    },
+    "virality_posture": {
+      "type": "string",
+      "enum": ["evergreen_dr", "trend_reactive", "share_engineered", "brand_film"],
+      "description": "How the piece is meant to spread or convert."
     },
     "style": {
       "type": "string",
@@ -41,7 +64,40 @@
         "meme_native",
         "listicle_text_overlay",
         "testimonial_cutdown",
-        "local_service_trust"
+        "local_service_trust",
+        "pov_day_in_life",
+        "duet_stitch_react",
+        "green_screen_rant",
+        "skit_sketch",
+        "grwm_soft_sell",
+        "street_interview",
+        "unboxing_asmr",
+        "challenge_participation",
+        "series_cliffhanger",
+        "hot_take_controversy",
+        "text_story_slideshow",
+        "save_share_bait",
+        "hero_product_film",
+        "fashion_editorial",
+        "beauty_macro_tabletop",
+        "cgi_3d_product",
+        "motion_design_explainer",
+        "documentary_cutdown",
+        "music_video_brand",
+        "vfx_transformation",
+        "performance_sports_cine",
+        "launch_teaser",
+        "offer_urgency",
+        "comparison_vs",
+        "objection_faq",
+        "lead_magnet_value",
+        "app_demo_ui",
+        "influencer_collab_brief",
+        "kinetic_type_explainer",
+        "testimonial_montage_cine",
+        "bts_making_of",
+        "cultural_moment",
+        "podcast_clip_ad"
       ]
     },
     "funnel_stage": {

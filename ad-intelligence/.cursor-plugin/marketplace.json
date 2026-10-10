@@ -10,9 +10,9 @@
     {
       "name": "ad-intelligence",
       "source": ".",
-      "description": "High-performing ad blueprints, hooks, flows, and retrieval for AI ad generation.",
-      "version": "1.0.0",
-      "keywords": ["ads", "marketing", "creative", "ugc", "meta", "tiktok"]
+      "description": "Viral + high-production ad blueprints and retrieval for AI creative agents across every niche.",
+      "version": "2.0.0",
+      "keywords": ["ads", "viral", "tiktok", "cinematic", "ugc", "high-production", "meta", "youtube", "creative"]
     }
   ]
 }

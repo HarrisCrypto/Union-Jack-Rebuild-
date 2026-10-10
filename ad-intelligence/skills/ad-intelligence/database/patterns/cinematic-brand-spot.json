@@ -1,12 +1,30 @@
 {
   "id": "cinematic-brand-spot",
   "name": "Cinematic brand spot (feeling → product)",
-  "platforms": ["youtube", "meta", "organic_short"],
+  "platforms": [
+    "youtube",
+    "meta",
+    "organic_short"
+  ],
   "style": "cinematic_brand",
   "funnel_stage": "tof_awareness",
-  "niches": ["luxury", "auto", "travel", "fashion", "craft"],
-  "duration_seconds": { "min": 15, "max": 60, "ideal": 30 },
-  "aspect_ratios": ["16:9", "9:16", "1:1"],
+  "niches": [
+    "luxury",
+    "auto",
+    "travel",
+    "fashion",
+    "craft"
+  ],
+  "duration_seconds": {
+    "min": 15,
+    "max": 60,
+    "ideal": 30
+  },
+  "aspect_ratios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
   "hook": {
     "window_seconds": "0-3",
     "visual": "One unforgettable image — motion, light, material",
@@ -74,7 +92,14 @@
     "video_gen": "Cinematic shallow-DOF sequence, unified color grade, premium materials, no UI text overlays in first seconds"
   },
   "output_contract": {
-    "deliverables": ["shot_list", "video_gen_prompt", "primary_text", "thumbnail_prompt"]
+    "deliverables": [
+      "shot_list",
+      "video_gen_prompt",
+      "primary_text",
+      "thumbnail_prompt"
+    ]
   },
-  "source_notes": "Brand/TOFU pattern — not a substitute for DR creative in tight CAC accounts."
+  "source_notes": "Brand/TOFU pattern — not a substitute for DR creative in tight CAC accounts.",
+  "production_tier": "premium_cinema",
+  "virality_posture": "brand_film"
 }

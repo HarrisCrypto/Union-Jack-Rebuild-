@@ -1,8 +1,8 @@
 {
   "name": "ad-intelligence",
   "displayName": "Ad Intelligence",
-  "version": "1.0.0",
-  "description": "Pattern-first high-performing ad blueprints for LLM agents. Retrieve hooks, flows, styles, and output contracts — not raw scraped creatives.",
+  "version": "2.0.0",
+  "description": "Universal ad intelligence for LLM agents: 40+ viral, share-engineered, and high-production blueprints across niches — with retrieval, hooks, flows, and output contracts.",
   "author": {
     "name": "HarrisCrypto"
   },

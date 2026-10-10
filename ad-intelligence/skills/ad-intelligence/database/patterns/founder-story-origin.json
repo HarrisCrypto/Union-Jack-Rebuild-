@@ -1,12 +1,31 @@
 {
   "id": "founder-story-origin",
   "name": "Founder / craftsperson origin story",
-  "platforms": ["meta", "youtube", "linkedin", "organic_short"],
+  "platforms": [
+    "meta",
+    "youtube",
+    "linkedin",
+    "organic_short"
+  ],
   "style": "founder_story",
   "funnel_stage": "tof_awareness",
-  "niches": ["local_services", "luxury", "craft", "saas", "food"],
-  "duration_seconds": { "min": 30, "max": 90, "ideal": 45 },
-  "aspect_ratios": ["9:16", "16:9", "1:1"],
+  "niches": [
+    "local_services",
+    "luxury",
+    "craft",
+    "saas",
+    "food"
+  ],
+  "duration_seconds": {
+    "min": 30,
+    "max": 90,
+    "ideal": 45
+  },
+  "aspect_ratios": [
+    "9:16",
+    "16:9",
+    "1:1"
+  ],
   "hook": {
     "window_seconds": "0-5",
     "visual": "Founder in the place of work, mid-action — not desk TED talk",
@@ -74,7 +93,14 @@
     "shot_list": "Founder action → archive → process close-ups → customer outcome → soft CTA"
   },
   "output_contract": {
-    "deliverables": ["script", "shot_list", "primary_text", "video_gen_prompt"]
+    "deliverables": [
+      "script",
+      "shot_list",
+      "primary_text",
+      "video_gen_prompt"
+    ]
   },
-  "source_notes": "Brand-building pattern for craft and local service businesses."
+  "source_notes": "Brand-building pattern for craft and local service businesses.",
+  "production_tier": "high_production",
+  "virality_posture": "brand_film"
 }

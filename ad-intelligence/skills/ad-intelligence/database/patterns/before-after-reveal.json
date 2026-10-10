@@ -1,12 +1,33 @@
 {
   "id": "before-after-reveal",
   "name": "Before → After reveal (craft proof)",
-  "platforms": ["meta", "tiktok", "youtube", "organic_short"],
+  "platforms": [
+    "meta",
+    "tiktok",
+    "youtube",
+    "organic_short"
+  ],
   "style": "before_after",
   "funnel_stage": "tof_awareness",
-  "niches": ["auto_restoration", "home_renovation", "beauty", "cleaning", "fitness", "design"],
-  "duration_seconds": { "min": 8, "max": 30, "ideal": 15 },
-  "aspect_ratios": ["9:16", "1:1"],
+  "niches": [
+    "beauty",
+    "home_renovation",
+    "cleaning",
+    "fitness",
+    "design",
+    "fashion",
+    "dental",
+    "auto"
+  ],
+  "duration_seconds": {
+    "min": 8,
+    "max": 30,
+    "ideal": 15
+  },
+  "aspect_ratios": [
+    "9:16",
+    "1:1"
+  ],
   "hook": {
     "window_seconds": "0-2",
     "visual": "Ugly / incomplete / neglected state fills the frame immediately",
@@ -19,8 +40,8 @@
       {
         "t": "2-8s",
         "purpose": "Process teaser (not full documentary)",
-        "visual": "3–5 quick craft cuts: sanding, weld, paint, polish, stitch",
-        "vo_or_copy": "Optional sparse VO: time span or craft constraint"
+        "visual": "3–5 quick process cuts specific to the niche (apply, install, train, cook, edit, transform)",
+        "vo_or_copy": "Optional sparse VO: time span or constraint"
       },
       {
         "t": "8-12s",
@@ -75,7 +96,15 @@
     "video_gen": "Vertical transformation montage, matched framing before and after, documentary craft lighting"
   },
   "output_contract": {
-    "deliverables": ["shot_list", "caption_track", "thumbnail_prompt", "primary_text", "cta_variants"]
+    "deliverables": [
+      "shot_list",
+      "caption_track",
+      "thumbnail_prompt",
+      "primary_text",
+      "cta_variants"
+    ]
   },
-  "source_notes": "Dominant pattern in restoration, reno, beauty, and cleaning verticals."
+  "source_notes": "Dominant pattern in restoration, reno, beauty, and cleaning verticals.",
+  "production_tier": "hybrid_polished",
+  "virality_posture": "share_engineered"
 }

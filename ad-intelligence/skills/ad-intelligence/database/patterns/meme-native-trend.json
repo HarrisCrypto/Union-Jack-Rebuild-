@@ -1,12 +1,28 @@
 {
   "id": "meme-native-trend",
   "name": "Meme / native trend hijack",
-  "platforms": ["tiktok", "meta", "organic_short"],
+  "platforms": [
+    "tiktok",
+    "meta",
+    "organic_short"
+  ],
   "style": "meme_native",
   "funnel_stage": "tof_awareness",
-  "niches": ["consumer", "ecommerce", "saas", "youth", "food"],
-  "duration_seconds": { "min": 6, "max": 20, "ideal": 12 },
-  "aspect_ratios": ["9:16"],
+  "niches": [
+    "consumer",
+    "ecommerce",
+    "saas",
+    "youth",
+    "food"
+  ],
+  "duration_seconds": {
+    "min": 6,
+    "max": 20,
+    "ideal": 12
+  },
+  "aspect_ratios": [
+    "9:16"
+  ],
   "hook": {
     "window_seconds": "0-1.5",
     "visual": "Trend format recognized in first beat (duet layout, green screen, POV, capcut template)",
@@ -68,7 +84,14 @@
     "video_gen": "Vertical native meme-style clip matching [trend format], no corporate polish"
   },
   "output_contract": {
-    "deliverables": ["script", "caption_track", "cta_variants", "ab_test_matrix"]
+    "deliverables": [
+      "script",
+      "caption_track",
+      "cta_variants",
+      "ab_test_matrix"
+    ]
   },
-  "source_notes": "Ephemeral pattern — refresh weekly; do not bake specific trending sounds into the skill forever."
+  "source_notes": "Ephemeral pattern — refresh weekly; do not bake specific trending sounds into the skill forever.",
+  "production_tier": "native_ugc",
+  "virality_posture": "trend_reactive"
 }

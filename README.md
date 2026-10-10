@@ -2,7 +2,7 @@
 
 Static marketing site for Union Jack (San Martin, CA). Vite bundles the homepage motion; GitHub Pages serves the repo root.
 
-**Ad agents:** see [`ad-intelligence/`](./ad-intelligence/) — a Cursor skill + pattern database for high-performing ad blueprints (extractable to its own repo for packaging/sale).
+**Standalone package in this repo:** [`ad-intelligence/`](./ad-intelligence/) — universal LLM ad-pattern skill (viral + high-production). Not site-specific; extract to its own repo to publish/sell.
 
 ```bash
 npm install

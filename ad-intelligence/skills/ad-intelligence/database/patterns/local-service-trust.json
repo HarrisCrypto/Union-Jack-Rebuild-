@@ -1,12 +1,32 @@
 {
   "id": "local-service-trust",
   "name": "Local service trust ad (geo + proof + call)",
-  "platforms": ["meta", "google_display", "youtube"],
+  "platforms": [
+    "meta",
+    "google_display",
+    "youtube"
+  ],
   "style": "local_service_trust",
   "funnel_stage": "bof_conversion",
-  "niches": ["auto_restoration", "auto_repair", "home_services", "medical", "legal", "trades"],
-  "duration_seconds": { "min": 15, "max": 30, "ideal": 20 },
-  "aspect_ratios": ["4:5", "1:1", "9:16"],
+  "niches": [
+    "home_services",
+    "medical",
+    "legal",
+    "trades",
+    "auto_repair",
+    "beauty_local",
+    "fitness_local"
+  ],
+  "duration_seconds": {
+    "min": 15,
+    "max": 30,
+    "ideal": 20
+  },
+  "aspect_ratios": [
+    "4:5",
+    "1:1",
+    "9:16"
+  ],
   "hook": {
     "window_seconds": "0-3",
     "visual": "Recognizable local cue (shop exterior, city/landmark-adjacent, marque in bay) OR the exact service problem",
@@ -74,7 +94,15 @@
     "shot_list": "Exterior → bay specialty → review overlay → end card with phone"
   },
   "output_contract": {
-    "deliverables": ["script", "shot_list", "primary_text", "headline", "cta_variants"]
+    "deliverables": [
+      "script",
+      "shot_list",
+      "primary_text",
+      "headline",
+      "cta_variants"
+    ]
   },
-  "source_notes": "Built for geo-intent and local lead gen; maps cleanly to Union Jack–style restoration shops."
+  "source_notes": "Built for geo-intent and local lead gen across service businesses.",
+  "production_tier": "native_ugc",
+  "virality_posture": "evergreen_dr"
 }

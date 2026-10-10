@@ -1,12 +1,30 @@
 {
   "id": "social-proof-stack",
   "name": "Social proof stack (reviews → result → offer)",
-  "platforms": ["meta", "youtube", "google_display"],
+  "platforms": [
+    "meta",
+    "youtube",
+    "google_display"
+  ],
   "style": "social_proof_stack",
   "funnel_stage": "bof_conversion",
-  "niches": ["local_services", "ecommerce", "saas", "auto", "home"],
-  "duration_seconds": { "min": 15, "max": 45, "ideal": 25 },
-  "aspect_ratios": ["4:5", "1:1", "9:16"],
+  "niches": [
+    "local_services",
+    "ecommerce",
+    "saas",
+    "auto",
+    "home"
+  ],
+  "duration_seconds": {
+    "min": 15,
+    "max": 45,
+    "ideal": 25
+  },
+  "aspect_ratios": [
+    "4:5",
+    "1:1",
+    "9:16"
+  ],
   "hook": {
     "window_seconds": "0-3",
     "visual": "Real review UI or customer face — not stock smile",
@@ -74,7 +92,15 @@
     "shot_list": "Review1 → Review2 → Result photo → Offer → Risk reversal CTA"
   },
   "output_contract": {
-    "deliverables": ["script", "primary_text", "headline", "cta_variants", "ab_test_matrix"]
+    "deliverables": [
+      "script",
+      "primary_text",
+      "headline",
+      "cta_variants",
+      "ab_test_matrix"
+    ]
   },
-  "source_notes": "Bottom-of-funnel pattern; requires real reviews the brand owns rights to use."
+  "source_notes": "Bottom-of-funnel pattern; requires real reviews the brand owns rights to use.",
+  "production_tier": "hybrid_polished",
+  "virality_posture": "evergreen_dr"
 }

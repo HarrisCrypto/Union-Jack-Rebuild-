@@ -1,12 +1,29 @@
 {
   "id": "ugc-talking-head-scroll-stop",
   "name": "UGC talking head — scroll-stop confession",
-  "platforms": ["meta", "tiktok", "organic_short"],
+  "platforms": [
+    "meta",
+    "tiktok",
+    "organic_short"
+  ],
   "style": "ugc_talking_head",
   "funnel_stage": "tof_awareness",
-  "niches": ["consumer", "local_services", "saas", "health", "ecommerce"],
-  "duration_seconds": { "min": 15, "max": 45, "ideal": 28 },
-  "aspect_ratios": ["9:16", "4:5"],
+  "niches": [
+    "consumer",
+    "local_services",
+    "saas",
+    "health",
+    "ecommerce"
+  ],
+  "duration_seconds": {
+    "min": 15,
+    "max": 45,
+    "ideal": 28
+  },
+  "aspect_ratios": [
+    "9:16",
+    "4:5"
+  ],
   "hook": {
     "window_seconds": "0-3",
     "visual": "Face fills frame; slight lean-in; phone selfie angle; busy-but-real background",
@@ -76,7 +93,16 @@
     "video_gen": "Handheld vertical UGC selfie of a real person mid-confession, natural light, no logos, candid energy"
   },
   "output_contract": {
-    "deliverables": ["script", "shot_list", "caption_track", "primary_text", "cta_variants", "ab_test_matrix"]
+    "deliverables": [
+      "script",
+      "shot_list",
+      "caption_track",
+      "primary_text",
+      "cta_variants",
+      "ab_test_matrix"
+    ]
   },
-  "source_notes": "Distilled from common Meta/TikTok UGC winners across consumer and local-service accounts — pattern only, no scraped creative."
+  "source_notes": "Distilled from common Meta/TikTok UGC winners across consumer and local-service accounts — pattern only, no scraped creative.",
+  "production_tier": "native_ugc",
+  "virality_posture": "evergreen_dr"
 }

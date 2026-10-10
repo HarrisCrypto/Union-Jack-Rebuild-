@@ -6,7 +6,7 @@
       "id": "logo-first",
       "name": "Logo-first cold open",
       "why_bad": "Wastes the 0–1s thumb-stop window on identity the viewer doesn’t care about yet.",
-      "fix": "Open on problem, confession, transformation, or trend format; brand after second 8–12."
+      "fix": "Open on problem, confession, transformation, spectacle, or trend format; brand after second 8–12 (earlier only if brand IS the spectacle)."
     },
     {
       "id": "feature-laundry",
@@ -18,7 +18,7 @@
       "id": "fake-ugc",
       "name": "Obviously fake UGC",
       "why_bad": "Studio lighting + teleprompter cadence + stock smile triggers distrust.",
-      "fix": "Real handheld, real environment, imperfect takes, or lean into polished cinematic honestly."
+      "fix": "Real handheld, real environment, imperfect takes — or lean into polished cinematic honestly (don’t fake native)."
     },
     {
       "id": "multi-cta",
@@ -49,6 +49,48 @@
       "name": "Forced trend with no offer map",
       "why_bad": "Gets views, zero commercial memory.",
       "fix": "Punchline must equal product truth, or skip the trend."
+    },
+    {
+      "id": "tragedy-jack",
+      "name": "Tragedy / crisis newsjacking",
+      "why_bad": "Brand damage and platform takedowns; unethical.",
+      "fix": "Only ride light cultural moments you can own tastefully; never exploit harm."
+    },
+    {
+      "id": "rights-blind",
+      "name": "Unlicensed audio, footage, or faces",
+      "why_bad": "Kills paid scale; legal risk.",
+      "fix": "Clear sounds for paid; prefer original or licensed music; releases for faces."
+    },
+    {
+      "id": "cinema-without-job",
+      "name": "Pretty film with no job-to-be-done",
+      "why_bad": "Awards energy, zero commercial lift.",
+      "fix": "Even premium_cinema needs a desire → capability → signature end. Pair with a DR twin."
+    },
+    {
+      "id": "cheap-cgi",
+      "name": "Uncanny cheap CGI flex",
+      "why_bad": "Signals low quality; hurts premium brands.",
+      "fix": "If CGI isn’t excellent, use live macro / practical instead."
+    },
+    {
+      "id": "over-scripted-creator",
+      "name": "Over-scripted influencer",
+      "why_bad": "Destroys the native advantage you paid for.",
+      "fix": "Brief with must-say truths and do-not-say; let delivery stay theirs. FTC disclose."
+    },
+    {
+      "id": "engagement-bait-empty",
+      "name": "Empty engagement bait",
+      "why_bad": "Comments without commercial memory; can trip spam systems.",
+      "fix": "Comment CTAs must unlock real utility (keyword → asset) or a real debate worth having."
+    },
+    {
+      "id": "cliff-without-plan",
+      "name": "Cliffhanger with no Part 2 planned",
+      "why_bad": "Burns trust; followers churn.",
+      "fix": "Outline the full series before publishing Part 1."
     }
   ]
 }

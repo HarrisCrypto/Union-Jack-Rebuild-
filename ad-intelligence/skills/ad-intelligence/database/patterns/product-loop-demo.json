@@ -1,12 +1,29 @@
 {
   "id": "product-loop-demo",
   "name": "Product loop / satisfying demo",
-  "platforms": ["meta", "tiktok", "organic_short"],
+  "platforms": [
+    "meta",
+    "tiktok",
+    "organic_short"
+  ],
   "style": "product_loop",
   "funnel_stage": "tof_awareness",
-  "niches": ["ecommerce", "beauty", "kitchen", "tools", "gadgets"],
-  "duration_seconds": { "min": 6, "max": 15, "ideal": 10 },
-  "aspect_ratios": ["9:16", "1:1"],
+  "niches": [
+    "ecommerce",
+    "beauty",
+    "kitchen",
+    "tools",
+    "gadgets"
+  ],
+  "duration_seconds": {
+    "min": 6,
+    "max": 15,
+    "ideal": 10
+  },
+  "aspect_ratios": [
+    "9:16",
+    "1:1"
+  ],
   "hook": {
     "window_seconds": "0-1",
     "visual": "The satisfying action already mid-motion (pour, peel, click, transform)",
@@ -67,7 +84,14 @@
     "video_gen": "Seamless looping vertical product demo, macro, bright even light, satisfying motion"
   },
   "output_contract": {
-    "deliverables": ["shot_list", "video_gen_prompt", "primary_text", "headline"]
+    "deliverables": [
+      "shot_list",
+      "video_gen_prompt",
+      "primary_text",
+      "headline"
+    ]
   },
-  "source_notes": "Ecommerce staple; pattern only."
+  "source_notes": "Ecommerce staple; pattern only.",
+  "production_tier": "hybrid_polished",
+  "virality_posture": "evergreen_dr"
 }

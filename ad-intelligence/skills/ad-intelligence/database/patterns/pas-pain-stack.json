@@ -1,12 +1,31 @@
 {
   "id": "pas-pain-stack",
   "name": "Problem → Agitate → Solve (pain stack)",
-  "platforms": ["meta", "tiktok", "youtube"],
+  "platforms": [
+    "meta",
+    "tiktok",
+    "youtube"
+  ],
   "style": "problem_agitate_solve",
   "funnel_stage": "mof_consideration",
-  "niches": ["local_services", "b2b", "home", "auto", "health", "finance"],
-  "duration_seconds": { "min": 20, "max": 60, "ideal": 35 },
-  "aspect_ratios": ["9:16", "1:1", "16:9"],
+  "niches": [
+    "local_services",
+    "b2b",
+    "home",
+    "auto",
+    "health",
+    "finance"
+  ],
+  "duration_seconds": {
+    "min": 20,
+    "max": 60,
+    "ideal": 35
+  },
+  "aspect_ratios": [
+    "9:16",
+    "1:1",
+    "16:9"
+  ],
   "hook": {
     "window_seconds": "0-3",
     "visual": "The problem in progress — not the happy ending",
@@ -75,7 +94,15 @@
     "image_gen": "Documentary still of the problem consequence in a real workspace, no text, no logo"
   },
   "output_contract": {
-    "deliverables": ["script", "shot_list", "primary_text", "headline", "cta_variants"]
+    "deliverables": [
+      "script",
+      "shot_list",
+      "primary_text",
+      "headline",
+      "cta_variants"
+    ]
   },
-  "source_notes": "Classic direct-response structure adapted for short video; pattern only."
+  "source_notes": "Classic direct-response structure adapted for short video; pattern only.",
+  "production_tier": "hybrid_polished",
+  "virality_posture": "evergreen_dr"
 }

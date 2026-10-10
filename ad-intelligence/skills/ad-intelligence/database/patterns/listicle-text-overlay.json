@@ -1,12 +1,31 @@
 {
   "id": "listicle-text-overlay",
   "name": "Listicle / text-overlay education",
-  "platforms": ["meta", "tiktok", "linkedin", "organic_short"],
+  "platforms": [
+    "meta",
+    "tiktok",
+    "linkedin",
+    "organic_short"
+  ],
   "style": "listicle_text_overlay",
   "funnel_stage": "mof_consideration",
-  "niches": ["saas", "finance", "health", "auto", "home", "b2b"],
-  "duration_seconds": { "min": 20, "max": 60, "ideal": 35 },
-  "aspect_ratios": ["9:16", "1:1"],
+  "niches": [
+    "saas",
+    "finance",
+    "health",
+    "auto",
+    "home",
+    "b2b"
+  ],
+  "duration_seconds": {
+    "min": 20,
+    "max": 60,
+    "ideal": 35
+  },
+  "aspect_ratios": [
+    "9:16",
+    "1:1"
+  ],
   "hook": {
     "window_seconds": "0-3",
     "visual": "Static or slow B-roll under huge title card",
@@ -67,7 +86,14 @@
     "script": "35s ‘5 mistakes’ listicle for [niche]. Specific audience in title. Each item actionable. Soft CTA to full checklist."
   },
   "output_contract": {
-    "deliverables": ["script", "caption_track", "primary_text", "headline"]
+    "deliverables": [
+      "script",
+      "caption_track",
+      "primary_text",
+      "headline"
+    ]
   },
-  "source_notes": "Education-led mid-funnel pattern."
+  "source_notes": "Education-led mid-funnel pattern.",
+  "production_tier": "native_ugc",
+  "virality_posture": "share_engineered"
 }

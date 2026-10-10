@@ -1,113 +1,121 @@
 ---
 name: ad-intelligence
 description: >-
-  Pattern-first database of high-performing ad blueprints for LLM agents.
-  Use when writing ads, scripts, shot lists, UGC briefs, Meta/TikTok/YouTube
-  creatives, swipe-file style references, or improving weak ad generations.
-  Retrieves hooks, flows, styles, niche angles, and output contracts — not
-  scraped competitor creatives.
+  Comprehensive pattern database for every kind of ad — viral trend formats,
+  share-engineered content, and high-production / cinematic films — plus
+  performance DR across niches. Use when writing ads, scripts, shot lists,
+  UGC, TikTok/Meta/YouTube creatives, launch films, influencer briefs, or
+  when prior LLM ad output feels generic or off-trend.
 ---
 
-# Ad Intelligence
+# Ad Intelligence (universal)
 
-You have a **pattern library**, not a dump of stolen ads. Winning ads share
-structures. Retrieve those structures, then write original creative for the
-user’s brand.
+You have a **cross-vertical pattern library** optimized for:
+
+1. **Viral / trend-reactive** formats (POV, stitch, challenges, memes, serials)
+2. **Share-engineered** utility and spectacle (saves, skits, VFX, checklists)
+3. **High-production / premium cinema** (hero films, editorial, macro, CGI, sports cine)
+4. **Performance DR** (offers, proof, PAS, app demos, lead magnets)
+
+This is **not** a single-brand pack. Pick patterns by platform, niche, production tier, and virality posture.
 
 ## When to use
 
-- User asks for ads, ad scripts, hooks, creatives, UGC, waitlists, local lead ads
-- User says prior LLM ad output was generic, weak, or “doesn’t feel like a real ad”
-- User wants a swipe-file / competitive inspiration **without** pasting copyrighted copy
+- Any request to create or improve ads, creatives, hooks, scripts, or briefs
+- User wants “viral,” “trending,” “high production,” “cinematic,” “UGC,” or “performance”
+- Prior model output looks like a brochure, not a feed-native or film-native ad
 
 ## Hard rules
 
-1. **Never invent testimonials, star ratings, awards, or performance metrics.**
+1. **Never invent testimonials, metrics, awards, or celebrity endorsements.**
 2. **Never reproduce scraped competitor ads verbatim** (copy, frames, audio).
-3. Prefer **one job per ad**. If they need variants, use an A/B matrix.
-4. Assume **muted autoplay** unless told otherwise — hook must work as text or pure visual.
-5. Match **landing promise** to the hook.
-6. Check `database/anti-patterns.json` before finalizing.
+3. **One job per ad.** Variants go in an A/B matrix.
+4. Assume **muted autoplay** unless told otherwise.
+5. Match **landing / store / bio promise** to the hook.
+6. For trends: borrow **format**, invent **payload**; clear rights for paid audio/footage.
+7. Read `database/anti-patterns.json` and `database/trends/viral-operating-system.json` before finalizing viral or cinema work.
 
-## Workflow (do this every time)
+## Workflow
 
-### 1. Brief intake (infer if obvious; ask only if blocked)
+### 1. Brief intake
 
-- Platform(s): meta | tiktok | youtube | google_display | linkedin | organic_short
-- Funnel: tof_awareness | mof_consideration | bof_conversion | retargeting
-- Niche / offer / geo
-- Proof assets the user actually has (reviews, before/after, facility footage)
-- Desired length and CTA type
+Capture (infer if obvious):
 
-### 2. Retrieve blueprints
+| Field | Examples |
+| --- | --- |
+| Platforms | tiktok, meta, youtube, shorts, CTV, linkedin, spark/influencer |
+| Goal | views/follows, saves, leads, purchases, brand memory |
+| Niche | beauty, saas, gaming, food, etc. |
+| Production tier | native_ugc · hybrid_polished · high_production · premium_cinema |
+| Virality posture | evergreen_dr · trend_reactive · share_engineered · brand_film |
+| Proof on hand | real reviews, footage, creators, macros, CGI budget |
+| Length + CTA | |
 
-From this skill directory, run:
+### 2. Retrieve
 
 ```bash
-node scripts/retrieve.mjs --niche <niche> --platform <platform> --funnel <stage> --job "<keywords>" --limit 3
-```
-
-Examples:
-
-```bash
-node scripts/retrieve.mjs --niche auto_restoration --platform meta --limit 3
-node scripts/retrieve.mjs --style before_after --job "transformation craft"
+node scripts/retrieve.mjs --niche <niche> --platform <platform> --tag viral --limit 5
+node scripts/retrieve.mjs --production premium_cinema --virality brand_film
+node scripts/retrieve.mjs --job "pov challenge skit" --platform tiktok
 node scripts/retrieve.mjs --list
+node scripts/retrieve.mjs --list-niches
 ```
 
-If you cannot run the script, open `database/index.json`, pick the best 2–3
-pattern files under `database/patterns/`, plus the matching niche file under
-`database/niches/` when relevant. Also read `database/hooks/library.json` and
-`database/flows/library.json`.
+If you cannot run the script: open `database/index.json`, pick 3–5 patterns, plus niche file + viral OS + hooks/flows.
 
-### 3. Select 1 primary pattern (+ optional 1 challenger)
+### 3. Select stack
 
-Score mentally on: platform fit, funnel, available proof, production difficulty.
-Tell the user which pattern id you chose and why (one sentence).
+Default stack for strong output:
 
-### 4. Generate using the pattern’s `output_contract`
+- **1 primary pattern** (matches tier + posture)
+- **1 challenger** (different posture — e.g. cinema + UGC twin, or trend + DR twin)
+- **1 hook family** from `database/hooks/library.json`
+- **1 flow** from `database/flows/library.json`
 
-Emit only what the contract asks for, in this order when present:
+Say the pattern ids and why (one sentence each).
 
-1. **Pattern id + why**
-2. **Hook options** (3) — from hook library + niche angles
-3. **Full script** with timecodes matching `body.beats`
-4. **Shot list** / visual system notes
-5. **Caption track** (muted-first)
-6. **Primary text + headline** (paid social)
-7. **CTA variants** (1 primary + 2 alts — separate, not stacked in one cut)
-8. **A/B test matrix** (what changes between variants)
-9. **Landing mirror notes**
+### 4. Generate to `output_contract`
 
-Fill brand facts from the user. Leave `[PLACEHOLDER]` for missing proof — do
-not fabricate.
+Typical order:
 
-### 5. Self-critique against anti-patterns
+1. Pattern ids + postures
+2. Trend class used (if any) from viral OS
+3. Hook options (3–5)
+4. Timed script / beat sheet
+5. Shot list + visual system + audio notes
+6. Caption track (muted-first)
+7. Primary text / headline / description
+8. CTA variants + A/B matrix
+9. Production notes (tier, rights, creator brief if influencer)
+10. Landing / store mirror notes
 
-Reject and rewrite if you detect: logo-first cold open, feature laundry list,
-fake UGC polish, multi-CTA, invented proof, muted-illegible text, promise
-mismatch, forced trend.
+Use `[PLACEHOLDER]` for missing proof — never fabricate.
+
+### 5. Dual-track recommendation (when relevant)
+
+If the user wants growth **and** brand:
+
+- Ship a **trend_reactive or share_engineered** cut for distribution
+- Ship a **high_production / premium_cinema** cut for memory and whitelisting
+- Keep the same job-to-be-done across both
+
+### 6. Self-critique
+
+Reject logo-first opens, feature laundry, fake UGC, multi-CTA, invented proof, forced trends, tragedy jacking, uncleared audio, pretty films with no job, empty engagement bait, cliffhangers without a Part 2 plan.
 
 ## Database map
 
 | Path | Purpose |
 | --- | --- |
-| `database/index.json` | Master index for retrieval |
-| `database/patterns/*.json` | Full ad blueprints (schema-validated shape) |
+| `database/index.json` | Master index (~40+ patterns) |
+| `database/patterns/*.json` | Full blueprints |
+| `database/trends/viral-operating-system.json` | Trend classes + virality checklist |
 | `database/hooks/library.json` | Hook templates |
 | `database/flows/library.json` | Beat sheets |
-| `database/niches/*.json` | Niche angles, lexicon, CTAs |
-| `database/anti-patterns.json` | What not to generate |
-| `../../schema/ad-blueprint.schema.json` | Blueprint JSON Schema |
-| `scripts/retrieve.mjs` | Local retrieval CLI |
+| `database/niches/*.json` | Vertical angle packs |
+| `database/anti-patterns.json` | Do-not-generate list |
+| `scripts/retrieve.mjs` | CLI retrieval |
 
-## Why this beats “paste one reference ad”
+## Extending
 
-One reference teaches imitation of surface style. A pattern library teaches
-**transferable structure** (hook window, beat purpose, visual system, CTA type)
-across styles so the agent can invent new ads that still feel commercially real.
-
-## Extending with live ads (optional)
-
-See `../../ingest/README.md`. Ingest structured **breakdowns** you have rights
-to analyze. Do not ship third-party creatives inside a public skill package.
+Private live-ad breakdowns: `../../ingest/README.md`. Keep scraped media out of public skill packages.
