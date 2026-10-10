@@ -1,0 +1,24 @@
+{
+  "name": "ad-intelligence",
+  "displayName": "Ad Intelligence",
+  "version": "3.1.0",
+  "description": "First-shot ad maker: patterns + consistency sheets + self-critique + Seedance/Higgsfield stack.",
+  "author": {
+    "name": "HarrisCrypto"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "ads",
+    "seedance",
+    "higgsfield",
+    "viral",
+    "cinematic",
+    "ugc",
+    "tiktok",
+    "meta",
+    "creative-stack"
+  ],
+  "skills": [
+    "./skills/ad-intelligence/SKILL.md"
+  ]
+}

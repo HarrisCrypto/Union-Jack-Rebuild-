@@ -1,0 +1,16 @@
+---
+description: Use Ad Intelligence skill for any ads or creative generation
+alwaysApply: false
+---
+
+When the user asks for ads, creatives, hooks, scripts, UGC, TikTok/Meta/YouTube/CTV
+ads, launch films, influencer briefs, Seedance/Higgsfield-quality work, or “make it viral”:
+
+1. Follow `.cursor/skills/ad-intelligence/SKILL.md` and `pipelines/one-stop-ad-maker.md`.
+2. Retrieve patterns; route a creative stack (Seedance / Higgsfield / peers) from
+   `references/creative-stack/`.
+3. If Higgsfield MCP (or other generators) are available, call them; otherwise emit
+   Seedance prompt contract + Higgsfield execution brief.
+4. Deliver `references/output-template.md` (stack + prompts required).
+5. Pass first-time-right QA + mistakes library. Dual-track by default for serious brands.
+6. Never invent proof. One CTA. Muted-first hooks.

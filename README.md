@@ -2,6 +2,8 @@
 
 Static marketing site for Union Jack (San Martin, CA). Vite bundles the homepage motion; GitHub Pages serves the repo root.
 
+**Ad Intelligence skill (for any agent):** [`ad-intelligence/`](./ad-intelligence/) — viral + high-production ad blueprints. **How to connect your agent:** [`ad-intelligence/INSTALL.md`](./ad-intelligence/INSTALL.md). Install from this GitHub repo via Cursor Customize → From GitHub Repository, or use `/ad-intelligence` in this project.
+
 ```bash
 npm install
 npm run build    # writes assets/app.js
