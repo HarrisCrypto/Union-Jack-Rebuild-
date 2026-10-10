@@ -1,0 +1,28 @@
+{
+  "name": "harris-crypto-tools",
+  "owner": {
+    "name": "HarrisCrypto"
+  },
+  "metadata": {
+    "description": "Plugins from HarrisCrypto repos — including Ad Intelligence."
+  },
+  "plugins": [
+    {
+      "name": "ad-intelligence",
+      "source": "ad-intelligence",
+      "description": "One-stop ad maker: patterns + Seedance/Higgsfield creative stack for any niche.",
+      "version": "3.0.0",
+      "keywords": [
+        "ads",
+        "viral",
+        "tiktok",
+        "cinematic",
+        "ugc",
+        "high-production",
+        "meta",
+        "youtube",
+        "creative"
+      ]
+    }
+  ]
+}
