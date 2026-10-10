@@ -1,3 +1,5 @@
+> **shape-only — not a length or quality target.** Required depth: see `examples/beauty-dtc-dual-track.md`. Do not claim Gates PASS from this skeleton.
+
 # Gold example — Entertainment / creator (series cliffhanger)
 
 ## Ad package

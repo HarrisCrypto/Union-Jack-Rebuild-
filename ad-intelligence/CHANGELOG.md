@@ -1,28 +1,42 @@
 # Changelog
 
+## 3.2.0 — 2026-10-10
+
+Multi-model audit consensus (Fable 5.1, Opus 5.5, GPT-5.6, Grok 4.7, Sonnet 5.5): make gates mechanical and generation MCP-correct.
+
+### Added
+- `scripts/lint-package.mjs` — mechanical ship gate (`lint-pass`)
+- `references/creative-stack/render-plan.md` — clip units + real MCP roles
+- `references/creative-stack/connected-run-protocol.md` — preflight→receipt state machine
+- `references/claim-firewall.json` — provenance tags + niche bans + slop lexicon
+- `references/brief-defaults.json` — thin-brief defaults + asset ladder S0–S3
+- `references/policy-precheck.json` — SAC / restricted vertical flags
+- Output template: Claim ledger, Render plan, Render log, revision protocol
+- Rubric caps + evidence requirement for score 5s
+
+### Changed
+- `retrieve.mjs`: niche aliases/synonyms, recommended_pattern boost, platform aliases, no silent alphabetical fallback, picks.routes, swipe hints only when niche matches
+- `pattern-to-pipeline.json`: all **47** patterns routed
+- Seedance contract + Higgsfield playbook: remove invented API roles; multi-clip; cost/draft/receipt
+- Product/character sheets: provenance tags + identity modes + ref quality bar
+- `examples/beauty-dtc-dual-track.md`: full-depth gold fixture (lint-clean)
+- Other examples: marked **shape-only** (not quality targets)
+- SKILL / pipeline / harness / first-time-right aligned to lint + render plan
+- Plugin version **3.2.0**
+
+### Preserved
+- Dual-path connected vs handoff; dual-track default; never invent proof; pattern DB structure
+
 ## 3.1.0 — 2026-10-10
 
 First-shot reliability upgrade (anti-slop / anti-redo).
 
 ### Added
-- `skills/ad-intelligence/references/creative-stack/product-sheet-template.md`
-- `skills/ad-intelligence/references/creative-stack/character-sheet-template.md`
-- `skills/ad-intelligence/references/creative-stack/LAST-VERIFIED.md` (Seedance / Higgsfield freshness)
-- `skills/ad-intelligence/references/swipe-signals.json` (anonymized longevity + failure modes)
-- Mandatory **Self-critique & variants** section in output template
-- Hard gates in `checklists/first-time-right.json`: consistency-sheets, self-critique-variants, rights-disclosure, tool-freshness; rubric dim `consistency_lock`
-- Gold examples: beauty DTC, local service, SaaS, physical product, entertainment/creator
-- Platform specs: native signals, synthetic-media disclosure, rights decision tree
-- Output template: AI disclosure & rights block
-
-### Changed
-- Seedance prompt contract + Higgsfield playbook: explicit sheet / Soul-ID / multi-angle lock language
-- One-stop pipeline: sheets before generate; self-critique before ship
-- SKILL.md non-negotiables + workflow updated for consistency + critique loop
-- README positioning for harness-agnostic first-shot production
+- Product/character sheet templates + LAST-VERIFIED.md
+- swipe-signals.json
+- Self-critique & variants + hard gates
+- Gold example set (later deepened/demoted in 3.2)
+- Platform AI disclosure & rights
 
 ### Preserved
-- Retrieve script + pattern/niche structure
-- Dual-path: connected generators vs prompt-handoff
-- Dual-track default for serious brands
-- No invented proof rule
+- Retrieve + patterns; dual-path; dual-track; no invented proof

@@ -1,55 +1,61 @@
 # Product sheet template (consistency lock)
 
-**Hard rule:** Before any Seedance / Higgsfield / Kling / Runway generation for a physical or packaged product, fill this sheet (or mark gaps as `[REQUEST FROM USER]`). Paste the filled sheet into prompts as **IDENTITY LOCK**.
+**Hard rule:** Before product pixels generate, fill this sheet or mark `[REQUEST FROM USER]`.  
+**Identity modes:** `pack` | `ui` | `place-service` | `multi-sku`.  
+**Provenance:** every field tagged `USER_SUPPLIED` | `ASSET_VERIFIED` | `PLACEHOLDER` | `ASSUMED`.  
+**No product pixels without refs** (asset ladder S2+). S0 → product-less units only.
 
-Agents must **produce** this sheet in the output package under “Consistency systems,” even if some fields are placeholders.
+**Reference quality bar:** reject lifestyle-only, low-res, or label-illegible stills for lock roles.
+
+Inline the filled sheet in the package (not a 3-bullet summary).
 
 ```markdown
 ## Product sheet — [PRODUCT NAME / SKU]
+- Identity mode: pack / ui / place-service / multi-sku
+- Asset ladder: S0–S3
 
 ### Identity
-- Official name:
-- SKU / variant / colorway:
-- Category / niche:
-- One-line mechanism (not feature laundry):
+- Official name: (…) [TAG]
+- SKU / variant / colorway: (…) [TAG]
+- Category / niche: (…) [TAG]
+- One-line mechanism: (…) [TAG]
 
-### Visual lock (attach files)
-| Role | File | Notes |
-| --- | --- | --- |
-| Hero pack (front, true color) | `[PRODUCT_HERO.png]` | Straight-on, even light |
-| ¾ angle | `[PRODUCT_34.png]` | Depth + silhouette |
-| Label / logo close-up | `[PRODUCT_LABEL.png]` | Readable type |
-| In-hand / scale | `[PRODUCT_HAND.png]` | Size truth |
-| Detail / texture / macro | `[PRODUCT_MACRO.png]` | Material truth |
-| Open / in-use (if relevant) | `[PRODUCT_USE.png]` | Demo state |
+### Visual lock (ordered refs → image_references 1…n)
+| # | Role | File / media_id | Notes | Tag |
+| --- | --- | --- | --- | --- |
+| 1 | Hero |  | Straight-on, true color |  |
+| 2 | Label close-up |  | Readable type |  |
+| 3 | ¾ silhouette |  |  |  |
+| 4 | Macro / texture |  |  |  |
+| 5 | In-hand / UI screen / facility exterior |  | mode-specific |  |
+
+### Mode extras
+- **ui:** real screenshots only — never invent dashboards; chrome/font from shot
+- **place-service:** exterior, vehicle, WIP, NAP line (phone/geo USER_SUPPLIED or PLACEHOLDER)
+- **multi-sku:** one colorway per generation unit
 
 ### Non-negotiable visual truths
-- Shape / silhouette:
-- Exact colors (hex or plain language):
-- Materials / finish (matte, gloss, glass, fabric…):
-- Label text that must stay legible:
-- Forbidden morphs (no melting logo, no wrong cap color, no extra bottle…):
+- Shape / silhouette: (…) [TAG]
+- Exact colors: (…) [TAG]
+- Materials / finish: (…) [TAG]
+- Label text that must stay legible: (…) [TAG]
+- Forbidden morphs: (…)
 
 ### Do-not-generate claims
-- Banned on-pack or on-screen claims:
-- Medical / finance / performance claims status: user-approved only / none
+- Banned on-pack / on-screen claims:
+- Regulated status: see claim-firewall.json
 
-### Style lock (grade)
-- Lighting preference:
-- Grade / LUT vibe:
-- Backgrounds allowed:
-- Backgrounds forbidden:
+### Style lock
+- Lighting / grade / backgrounds allowed & forbidden:
 
-### Soul-ID notes (keep constant across variants)
-- “This product always looks like: …”
-- “Never looks like: …”
+### Soul-ID
+- Always looks like: …
+- Never looks like: …
 ```
 
-## How to inject into Seedance
+## Inject into unit prompts
 
 ```text
-PRODUCT SHEET LOCK — obey every frame:
-[paste filled sheet summary]
-References attached: hero, ¾, label, macro.
-If conflict between prompt and sheet, SHEET WINS.
+PRODUCT SHEET LOCK — Image 1=hero, Image 2=label, Image 3=¾. Sheet wins over free text.
+[paste truths]
 ```

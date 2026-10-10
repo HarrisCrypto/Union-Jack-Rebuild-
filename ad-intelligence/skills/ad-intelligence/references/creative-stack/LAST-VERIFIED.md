@@ -1,11 +1,16 @@
 # Creative stack — last verified
 
-| Item | Last verified | Notes |
-| --- | --- | --- |
-| Seedance 2.5 | 2026-10-10 | Up to ~30s single-pass; omni_reference; video_edit / extension; native audio; region/timestamp edits. Available via BytePlus/Lumina, CapCut/Dreamina, TikTok Symphony, Higgsfield `seedance_2_5`. |
-| Seedance 2.0 | 2026-10-10 | Strong multimodal refs; multi-SKU; Higgsfield `seedance_2_0`; still valid fallback. |
-| Higgsfield workflows | 2026-10-10 | ads-studio, ugc-video, ad-multiplier, product-photoshoot, marketing-studio, katana, brand-asset-creation, thumbnail-generation, faceless-video, video-montage, video-editing. Always call `get_workflow_instructions` first when MCP connected. |
-| Higgsfield video models | 2026-10-10 | Also: `marketing_studio_video`, `ad_multiplier_v2`, `grok_video_v15`, `gemini_omni` / `gemini_omni_flash_1_1`, `minimax_h3_max`. Prefer `models_explore(action:'recommend')` at runtime. |
-| Meta / TikTok / YT norms | 2026-10-10 | Muted-first social; Spark clearing; synthetic-media disclosure evolving — see platform-specs + rights tree. |
+**Agent rule:** If today is >90 days after a row’s date, warn in the package. When MCP is connected, **`models_explore get` / `get_workflow_instructions` override this table.**
 
-**Agent rule:** If today’s date is >90 days after Last verified, say so in the package and recommend re-checking model lists via MCP / vendor docs before expensive generates.
+| Item | Last verified | verified_via | Notes |
+| --- | --- | --- | --- |
+| Seedance 2.5 roles | 2026-10-10 | mcp+doc | Media roles: `start_image`, `end_image`, `image_references`, `video_references`, `audio_references`. Values = media/job ids. Prefer draft then finalize. Probe duration/defaults at runtime. |
+| Seedance 2.0 | 2026-10-10 | doc | Shorter max than 2.5 in many hosts (~15s) — split units; do not assume 30s. |
+| Higgsfield `generate_video` | 2026-10-10 | mcp | Explicit `aspect_ratio` (MS defaults can be 16:9). `get_cost:true`. Never resubmit on timeout. |
+| Ads Studio | 2026-10-10 | mcp | `ads_studio_quote` → `ads_studio_generate` |
+| UGC / Marketing Studio | 2026-10-10 | mcp | Use workflow instructions; testimonials need **owned** footage — do not fabricate. |
+| Ad Multiplier | 2026-10-10 | doc | Source 4–30s; one variable; not for testimonials impersonation |
+| Render plan contract | 2026-10-10 | skill | `render-plan.md` + `connected-run-protocol.md` |
+| Meta / TikTok / YT policy flags | 2026-10-10 | editorial | See `policy-precheck.json` — not legal advice |
+
+**Changelog (mini):** 2026-10-10 — v3.2: removed invented `product_hero` file roles from API path; multi-clip + cost/receipt required.

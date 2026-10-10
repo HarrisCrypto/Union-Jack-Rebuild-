@@ -1,113 +1,103 @@
 # One-stop perfect ad maker — master pipeline
 
-Default path for **any company / any niche**. Goal: **first-shot production packages** — no slop, no redo loops.
+Default path for **any company / any niche**. Goal: **first-shot production packages**.
 
 ```
-BRIEF → RETRIEVE (+ swipe signals) → STACK → CONSISTENCY SHEETS → GENERATE → FINISH → SELF-CRITIQUE/VARIANTS → QA → DISTRIBUTE → SCALE
+BRIEF → RETRIEVE → ASSET LADDER / SHEETS → LEDGER → RENDER PLAN → GENERATE/HANDOFF
+→ FINISH → SELF-CRITIQUE → LINT/QA → DISTRIBUTE → SCALE → REVISE (minimal lever)
 ```
 
-## 1) Brief (5 minutes)
+## 1) Brief (≤3 blocking questions)
 
-| Field | Example |
+| Field | Source |
 | --- | --- |
-| Company / product | … |
-| Niche | from niches/* |
-| Goal | awareness / traffic / leads / purchases / app installs |
-| Platforms | TikTok, Meta, YT, CTV… |
-| Offer | … |
-| Proof on hand | stills, reviews, footage, URL — never invent |
-| Budget posture | AI-only / hybrid / live shoot |
-| Dual-track? | viral + cinema (**default YES** for serious brands) |
-| Tool access | Higgsfield MCP connected / prompt-handoff |
+| Company / product | user |
+| Niche | user or resolve alias |
+| Goal / platforms / offer | user or `brief-defaults.json` |
+| Proof on hand | user — never invent |
+| Asset ladder | S0 text / S1 URL / S2 photos / S3 footage+talent |
+| Dual-track? | default YES for serious brands |
+| Tool access | connected MCP / handoff / live |
 
-## 2) Retrieve intelligence
+List **Assumptions**. Ask only for offer, product refs, regulated claims if missing.
+
+## 2) Retrieve
 
 ```bash
-node scripts/retrieve.mjs --niche <niche> --platform <platform> --limit 5
-node scripts/retrieve.mjs --tag viral --limit 3
-node scripts/retrieve.mjs --production premium_cinema --limit 3
+node scripts/retrieve.mjs --niche <niche|alias> --platform <platform> --limit 5
 ```
 
-Also load:
+Heed `resolved`, `warnings`, `picks.routes`. If `match_quality: none`, do not fake a pattern — clarify niche.
 
-- `references/swipe-signals.json` (high-longevity formats + failure modes)
-- style catalog, viral OS, mistakes library, platform specs
+Also: swipe-signals (only when niche matched), style catalog, mistakes, platform-specs, claim-firewall, policy-precheck.
 
-Pick: **primary + challenger + dual-track twin**. Prefer high-longevity formats when user wants evergreen.
+## 3) Creative stack
 
-## 3) Pick creative stack
-
-Use `references/creative-stack/pattern-to-pipeline.json`. Check `LAST-VERIFIED.md`.
+`pattern-to-pipeline.json` (all 47 routed). Check `LAST-VERIFIED.md`. Probe models if connected.
 
 | Track | Stack |
 | --- | --- |
-| High-production | Sheets → stills → **Seedance 2.5 omni_reference** → CapCut → aspects |
-| Viral / UGC | Sheets → Higgsfield `ugc-video` or creator brief → CapCut → Spark/Meta |
-| Static | Ads Studio / product-photoshoot / Canva |
-| Scale winner | Ad Multiplier (one variable) |
+| High-production | Sheets → stills → Seedance units → CapCut |
+| Viral / UGC | Sheets → UGC / creator → CapCut |
+| Static | Ads Studio / photoshoot / Canva |
+| Scale | Ad Multiplier (one variable) |
 
-**Connected tools → call them. Not connected → same quality via handoff prompts.**
+## 4) Consistency + asset ladder — hard gate
 
-## 4) Consistency systems / asset kit (BEFORE generate) — hard gate
+- [ ] Product sheet inlined (mode pack/ui/place/multi-sku) with tags  
+- [ ] Character sheet if talent  
+- [ ] **S0: no product pixels** — product-less units or REQUEST refs  
+- [ ] S1 connected: fetch URL → photoshoot → then video  
+- [ ] Claim & asset ledger started  
+- [ ] Disclosure plan if AI talent (no fake personal endorsements)
 
-Must complete or explicitly request gaps:
+## 5) Render plan → generate
 
-- [ ] **Product sheet** (`product-sheet-template.md`) — hero, ¾, label, macro, Soul-ID
-- [ ] **Character sheet** (`character-sheet-template.md`) if talent/UGC avatar
-- [ ] Logo for endcard only
-- [ ] 1–2 real proof items or `[PLACEHOLDER]`
-- [ ] Brand palette + forbidden claims
-- [ ] Synthetic disclosure plan if AI talent
+Emit timed script + **Render plan** (`render-plan.md`):
 
-Do **not** generate film prompts until sheets exist or gaps are listed for the user.
+1. Hook units (5–8s) ×3 drafts when connected  
+2. Body/CTA units (split ≤ model max)  
+3. Static twin  
+4. Cinema twin if dual-track (same locks; separate aspect generates)
 
-## 5) Generate
-
-Emit timed script + Seedance YAML/prompt **with sheet locks** + Higgsfield brief + static twin.
-
-Order:
-
-1. Hook tests (5–8s) ×3  
-2. Full spot (15–30s)  
-3. Static/carousel twin  
-4. Cinema twin if dual-track (same locks)
+Connected → `connected-run-protocol.md`. Handoff → paste-ready prompts + mcp_params placeholders.
 
 ## 6) Finish
 
-- Captions burned (muted-first)  
-- One CTA  
-- Safe margins  
-- Paid-safe audio path  
-- Required aspects  
+Captions/SRT, one CTA, safe margins, paid-safe audio, aspects.
 
-## 7) Self-critique & variants (mandatory — kills redo)
+## 7) Self-critique & variants
 
-1. Score every rubric dimension (incl. `consistency_lock`)  
-2. List **2–3** most likely failure modes for this niche/platform (use swipe-signals + mistakes library)  
-3. Emit **A/B/C** variants that each fix one failure (one variable each)  
+Score with evidence + caps → 2–3 failures → A/B/C (one variable).
 
-## 8) QA gate
+## 8) Lint / QA
 
-`checklists/first-time-right.json` — including consistency-sheets + self-critique-variants + rights-disclosure.  
-`references/mistakes-library.json`  
-Seedance quality bar  
+```bash
+node scripts/lint-package.mjs <package.md>
+```
+
+`first-time-right.json` — lint-pass overrides self-scores.  
+Render-acceptance: job ids or explicit NOT_RENDERED.
 
 ## 9) Distribute
 
-Platform-specs native signals + synthetic disclosure + rights tree.  
-Naming: `brand_pattern_posture_aspect_variant`
+Platform-specs + policy-precheck + disclosure.  
+Naming: `brand_pattern_posture_aspect_unit_variant`
 
 ## 10) Scale
 
-Ad Multiplier / Spark / weekly trend ops — preserve product/character lock.
+Ad Multiplier / Spark — preserve locks.
 
-## Agent self-check before saying “done”
+## 11) Revise (kill redo loops)
 
-- [ ] Pattern ids cited  
-- [ ] Sheets filled or gaps requested  
-- [ ] Tool stack named + prompts copy-pasteable  
+Classify → edit one unit_id / add ref / recut — sheets immutable unless new user assets. Bump package version; re-lint.
+
+## Agent self-check before “done”
+
+- [ ] Pattern ids + retrieve warnings handled  
+- [ ] Sheets + ledger + render plan  
 - [ ] Dual-track if serious brand  
 - [ ] No invented proof  
-- [ ] Self-critique + variants present  
-- [ ] Output template complete  
-- [ ] All first-time-right gates PASS  
+- [ ] Lint exit 0  
+- [ ] NOT_RENDERED or receipt  
+- [ ] Self-critique + variants  

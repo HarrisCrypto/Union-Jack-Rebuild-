@@ -1,45 +1,23 @@
-# Ad Intelligence — one-stop perfect ad maker
+# Ad Intelligence
 
-> **Install:** [`INSTALL.md`](./INSTALL.md) · **Changelog:** [`CHANGELOG.md`](./CHANGELOG.md)
+**One-stop first-shot ad maker** for any niche — Cursor, Claude, Grok, Hermes, OpenClaw, etc.
 
-A harness-agnostic skill (Cursor, Claude, Grok, Hermes, OpenClaw, …) that produces
-**Seedance / Higgsfield-quality ads on the first shot** for any niche —
+Patterns + consistency sheets + **provenance ledger** + **MCP-correct render plans** + **mechanical lint** + self-critique. Call Higgsfield/Seedance when connected; otherwise emit the same-quality handoff.
 
-- **Connected tools** → call Higgsfield MCP / generators  
-- **Not connected** → emit the same quality as Seedance YAML, Higgsfield briefs, CapCut finishing, media-buy checklists  
+## Install
 
-**Leverage = patterns + consistency sheets + QA/self-critique**, not model vibes.
+See [INSTALL.md](./INSTALL.md). Skill root: `skills/ad-intelligence/`.
 
-## What’s inside (v3.1)
-
-| Layer | Contents |
-| --- | --- |
-| Patterns | 47 blueprints (viral, share, cinema, DR) |
-| Consistency | Product sheet + character sheet templates (Soul-ID / multi-angle locks) |
-| Creative stack | Seedance 2.0/2.5, Higgsfield workflows, Kling, Runway, CapCut, Meta/TikTok… |
-| Self-critique | Rubric → failure modes → A/B/C variants (hard gate) |
-| Swipe signals | Anonymized high-longevity formats + common failures |
-| Examples | 5 gold filled packages |
-| QA | First-time-right checklist + mistakes library |
-| Retrieval | `skills/ad-intelligence/scripts/retrieve.mjs` |
-
-## Quick start
+## Quick use
 
 ```bash
-cd skills/ad-intelligence
-node scripts/retrieve.mjs --niche beauty --tag viral --limit 5
+node skills/ad-intelligence/scripts/retrieve.mjs --niche skincare --platform tiktok --limit 5
+node skills/ad-intelligence/scripts/lint-package.mjs path/to/package.md
 ```
 
-Ask: *Using ad-intelligence, make a first-shot dual-track package for [brand] with product/character sheets, Seedance prompts, self-critique, and variants.*
+Follow `skills/ad-intelligence/SKILL.md` and `pipelines/one-stop-ad-maker.md`.  
+Quality bar package: `skills/ad-intelligence/examples/beauty-dtc-dual-track.md`.
 
-## Design principles
+## Version
 
-1. Never invent proof — user-supplied or `[PLACEHOLDER]`  
-2. Sheets before generate  
-3. Muted-first, one CTA, timed beats, product/character lock  
-4. Dual-track default for serious brands  
-5. Self-critique before delivery  
-
-## Legal
-
-See [`LICENSE`](./LICENSE). No scraped competitor creatives in this package.
+**3.2.0** — see [CHANGELOG.md](./CHANGELOG.md).

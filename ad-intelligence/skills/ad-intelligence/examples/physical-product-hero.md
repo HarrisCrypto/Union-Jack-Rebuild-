@@ -1,3 +1,5 @@
+> **shape-only — not a length or quality target.** Required depth: see `examples/beauty-dtc-dual-track.md`. Do not claim Gates PASS from this skeleton.
+
 # Gold example — Physical product (hero film + loop)
 
 ## Ad package
@@ -33,7 +35,7 @@ Make precise-temp pour feel craft-inevitable; shop CTA on twin.
 | --- | --- |
 | 0–3 | Macro steam / light streak — no logo |
 | 3–18 | Desire world + pour physics matching sheet |
-| 18–26 | Capability: temp ring settles on 205° |
+| 18–26 | Capability: temp ring settles on [SPEC: product sheet] |
 | 26–30 | Signature endcard Explore |
 
 ### Self-critique & variants
