@@ -1,121 +1,112 @@
 ---
 name: ad-intelligence
 description: >-
-  Comprehensive pattern database for every kind of ad — viral trend formats,
-  share-engineered content, and high-production / cinematic films — plus
-  performance DR across niches. Use when writing ads, scripts, shot lists,
-  UGC, TikTok/Meta/YouTube creatives, launch films, influencer briefs, or
-  when prior LLM ad output feels generic or off-trend.
+  Most comprehensive pattern database for LLM ad creation — viral trends,
+  share-engineered content, high-production cinema, and performance DR across
+  20+ niches. Use whenever making ads, hooks, scripts, UGC, TikTok/Meta/YouTube
+  creatives, launch films, or influencer briefs. Forces retrieval, output
+  template, mistakes scan, and first-time-right QA so creatives land correctly
+  the first time.
 ---
 
-# Ad Intelligence (universal)
+# Ad Intelligence
 
-You have a **cross-vertical pattern library** optimized for:
+You are not brainstorming blindly. You **retrieve** proven structures, **fill**
+an output contract, and **QA** against a mistakes library before delivery.
 
-1. **Viral / trend-reactive** formats (POV, stitch, challenges, memes, serials)
-2. **Share-engineered** utility and spectacle (saves, skits, VFX, checklists)
-3. **High-production / premium cinema** (hero films, editorial, macro, CGI, sports cine)
-4. **Performance DR** (offers, proof, PAS, app demos, lead magnets)
+## Non-negotiables
 
-This is **not** a single-brand pack. Pick patterns by platform, niche, production tier, and virality posture.
+1. Retrieve before writing (CLI or index).
+2. Cite **primary + challenger** pattern ids.
+3. Deliver with `references/output-template.md`.
+4. Pass `checklists/first-time-right.json`.
+5. Scan `references/mistakes-library.json` and rewrite hits.
+6. Never invent proof (reviews, metrics, celebs, awards).
+7. Never logo-first on cold. One CTA. Muted-first hooks.
+8. Name **style**, **production_tier**, **virality_posture**.
 
 ## When to use
 
-- Any request to create or improve ads, creatives, hooks, scripts, or briefs
-- User wants “viral,” “trending,” “high production,” “cinematic,” “UGC,” or “performance”
-- Prior model output looks like a brochure, not a feed-native or film-native ad
+Any ads / creatives / hooks / scripts / UGC / viral / cinematic / launch /
+influencer / Meta / TikTok / YouTube / CTV request — including “my last agent
+ad sucked.”
 
-## Hard rules
+## Workflow (mandatory order)
 
-1. **Never invent testimonials, metrics, awards, or celebrity endorsements.**
-2. **Never reproduce scraped competitor ads verbatim** (copy, frames, audio).
-3. **One job per ad.** Variants go in an A/B matrix.
-4. Assume **muted autoplay** unless told otherwise.
-5. Match **landing / store / bio promise** to the hook.
-6. For trends: borrow **format**, invent **payload**; clear rights for paid audio/footage.
-7. Read `database/anti-patterns.json` and `database/trends/viral-operating-system.json` before finalizing viral or cinema work.
+### 0) Orient
 
-## Workflow
+Skim if needed:
 
-### 1. Brief intake
+- `references/style-catalog.md` — pick style family
+- `references/platform-specs.json` — platform constraints
+- `database/trends/viral-operating-system.json` — if viral/trend
+- `references/worked-examples.md` — closest teaching pack
 
-Capture (infer if obvious):
+### 1) Lock the brief
 
-| Field | Examples |
-| --- | --- |
-| Platforms | tiktok, meta, youtube, shorts, CTV, linkedin, spark/influencer |
-| Goal | views/follows, saves, leads, purchases, brand memory |
-| Niche | beauty, saas, gaming, food, etc. |
-| Production tier | native_ugc · hybrid_polished · high_production · premium_cinema |
-| Virality posture | evergreen_dr · trend_reactive · share_engineered · brand_film |
-| Proof on hand | real reviews, footage, creators, macros, CGI budget |
-| Length + CTA | |
+Platforms, niche, offer, funnel, tier, posture, proof on hand, CTA.
+If blocked, ask only for missing blockers — then proceed with stated assumptions.
 
-### 2. Retrieve
+### 2) Retrieve
 
 ```bash
-node scripts/retrieve.mjs --niche <niche> --platform <platform> --tag viral --limit 5
-node scripts/retrieve.mjs --production premium_cinema --virality brand_film
-node scripts/retrieve.mjs --job "pov challenge skit" --platform tiktok
+node scripts/retrieve.mjs --niche <niche> --platform <platform> --limit 5
+node scripts/retrieve.mjs --tag viral --limit 5
+node scripts/retrieve.mjs --production premium_cinema --limit 5
+node scripts/retrieve.mjs --job "<keywords>" --virality trend_reactive
 node scripts/retrieve.mjs --list
 node scripts/retrieve.mjs --list-niches
 ```
 
-If you cannot run the script: open `database/index.json`, pick 3–5 patterns, plus niche file + viral OS + hooks/flows.
+Also load matching niche JSON, hooks, flows, anti-patterns.
 
-### 3. Select stack
+### 3) Choose stack
 
-Default stack for strong output:
+| Goal | Default stack |
+| --- | --- |
+| Viral reach | trend class + native pattern + share challenger |
+| Premium quality | `hero-product-film` / macro / editorial + UGC twin |
+| Dual-track (recommended) | Same JTBD × native twin × cinema twin |
+| Conversion | DR pattern + proof + one CTA |
 
-- **1 primary pattern** (matches tier + posture)
-- **1 challenger** (different posture — e.g. cinema + UGC twin, or trend + DR twin)
-- **1 hook family** from `database/hooks/library.json`
-- **1 flow** from `database/flows/library.json`
+### 4) Write into the template
 
-Say the pattern ids and why (one sentence each).
+Use `references/output-template.md` exactly. Timed beats required.
+Mirror a flow from `database/flows/library.json`.
 
-### 4. Generate to `output_contract`
+### 5) First-time-right QA
 
-Typical order:
+Run every gate in `checklists/first-time-right.json`.
+Score rubric dims; ship only if all ≥4 or list risks the user accepted.
+Rewrite any `references/mistakes-library.json` matches.
 
-1. Pattern ids + postures
-2. Trend class used (if any) from viral OS
-3. Hook options (3–5)
-4. Timed script / beat sheet
-5. Shot list + visual system + audio notes
-6. Caption track (muted-first)
-7. Primary text / headline / description
-8. CTA variants + A/B matrix
-9. Production notes (tier, rights, creator brief if influencer)
-10. Landing / store mirror notes
+### 6) Deliver
 
-Use `[PLACEHOLDER]` for missing proof — never fabricate.
-
-### 5. Dual-track recommendation (when relevant)
-
-If the user wants growth **and** brand:
-
-- Ship a **trend_reactive or share_engineered** cut for distribution
-- Ship a **high_production / premium_cinema** cut for memory and whitelisting
-- Keep the same job-to-be-done across both
-
-### 6. Self-critique
-
-Reject logo-first opens, feature laundry, fake UGC, multi-CTA, invented proof, forced trends, tragedy jacking, uncleared audio, pretty films with no job, empty engagement bait, cliffhangers without a Part 2 plan.
+Lead with pattern ids + JTBD, then the full template. Offer 3 A/B variants minimum.
 
 ## Database map
 
 | Path | Purpose |
 | --- | --- |
-| `database/index.json` | Master index (~40+ patterns) |
-| `database/patterns/*.json` | Full blueprints |
-| `database/trends/viral-operating-system.json` | Trend classes + virality checklist |
-| `database/hooks/library.json` | Hook templates |
-| `database/flows/library.json` | Beat sheets |
-| `database/niches/*.json` | Vertical angle packs |
-| `database/anti-patterns.json` | Do-not-generate list |
-| `scripts/retrieve.mjs` | CLI retrieval |
+| `database/index.json` | 40+ patterns index |
+| `database/patterns/` | Full blueprints |
+| `database/niches/` | 23 vertical packs |
+| `database/trends/viral-operating-system.json` | Viral method |
+| `database/hooks/` · `flows/` | Hook + beat libraries |
+| `database/anti-patterns.json` | Hard nos |
+| `references/style-catalog.md` | Style picker |
+| `references/worked-examples.md` | Teaching packs |
+| `references/mistakes-library.json` | Mistake → fix |
+| `references/output-template.md` | Required deliverable shape |
+| `references/platform-specs.json` | Platform defaults |
+| `checklists/first-time-right.json` | Ship gate |
+| `prompts/harness-system-prompt.md` | Non-Cursor agents |
+| `scripts/retrieve.mjs` | Retrieval CLI |
 
-## Extending
+## Install / point an agent here
 
-Private live-ad breakdowns: `../../ingest/README.md`. Keep scraped media out of public skill packages.
+See `../../INSTALL.md` (repo: GitHub plugin install, `/ad-intelligence`, Cloud Agents, Hermes harness).
+
+## Extend
+
+Private live-ad breakdowns: `../../ingest/README.md` (keep scraped media private).

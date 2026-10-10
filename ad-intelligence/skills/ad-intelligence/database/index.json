@@ -4,8 +4,8 @@
   "description": "Comprehensive pattern-first ad blueprints for LLM agents — viral trends, high-production films, and performance creative across verticals.",
   "updated": "2026-10-10",
   "counts": {
-    "patterns": 43,
-    "viral_or_share": 22,
+    "patterns": 47,
+    "viral_or_share": 23,
     "high_production": 15
   },
   "retrieval": {
@@ -1041,6 +1041,33 @@
       ]
     },
     {
+      "id": "remix-duet-bait",
+      "file": "patterns/remix-duet-bait.json",
+      "style": "duet_stitch_react",
+      "funnel_stage": "tof_awareness",
+      "platforms": [
+        "tiktok",
+        "organic_short",
+        "meta"
+      ],
+      "niches": [
+        "creator",
+        "entertainment",
+        "apps",
+        "food_bev",
+        "fashion",
+        "gaming"
+      ],
+      "production_tier": "native_ugc",
+      "virality_posture": "share_engineered",
+      "tags": [
+        "native_ugc",
+        "share_engineered",
+        "duet_stitch_react",
+        "viral"
+      ]
+    },
+    {
       "id": "save-share-bait",
       "file": "patterns/save-share-bait.json",
       "style": "save_share_bait",
@@ -1171,6 +1198,34 @@
       ]
     },
     {
+      "id": "static-carousel-dr",
+      "file": "patterns/static-carousel-dr.json",
+      "style": "listicle_text_overlay",
+      "funnel_stage": "mof_consideration",
+      "platforms": [
+        "meta",
+        "linkedin",
+        "pinterest",
+        "google_display"
+      ],
+      "niches": [
+        "ecommerce",
+        "saas",
+        "education",
+        "fintech",
+        "health",
+        "b2b_services",
+        "real_estate"
+      ],
+      "production_tier": "hybrid_polished",
+      "virality_posture": "evergreen_dr",
+      "tags": [
+        "hybrid_polished",
+        "evergreen_dr",
+        "listicle_text_overlay"
+      ]
+    },
+    {
       "id": "street-interview",
       "file": "patterns/street-interview.json",
       "style": "street_interview",
@@ -1198,6 +1253,34 @@
         "share_engineered",
         "street_interview",
         "viral"
+      ]
+    },
+    {
+      "id": "testimonial-cutdown-ugc",
+      "file": "patterns/testimonial-cutdown-ugc.json",
+      "style": "testimonial_cutdown",
+      "funnel_stage": "bof_conversion",
+      "platforms": [
+        "meta",
+        "tiktok",
+        "youtube_shorts",
+        "organic_short"
+      ],
+      "niches": [
+        "ecommerce",
+        "saas",
+        "health",
+        "education",
+        "fitness",
+        "apps",
+        "local_services"
+      ],
+      "production_tier": "native_ugc",
+      "virality_posture": "evergreen_dr",
+      "tags": [
+        "native_ugc",
+        "evergreen_dr",
+        "testimonial_cutdown"
       ]
     },
     {
@@ -1257,6 +1340,34 @@
         "share_engineered",
         "text_story_slideshow",
         "viral"
+      ]
+    },
+    {
+      "id": "ugc-demo-hands",
+      "file": "patterns/ugc-demo-hands.json",
+      "style": "ugc_demo",
+      "funnel_stage": "mof_consideration",
+      "platforms": [
+        "meta",
+        "tiktok",
+        "youtube_shorts",
+        "organic_short"
+      ],
+      "niches": [
+        "ecommerce",
+        "beauty",
+        "home",
+        "apps",
+        "fitness",
+        "food_bev",
+        "pets"
+      ],
+      "production_tier": "native_ugc",
+      "virality_posture": "evergreen_dr",
+      "tags": [
+        "native_ugc",
+        "evergreen_dr",
+        "ugc_demo"
       ]
     },
     {

@@ -1,0 +1,15 @@
+---
+description: Use Ad Intelligence skill for any ads or creative generation
+alwaysApply: false
+---
+
+When the user asks for ads, creatives, hooks, scripts, UGC, TikTok/Meta/YouTube/CTV
+ads, launch films, influencer briefs, or “make it viral”:
+
+1. Follow `.cursor/skills/ad-intelligence/SKILL.md` (symlink into `ad-intelligence/`).
+2. Run retrieval from `ad-intelligence/skills/ad-intelligence`:
+   `node scripts/retrieve.mjs --niche … --platform … --limit 5` (add `--tag viral`
+   and/or `--production premium_cinema` as needed).
+3. Deliver with `references/output-template.md`.
+4. Pass `checklists/first-time-right.json` and scan `references/mistakes-library.json`.
+5. Cite pattern ids. Never invent proof. One CTA. Muted-first hooks.

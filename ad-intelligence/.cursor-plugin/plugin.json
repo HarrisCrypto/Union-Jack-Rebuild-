@@ -1,8 +1,8 @@
 {
   "name": "ad-intelligence",
   "displayName": "Ad Intelligence",
-  "version": "2.0.0",
-  "description": "Universal ad intelligence for LLM agents: 40+ viral, share-engineered, and high-production blueprints across niches — with retrieval, hooks, flows, and output contracts.",
+  "version": "2.1.0",
+  "description": "Most comprehensive viral + high-production ad intelligence skill for LLM agents — retrieval, mistakes library, first-time-right QA, 45+ patterns.",
   "author": {
     "name": "HarrisCrypto"
   },
@@ -18,5 +18,7 @@
     "llm",
     "agent"
   ],
-  "skills": ["./skills/ad-intelligence/SKILL.md"]
+  "skills": [
+    "./skills/ad-intelligence/SKILL.md"
+  ]
 }

@@ -1,0 +1,100 @@
+# How to get your agent to use Ad Intelligence
+
+This package is already on your GitHub via the `ad-intelligence/` folder
+(PR on `HarrisCrypto/Union-Jack-Rebuild-`). After merge — or from the PR
+branch — you can point Cursor and other agents at it several ways.
+
+## Fastest path (this repo)
+
+The skill is linked at:
+
+```text
+.cursor/skills/ad-intelligence  →  ad-intelligence/skills/ad-intelligence
+```
+
+**Any Cursor agent working in this repo** can discover it automatically.
+
+### Use it in chat
+
+1. Open Agent chat in this project.
+2. Type `/ad-intelligence` **or** just ask:  
+   `Using the ad-intelligence skill, create a viral TikTok + premium hero film for …`
+3. For a whole session, turn the skill into a **Custom Mode** (Option/Alt+Enter on the skill) so it stays on.
+
+### Force it every time (optional rule)
+
+Add a project rule, e.g. `.cursor/rules/ads.mdc`:
+
+```markdown
+---
+description: Always use Ad Intelligence for creative work
+alwaysApply: false
+---
+When the user asks for ads, creatives, hooks, scripts, UGC, TikTok/Meta/YouTube
+ads, or launch films: read and follow `.cursor/skills/ad-intelligence/SKILL.md`,
+run `node scripts/retrieve.mjs` from that skill directory, and pass the
+first-time-right checklist before delivering.
+```
+
+## Install from GitHub (point any Cursor at this repo)
+
+Cursor installs **plugins** from GitHub (not bare skill folders). This repo
+includes a root marketplace manifest that exposes the plugin:
+
+1. In Cursor: **Customize → From GitHub Repository**
+2. Paste: `https://github.com/HarrisCrypto/Union-Jack-Rebuild-`
+3. Install the **ad-intelligence** plugin
+4. Confirm it appears under **Customize → Skills**
+
+> Prefer a clean product URL? Copy the `ad-intelligence/` folder into its own
+> repository (keep `.cursor-plugin/` + `skills/`). Then point Cursor at that repo
+> instead — better for selling.
+
+**Branch tip:** Until the PR merges, point at branch
+`cursor/ad-intelligence-skill-3683` if your GitHub import UI allows a ref.
+
+## Use with Cloud Agents
+
+- **Project skill (recommended):** keep `.cursor/skills/ad-intelligence` in the
+  repo so every Cloud Agent clone gets it.
+- **Personal skill sync:** copy the skill into `~/.cursor/skills/ad-intelligence`
+  and enable **Settings → Agents → Sync Skills for Cloud Agents**.
+
+## Use with Hermes / Manus / custom harnesses
+
+Skills are files. Mount or clone the skill directory into the agent’s workspace,
+then prepend the system prompt in
+[`skills/ad-intelligence/prompts/harness-system-prompt.md`](./skills/ad-intelligence/prompts/harness-system-prompt.md).
+
+Minimal harness loop:
+
+```bash
+git clone https://github.com/HarrisCrypto/Union-Jack-Rebuild-.git
+cd Union-Jack-Rebuild-/ad-intelligence/skills/ad-intelligence
+node scripts/retrieve.mjs --niche <niche> --tag viral --limit 5
+# feed JSON + SKILL.md into the model; require output-template.md
+```
+
+## Verify it’s loaded
+
+```bash
+cd ad-intelligence/skills/ad-intelligence
+node scripts/retrieve.mjs --list | head
+node scripts/retrieve.mjs --niche beauty --tag viral --limit 3
+```
+
+In Cursor chat: `/ad-intelligence` should resolve. Ask for an ad and confirm the
+reply cites **pattern ids** and a **QA checklist** — if it doesn’t, tell the
+agent explicitly: *Follow the ad-intelligence skill and output template.*
+
+## What “point my agent at it” means in practice
+
+| Setup | What you do |
+| --- | --- |
+| Working in this repo | Nothing extra — skill is already linked |
+| Other Cursor projects | Install plugin from this GitHub repo (or a dedicated fork) |
+| Cloud Agents | Keep skill in repo **or** sync personal skills |
+| Non-Cursor LLM harness | Clone path + paste harness system prompt + run retrieve CLI |
+
+You do **not** need a separate hosted database for the pattern skill to work.
+Optional later: private vector DB of live ad breakdowns (see `ingest/README.md`).

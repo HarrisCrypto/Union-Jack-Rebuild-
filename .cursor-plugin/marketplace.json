@@ -1,0 +1,28 @@
+{
+  "name": "harris-crypto-tools",
+  "owner": {
+    "name": "HarrisCrypto"
+  },
+  "metadata": {
+    "description": "Plugins from HarrisCrypto repos — including Ad Intelligence."
+  },
+  "plugins": [
+    {
+      "name": "ad-intelligence",
+      "source": "ad-intelligence",
+      "description": "Universal viral + high-production ad blueprints and retrieval for AI creative agents.",
+      "version": "2.1.0",
+      "keywords": [
+        "ads",
+        "viral",
+        "tiktok",
+        "cinematic",
+        "ugc",
+        "high-production",
+        "meta",
+        "youtube",
+        "creative"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Ad Intelligence — universal LLM ad pattern skill
 
+> **How to point your agent here:** see [`INSTALL.md`](./INSTALL.md)  
+> Already on GitHub in this repo (`ad-intelligence/` + root marketplace). Use `/ad-intelligence` in Cursor, or Customize → From GitHub Repository → `HarrisCrypto/Union-Jack-Rebuild-`.
+
+
 A **comprehensive, pattern-first** database of high-performing ad blueprints for AI agents — spanning **viral trend formats**, **share-engineered content**, and **high-production / cinematic** films, plus classic performance creative.
 
 Built to be installed as a **Cursor Agent Skill / plugin** and reused in any harness (Cursor, Claude, Hermes, Grok, custom RAG).
@@ -12,7 +16,7 @@ Agencies, DTC brands, app studios, entertainment marketers, local services, B2B,
 
 | Layer | Contents |
 | --- | --- |
-| Patterns | **40+** blueprints across UGC, viral, DR, and premium cinema |
+| Patterns | **47** blueprints across UGC, viral, DR, and premium cinema |
 | Viral OS | Trend classes, weekly ops, virality checklist |
 | Production tiers | `native_ugc` → `hybrid_polished` → `high_production` → `premium_cinema` |
 | Virality postures | `evergreen_dr` · `trend_reactive` · `share_engineered` · `brand_film` |
