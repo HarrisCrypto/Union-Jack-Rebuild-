@@ -1,7 +1,7 @@
 {
   "name": "ad-intelligence-database",
-  "version": "2.0.0",
-  "description": "Comprehensive pattern-first ad blueprints for LLM agents — viral trends, high-production films, and performance creative across verticals.",
+  "version": "3.0.0",
+  "description": "One-stop ad intelligence: patterns + Seedance/Higgsfield creative stack for any niche.",
   "updated": "2026-10-10",
   "counts": {
     "patterns": 47,

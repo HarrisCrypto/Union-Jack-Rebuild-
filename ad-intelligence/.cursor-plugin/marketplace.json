@@ -10,8 +10,8 @@
     {
       "name": "ad-intelligence",
       "source": ".",
-      "description": "Viral + high-production ad blueprints and retrieval for AI creative agents across every niche.",
-      "version": "2.1.0",
+      "description": "One-stop ad maker: patterns + Seedance/Higgsfield creative stack for any niche.",
+      "version": "3.0.0",
       "keywords": [
         "ads",
         "viral",

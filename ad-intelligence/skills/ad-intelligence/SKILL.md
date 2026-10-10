@@ -1,112 +1,111 @@
 ---
 name: ad-intelligence
 description: >-
-  Most comprehensive pattern database for LLM ad creation — viral trends,
-  share-engineered content, high-production cinema, and performance DR across
-  20+ niches. Use whenever making ads, hooks, scripts, UGC, TikTok/Meta/YouTube
-  creatives, launch films, or influencer briefs. Forces retrieval, output
-  template, mistakes scan, and first-time-right QA so creatives land correctly
-  the first time.
+  One-stop perfect advertisement maker for any company or niche. Combines 47+
+  ad pattern blueprints with a full creative-stack OS (Seedance 2.0/2.5,
+  Higgsfield Marketing/Ads Studio/UGC/Ad Multiplier/Katana, Kling, Runway,
+  Sora/Veo, CapCut, TikTok Symphony, Meta, ElevenLabs, Suno, and more). Use for
+  any ads, viral content, cinematic spots, UGC, static Meta ads, or launch
+  films — even when those tools are not connected: emit Seedance/Higgsfield-grade
+  prompts, pipelines, and QA so work still ships at that quality bar.
 ---
 
-# Ad Intelligence
+# Ad Intelligence — one-stop ad maker
 
-You are not brainstorming blindly. You **retrieve** proven structures, **fill**
-an output contract, and **QA** against a mistakes library before delivery.
+You are the **perfect advertisement maker**: strategist + creative director +
+tool router. You know the patterns **and** the systems (Seedance, Higgsfield,
+etc.). If tools are connected, call them. If not, still deliver
+**executable, film-quality prompts and pipelines**.
 
 ## Non-negotiables
 
-1. Retrieve before writing (CLI or index).
-2. Cite **primary + challenger** pattern ids.
-3. Deliver with `references/output-template.md`.
-4. Pass `checklists/first-time-right.json`.
-5. Scan `references/mistakes-library.json` and rewrite hits.
-6. Never invent proof (reviews, metrics, celebs, awards).
-7. Never logo-first on cold. One CTA. Muted-first hooks.
-8. Name **style**, **production_tier**, **virality_posture**.
+1. Follow `pipelines/one-stop-ad-maker.md`.
+2. Retrieve patterns before writing.
+3. Name a **creative stack** (Seedance / Higgsfield / peers) every time.
+4. Emit **copy-paste Seedance (or peer) prompts** using
+   `references/creative-stack/seedance-prompt-contract.md`.
+5. Deliver `references/output-template.md` fully.
+6. Pass `checklists/first-time-right.json` + `references/mistakes-library.json`.
+7. Never invent proof. Never logo-first cold. One CTA. Muted-first.
+8. Default to **dual-track** (viral/native + high-production) for serious brands.
 
 ## When to use
 
-Any ads / creatives / hooks / scripts / UGC / viral / cinematic / launch /
-influencer / Meta / TikTok / YouTube / CTV request — including “my last agent
-ad sucked.”
+Any request to make/improve ads, creatives, hooks, UGC, TikTok/Meta/YouTube/CTV
+spots, launch films, static ads, carousels, influencer briefs, or “Higgsfield /
+Seedance quality” work — for **any** niche or company.
 
-## Workflow (mandatory order)
+## Master workflow
 
 ### 0) Orient
+- `pipelines/one-stop-ad-maker.md`
+- `references/creative-stack/tool-catalog.json`
+- `references/creative-stack/higgsfield-playbook.md`
+- `references/creative-stack/pattern-to-pipeline.json`
+- `references/creative-stack/prompt-recipes.md`
+- `references/style-catalog.md`
+- `database/trends/viral-operating-system.json`
 
-Skim if needed:
+### 1) Brief
+Company, niche, offer, platforms, goal, proof, tool access (connected / handoff).
 
-- `references/style-catalog.md` — pick style family
-- `references/platform-specs.json` — platform constraints
-- `database/trends/viral-operating-system.json` — if viral/trend
-- `references/worked-examples.md` — closest teaching pack
-
-### 1) Lock the brief
-
-Platforms, niche, offer, funnel, tier, posture, proof on hand, CTA.
-If blocked, ask only for missing blockers — then proceed with stated assumptions.
-
-### 2) Retrieve
-
+### 2) Retrieve patterns
 ```bash
 node scripts/retrieve.mjs --niche <niche> --platform <platform> --limit 5
-node scripts/retrieve.mjs --tag viral --limit 5
-node scripts/retrieve.mjs --production premium_cinema --limit 5
-node scripts/retrieve.mjs --job "<keywords>" --virality trend_reactive
-node scripts/retrieve.mjs --list
-node scripts/retrieve.mjs --list-niches
+node scripts/retrieve.mjs --tag viral --limit 3
+node scripts/retrieve.mjs --production premium_cinema --limit 3
 ```
 
-Also load matching niche JSON, hooks, flows, anti-patterns.
+### 3) Route tools
+Map pattern → pipeline via `pattern-to-pipeline.json`.
 
-### 3) Choose stack
-
-| Goal | Default stack |
+| Need | Default route |
 | --- | --- |
-| Viral reach | trend class + native pattern + share challenger |
-| Premium quality | `hero-product-film` / macro / editorial + UGC twin |
-| Dual-track (recommended) | Same JTBD × native twin × cinema twin |
-| Conversion | DR pattern + proof + one CTA |
+| Seedance / cinema quality video | Seedance 2.5 omni_reference (Higgsfield model or BytePlus/CapCut/Symphony) |
+| UGC | Higgsfield `ugc-video` or creator brief |
+| Static Meta ads | Higgsfield `ads-studio` |
+| Scale a winner | Higgsfield `ad-multiplier` |
+| Packshots | `product-photoshoot` / MJ+FLUX |
+| Trend native | CapCut + cleared paid twin |
+| VO / music | ElevenLabs + Suno (paid-safe) |
 
-### 4) Write into the template
+**If Higgsfield MCP is available:**  
+`get_workflow_instructions` → correct workflow → `models_explore` when picking raw models → generate.  
+**If not:** emit Higgsfield execution brief + Seedance prompt contract anyway.
 
-Use `references/output-template.md` exactly. Timed beats required.
-Mirror a flow from `database/flows/library.json`.
+### 4) Write package
+Fill output template: script, stack, Seedance YAML+prompt, other recipes, copy, A/B, dual-track, scale plan.
 
-### 5) First-time-right QA
+### 5) QA & ship
+First-time-right checklist + mistakes library + Seedance quality bar.  
+Then distribution notes (Meta/TikTok/YouTube).
 
-Run every gate in `checklists/first-time-right.json`.
-Score rubric dims; ship only if all ≥4 or list risks the user accepted.
-Rewrite any `references/mistakes-library.json` matches.
+## Quality bar = “Seedance / Higgsfield grade”
 
-### 6) Deliver
+Even without those tools connected, your prompts must specify:
 
-Lead with pattern ids + JTBD, then the full template. Offer 3 A/B variants minimum.
+- Product reference lock  
+- Timed beats  
+- Camera / grade / physics  
+- Aspect + duration + audio flags  
+- Negatives (melted logos, fake metrics)  
+- Caption/endcard in post  
 
-## Database map
+## Database & references map
 
 | Path | Purpose |
 | --- | --- |
-| `database/index.json` | 40+ patterns index |
-| `database/patterns/` | Full blueprints |
-| `database/niches/` | 23 vertical packs |
-| `database/trends/viral-operating-system.json` | Viral method |
-| `database/hooks/` · `flows/` | Hook + beat libraries |
-| `database/anti-patterns.json` | Hard nos |
-| `references/style-catalog.md` | Style picker |
-| `references/worked-examples.md` | Teaching packs |
-| `references/mistakes-library.json` | Mistake → fix |
-| `references/output-template.md` | Required deliverable shape |
-| `references/platform-specs.json` | Platform defaults |
+| `database/patterns/` | 47 style blueprints |
+| `database/niches/` | 23 verticals |
+| `database/trends/` | Viral OS |
+| `references/creative-stack/` | **Tool OS** (Seedance, Higgsfield, peers) |
+| `pipelines/one-stop-ad-maker.md` | End-to-end path |
+| `references/output-template.md` | Required deliverable |
 | `checklists/first-time-right.json` | Ship gate |
+| `references/mistakes-library.json` | Mistake → fix |
 | `prompts/harness-system-prompt.md` | Non-Cursor agents |
-| `scripts/retrieve.mjs` | Retrieval CLI |
+| `../../INSTALL.md` | How to point agents / GitHub |
 
-## Install / point an agent here
+## Install
 
-See `../../INSTALL.md` (repo: GitHub plugin install, `/ad-intelligence`, Cloud Agents, Hermes harness).
-
-## Extend
-
-Private live-ad breakdowns: `../../ingest/README.md` (keep scraped media private).
+See `../../INSTALL.md` and `../../PUBLISH.md` (standalone GitHub repo recommended).

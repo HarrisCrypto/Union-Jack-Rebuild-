@@ -1,22 +1,22 @@
 {
   "name": "ad-intelligence",
   "displayName": "Ad Intelligence",
-  "version": "2.1.0",
-  "description": "Most comprehensive viral + high-production ad intelligence skill for LLM agents — retrieval, mistakes library, first-time-right QA, 45+ patterns.",
+  "version": "3.0.0",
+  "description": "One-stop perfect advertisement maker for any company/niche — 47+ patterns plus Seedance, Higgsfield, and full creative-tool OS with prompt handoffs.",
   "author": {
     "name": "HarrisCrypto"
   },
   "license": "SEE LICENSE IN LICENSE",
   "keywords": [
     "ads",
-    "creative",
-    "marketing",
-    "meta",
-    "tiktok",
+    "seedance",
+    "higgsfield",
+    "viral",
+    "cinematic",
     "ugc",
-    "swipe-file",
-    "llm",
-    "agent"
+    "tiktok",
+    "meta",
+    "creative-stack"
   ],
   "skills": [
     "./skills/ad-intelligence/SKILL.md"

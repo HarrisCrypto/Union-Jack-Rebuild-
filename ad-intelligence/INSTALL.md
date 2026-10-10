@@ -8,6 +8,18 @@ Until it is published there, the package also lives temporarily under
 `cursor/ad-intelligence-skill-3683` and will be removed from Union Jack once
 the standalone repo is live.
 
+## Creative stack (Seedance / Higgsfield / peers)
+
+The skill is a **one-stop ad maker**: it routes Seedance 2.0/2.5, Higgsfield
+(Ads Studio, UGC, Marketing Studio, Ad Multiplier, Katana, product photoshoot),
+Kling, Runway, CapCut, Meta/TikTok, ElevenLabs, Suno, and more.
+
+- Connected tools → agent should call them  
+- Not connected → agent still emits Seedance/Higgsfield-grade prompts & briefs  
+
+Docs: `skills/ad-intelligence/references/creative-stack/` ·  
+`skills/ad-intelligence/pipelines/one-stop-ad-maker.md`
+
 ## Fastest path (this repo)
 
 The skill is linked at:
@@ -40,22 +52,16 @@ run `node scripts/retrieve.mjs` from that skill directory, and pass the
 first-time-right checklist before delivering.
 ```
 
-## Install from GitHub (point any Cursor at this repo)
+## Install from GitHub (point any Cursor at it)
 
-Cursor installs **plugins** from GitHub (not bare skill folders). This repo
-includes a root marketplace manifest that exposes the plugin:
+Cursor installs **plugins** from GitHub (not bare skill folders). The package
+root already has `.cursor-plugin/marketplace.json`.
 
 1. In Cursor: **Customize → From GitHub Repository**
-2. Paste: `https://github.com/HarrisCrypto/Union-Jack-Rebuild-`
+2. Paste: `https://github.com/HarrisCrypto/ad-intelligence`  
+   (or the Union Jack path only while waiting for publish)
 3. Install the **ad-intelligence** plugin
 4. Confirm it appears under **Customize → Skills**
-
-> Prefer a clean product URL? Copy the `ad-intelligence/` folder into its own
-> repository (keep `.cursor-plugin/` + `skills/`). Then point Cursor at that repo
-> instead — better for selling.
-
-**Branch tip:** Until the PR merges, point at branch
-`cursor/ad-intelligence-skill-3683` if your GitHub import UI allows a ref.
 
 ## Use with Cloud Agents
 
@@ -78,6 +84,10 @@ cd Union-Jack-Rebuild-/ad-intelligence/skills/ad-intelligence
 node scripts/retrieve.mjs --niche <niche> --tag viral --limit 5
 # feed JSON + SKILL.md into the model; require output-template.md
 ```
+
+## Creative stack
+
+This skill routes **Seedance**, **Higgsfield**, Kling, Runway, CapCut, Meta/TikTok, ElevenLabs, Suno, and peers — see `skills/ad-intelligence/references/creative-stack/` and `pipelines/one-stop-ad-maker.md`.
 
 ## Verify it’s loaded
 
