@@ -1,0 +1,18 @@
+{
+  "name": "ad-intelligence-marketplace",
+  "owner": {
+    "name": "HarrisCrypto"
+  },
+  "metadata": {
+    "description": "Pattern-first ad intelligence skills for LLM agents."
+  },
+  "plugins": [
+    {
+      "name": "ad-intelligence",
+      "source": ".",
+      "description": "High-performing ad blueprints, hooks, flows, and retrieval for AI ad generation.",
+      "version": "1.0.0",
+      "keywords": ["ads", "marketing", "creative", "ugc", "meta", "tiktok"]
+    }
+  ]
+}

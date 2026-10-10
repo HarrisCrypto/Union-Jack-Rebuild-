@@ -1,0 +1,54 @@
+{
+  "id": "anti-patterns-library",
+  "name": "Creative anti-patterns (do not generate these)",
+  "items": [
+    {
+      "id": "logo-first",
+      "name": "Logo-first cold open",
+      "why_bad": "Wastes the 0–1s thumb-stop window on identity the viewer doesn’t care about yet.",
+      "fix": "Open on problem, confession, transformation, or trend format; brand after second 8–12."
+    },
+    {
+      "id": "feature-laundry",
+      "name": "Feature laundry list",
+      "why_bad": "No single job; nothing memorable; sounds like a brochure.",
+      "fix": "One job per ad. Features become proof of the mechanism, not the headline."
+    },
+    {
+      "id": "fake-ugc",
+      "name": "Obviously fake UGC",
+      "why_bad": "Studio lighting + teleprompter cadence + stock smile triggers distrust.",
+      "fix": "Real handheld, real environment, imperfect takes, or lean into polished cinematic honestly."
+    },
+    {
+      "id": "multi-cta",
+      "name": "Multiple CTAs",
+      "why_bad": "Splits action; muddies attribution; lowers conversion.",
+      "fix": "One primary CTA per cut; variants live in the A/B matrix, not the same video."
+    },
+    {
+      "id": "invented-proof",
+      "name": "Invented testimonials or metrics",
+      "why_bad": "Legal and trust risk; models hallucinate social proof easily.",
+      "fix": "Only use reviews, numbers, and awards the user provides. Otherwise use pattern-level proof structure with placeholders."
+    },
+    {
+      "id": "muted-illegible",
+      "name": "Muted-illegible text",
+      "why_bad": "Most feed views start muted; tiny captions = dead ad.",
+      "fix": "Assume muted. Hook must read as text or work as pure visual."
+    },
+    {
+      "id": "wrong-landing",
+      "name": "Promise mismatch on landing",
+      "why_bad": "Kills conversion even if CTR is strong.",
+      "fix": "Mirror hook language above the fold; same offer, same SKU, same geo."
+    },
+    {
+      "id": "trend-force",
+      "name": "Forced trend with no offer map",
+      "why_bad": "Gets views, zero commercial memory.",
+      "fix": "Punchline must equal product truth, or skip the trend."
+    }
+  ]
+}

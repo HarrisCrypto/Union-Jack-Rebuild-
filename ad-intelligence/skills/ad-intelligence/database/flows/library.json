@@ -1,0 +1,54 @@
+{
+  "id": "flow-library",
+  "name": "Narrative flows (beat sheets)",
+  "flows": [
+    {
+      "id": "hook-mechanism-proof-cta",
+      "beats": ["hook", "mechanism", "proof", "cta"],
+      "ideal_seconds": 28,
+      "notes": "Default cold-traffic DR flow."
+    },
+    {
+      "id": "problem-agitate-reframe-process-cta",
+      "beats": ["problem", "agitate", "reframe", "process", "cta"],
+      "ideal_seconds": 35,
+      "notes": "Expertise-led local and B2B."
+    },
+    {
+      "id": "before-process-after-stamp",
+      "beats": ["before", "process_montage", "after_hold", "credibility_stamp", "cta"],
+      "ideal_seconds": 15,
+      "notes": "Visual transformation niches."
+    },
+    {
+      "id": "proof-proof-offer-risk-reversal",
+      "beats": ["proof_1", "proof_2", "offer", "risk_reversal", "cta"],
+      "ideal_seconds": 25,
+      "notes": "Retargeting / BOF."
+    },
+    {
+      "id": "origin-standard-who-for-soft-cta",
+      "beats": ["origin_hook", "craft_standard", "who_its_for", "soft_cta"],
+      "ideal_seconds": 45,
+      "notes": "Brand trust for premium craft."
+    },
+    {
+      "id": "geo-facility-trust-phone",
+      "beats": ["geo_hook", "facility", "trust_stack", "phone_cta"],
+      "ideal_seconds": 20,
+      "notes": "Local lead gen."
+    },
+    {
+      "id": "list-title-items-bridge",
+      "beats": ["list_title", "item_1", "item_2", "item_3", "bridge_offer"],
+      "ideal_seconds": 35,
+      "notes": "Education mid-funnel."
+    },
+    {
+      "id": "mood-world-reveal-endcard",
+      "beats": ["hero_image", "mood_world", "product_reveal", "endcard"],
+      "ideal_seconds": 30,
+      "notes": "Cinematic brand."
+    }
+  ]
+}

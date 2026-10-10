@@ -1,0 +1,54 @@
+{
+  "id": "niche-auto-restoration",
+  "niche": "auto_restoration",
+  "aliases": ["classic_car", "british_cars", "concours", "hot_rod_restore", "garage_restore"],
+  "audience": "Owners of classic/specialty cars who fear cheap shortcuts, want craftsmanship, and need trust in a long project.",
+  "jobs_to_be_done": [
+    "Prove the shop can restore MY marque correctly",
+    "Explain why proper restoration costs what it costs",
+    "Generate quote calls from a geo radius",
+    "Show before/after craft without looking like a flip channel"
+  ],
+  "recommended_pattern_ids": [
+    "before-after-reveal",
+    "founder-story-origin",
+    "local-service-trust",
+    "pas-pain-stack",
+    "social-proof-stack",
+    "cinematic-brand-spot"
+  ],
+  "angles": [
+    {
+      "id": "wrong-repair-cost",
+      "hook_seed": "The ‘cheap’ body repair that costs you the car later",
+      "pattern": "pas-pain-stack"
+    },
+    {
+      "id": "marque-matched-reveal",
+      "hook_seed": "BEFORE: barn-find [marque] → AFTER: road-ready",
+      "pattern": "before-after-reveal"
+    },
+    {
+      "id": "since-year-geo",
+      "hook_seed": "[City region] British restoration since [year]",
+      "pattern": "local-service-trust"
+    },
+    {
+      "id": "panel-gap-obsession",
+      "hook_seed": "Unpopular opinion: if the panel gaps are wrong, it isn’t finished",
+      "pattern": "founder-story-origin"
+    },
+    {
+      "id": "owner-review",
+      "hook_seed": "Owner quote about trust / communication / final drive",
+      "pattern": "social-proof-stack"
+    }
+  ],
+  "lexicon": {
+    "use": ["concours", "rotisserie", "panel gaps", "matching numbers", "bare-metal", "retrim", "wiring loom", "dyno"],
+    "avoid_unless_true": [" Concours winner", "perfect investment", "guaranteed appreciation"]
+  },
+  "proof_types": ["real bay photos", "owner reviews", "years in business", "marque specialization", "process photos"],
+  "cta_defaults": ["Call the shop", "Request a project quote", "See marque gallery"],
+  "landing_notes": "Match marque named in ad; show process + contact; keep NAP consistent."
+}

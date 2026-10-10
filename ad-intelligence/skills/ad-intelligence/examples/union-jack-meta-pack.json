@@ -1,0 +1,30 @@
+{
+  "brand": "Union Jack British Auto Restoration",
+  "geo": "San Martin, CA (South Bay)",
+  "phone": "(408) 686-1101",
+  "pattern_used": "before-after-reveal",
+  "challenger_pattern": "local-service-trust",
+  "deliverables": {
+    "hooks": [
+      "BEFORE: Tired British roadster in the bay — no VO.",
+      "San Martin shop that still does British cars the hard way.",
+      "If the panel gaps are wrong, it isn’t finished."
+    ],
+    "script_15s": [
+      { "t": "0-2", "visual": "Matched-frame BEFORE of customer car", "vo": "" },
+      { "t": "2-8", "visual": "4 craft cuts: metal, paint, trim, detail", "vo": "Optional: ‘Fourteen months. Done properly.’" },
+      { "t": "8-12", "visual": "Matched-frame AFTER; hold", "vo": "" },
+      { "t": "12-15", "visual": "End card: Union Jack · (408) 686-1101", "vo": "British restoration. Call the shop." }
+    ],
+    "primary_text": "Before-and-after from the Union Jack bay in San Martin. British marques restored with panel gaps, paint, and trim done properly — not rushed. Call (408) 686-1101 for a project quote.",
+    "headline": "British restoration, San Martin",
+    "cta_primary": "Call now",
+    "ab_matrix": [
+      { "variant": "A", "change": "Silent before/after" },
+      { "variant": "B", "change": "Founder VO unpopular-belief hook" },
+      { "variant": "C", "change": "Local trust cut with shop exterior + phone 3s" }
+    ],
+    "landing_mirror": "Marque gallery matching the car in the ad; quote CTA; NAP consistent"
+  },
+  "notes": "Example only — uses public brand facts from the Union Jack site. Replace proof with real owned before/after stills."
+}

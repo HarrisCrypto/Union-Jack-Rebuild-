@@ -1,0 +1,61 @@
+{
+  "id": "hook-library",
+  "name": "Hook templates (fill with niche specifics)",
+  "rules": [
+    "Never output a hook that starts with the brand name on cold traffic.",
+    "Replace bracket tokens with concrete nouns from the brief.",
+    "Prefer scenes over abstractions."
+  ],
+  "hooks": [
+    {
+      "id": "confession",
+      "template": "I wasted [time/money] on [failed approach] before I learned [mechanism].",
+      "best_styles": ["ugc_talking_head", "founder_story"]
+    },
+    {
+      "id": "costly-mistake",
+      "template": "If your [asset] has [symptom], don’t [common wrong fix] — that usually causes [worse outcome].",
+      "best_styles": ["problem_agitate_solve", "listicle_text_overlay"]
+    },
+    {
+      "id": "pattern-interrupt-visual",
+      "template": "[Unexpected visual of problem or craft] + on-screen: [3–5 word label]",
+      "best_styles": ["before_after", "product_loop", "cinematic_brand"]
+    },
+    {
+      "id": "geo-specific",
+      "template": "[City/region] [specialty] that actually [specific proof].",
+      "best_styles": ["local_service_trust"]
+    },
+    {
+      "id": "open-loop",
+      "template": "The [N]-step way shops fix [problem] without [painful tradeoff]…",
+      "best_styles": ["listicle_text_overlay", "problem_agitate_solve"]
+    },
+    {
+      "id": "customer-voice",
+      "template": "‘[Exact customer sentence].’ — then smash cut to the result.",
+      "best_styles": ["social_proof_stack", "testimonial_cutdown"]
+    },
+    {
+      "id": "unpopular-belief",
+      "template": "Unpopular opinion: [craft belief that explains your premium].",
+      "best_styles": ["founder_story", "ugc_talking_head"]
+    },
+    {
+      "id": "before-label",
+      "template": "BEFORE: [blunt problem state]. (No VO needed.)",
+      "best_styles": ["before_after"]
+    },
+    {
+      "id": "satisfying-mid-action",
+      "template": "Start on the satisfying motion already happening — [action].",
+      "best_styles": ["product_loop", "ugc_demo"]
+    },
+    {
+      "id": "trend-payload",
+      "template": "Use [trend format], punchline = [product truth in one line].",
+      "best_styles": ["meme_native"]
+    }
+  ]
+}

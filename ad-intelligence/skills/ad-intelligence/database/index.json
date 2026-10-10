@@ -1,0 +1,114 @@
+{
+  "name": "ad-intelligence-database",
+  "version": "1.0.0",
+  "description": "Pattern-first high-performing ad blueprints for LLM agents.",
+  "updated": "2026-10-10",
+  "retrieval": {
+    "primary_keys": ["id", "style", "funnel_stage", "platforms", "niches"],
+    "script": "../scripts/retrieve.mjs",
+    "query_schema": "../../../schema/query.schema.json",
+    "blueprint_schema": "../../../schema/ad-blueprint.schema.json"
+  },
+  "patterns": [
+    {
+      "id": "ugc-talking-head-scroll-stop",
+      "file": "patterns/ugc-talking-head-scroll-stop.json",
+      "style": "ugc_talking_head",
+      "funnel_stage": "tof_awareness",
+      "platforms": ["meta", "tiktok", "organic_short"],
+      "niches": ["consumer", "local_services", "saas", "health", "ecommerce"],
+      "tags": ["hook", "ugc", "cold"]
+    },
+    {
+      "id": "pas-pain-stack",
+      "file": "patterns/pas-pain-stack.json",
+      "style": "problem_agitate_solve",
+      "funnel_stage": "mof_consideration",
+      "platforms": ["meta", "tiktok", "youtube"],
+      "niches": ["local_services", "b2b", "home", "auto", "health", "finance"],
+      "tags": ["pas", "expertise", "urgency"]
+    },
+    {
+      "id": "before-after-reveal",
+      "file": "patterns/before-after-reveal.json",
+      "style": "before_after",
+      "funnel_stage": "tof_awareness",
+      "platforms": ["meta", "tiktok", "youtube", "organic_short"],
+      "niches": ["auto_restoration", "home_renovation", "beauty", "cleaning", "fitness", "design"],
+      "tags": ["transformation", "visual", "short"]
+    },
+    {
+      "id": "social-proof-stack",
+      "file": "patterns/social-proof-stack.json",
+      "style": "social_proof_stack",
+      "funnel_stage": "bof_conversion",
+      "platforms": ["meta", "youtube", "google_display"],
+      "niches": ["local_services", "ecommerce", "saas", "auto", "home"],
+      "tags": ["reviews", "retarget", "trust"]
+    },
+    {
+      "id": "founder-story-origin",
+      "file": "patterns/founder-story-origin.json",
+      "style": "founder_story",
+      "funnel_stage": "tof_awareness",
+      "platforms": ["meta", "youtube", "linkedin", "organic_short"],
+      "niches": ["local_services", "luxury", "craft", "saas", "food"],
+      "tags": ["story", "premium", "trust"]
+    },
+    {
+      "id": "local-service-trust",
+      "file": "patterns/local-service-trust.json",
+      "style": "local_service_trust",
+      "funnel_stage": "bof_conversion",
+      "platforms": ["meta", "google_display", "youtube"],
+      "niches": ["auto_restoration", "auto_repair", "home_services", "medical", "legal", "trades"],
+      "tags": ["geo", "calls", "nap"]
+    },
+    {
+      "id": "meme-native-trend",
+      "file": "patterns/meme-native-trend.json",
+      "style": "meme_native",
+      "funnel_stage": "tof_awareness",
+      "platforms": ["tiktok", "meta", "organic_short"],
+      "niches": ["consumer", "ecommerce", "saas", "youth", "food"],
+      "tags": ["trend", "organic", "short"]
+    },
+    {
+      "id": "product-loop-demo",
+      "file": "patterns/product-loop-demo.json",
+      "style": "product_loop",
+      "funnel_stage": "tof_awareness",
+      "platforms": ["meta", "tiktok", "organic_short"],
+      "niches": ["ecommerce", "beauty", "kitchen", "tools", "gadgets"],
+      "tags": ["loop", "demo", "ecommerce"]
+    },
+    {
+      "id": "listicle-text-overlay",
+      "file": "patterns/listicle-text-overlay.json",
+      "style": "listicle_text_overlay",
+      "funnel_stage": "mof_consideration",
+      "platforms": ["meta", "tiktok", "linkedin", "organic_short"],
+      "niches": ["saas", "finance", "health", "auto", "home", "b2b"],
+      "tags": ["education", "saves", "checklist"]
+    },
+    {
+      "id": "cinematic-brand-spot",
+      "file": "patterns/cinematic-brand-spot.json",
+      "style": "cinematic_brand",
+      "funnel_stage": "tof_awareness",
+      "platforms": ["youtube", "meta", "organic_short"],
+      "niches": ["luxury", "auto", "travel", "fashion", "craft"],
+      "tags": ["brand", "premium", "mood"]
+    }
+  ],
+  "libraries": [
+    { "id": "hooks", "file": "hooks/library.json" },
+    { "id": "flows", "file": "flows/library.json" },
+    { "id": "anti-patterns", "file": "anti-patterns.json" }
+  ],
+  "niches": [
+    { "id": "auto_restoration", "file": "niches/auto-restoration.json" },
+    { "id": "ecommerce", "file": "niches/ecommerce-dtc.json" },
+    { "id": "saas", "file": "niches/saas-b2b.json" }
+  ]
+}

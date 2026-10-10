@@ -1,0 +1,36 @@
+{
+  "id": "niche-saas-b2b",
+  "niche": "saas",
+  "aliases": ["b2b", "software", "productivity"],
+  "audience": "Operators tired of spreadsheet/workarounds; skeptical of feature dumps.",
+  "jobs_to_be_done": [
+    "Name the painful workflow precisely",
+    "Show the mechanism in a screen-native demo",
+    "Book a demo or start a trial"
+  ],
+  "recommended_pattern_ids": [
+    "pas-pain-stack",
+    "listicle-text-overlay",
+    "ugc-talking-head-scroll-stop",
+    "social-proof-stack"
+  ],
+  "angles": [
+    {
+      "id": "workflow-tax",
+      "hook_seed": "Your team loses [hours] every week to [workaround]",
+      "pattern": "pas-pain-stack"
+    },
+    {
+      "id": "mistakes-list",
+      "hook_seed": "5 signs your [process] is quietly breaking",
+      "pattern": "listicle-text-overlay"
+    }
+  ],
+  "lexicon": {
+    "use": ["workflow", "handoff", "source of truth", "time-to-value"],
+    "avoid_unless_true": ["AI-powered without mechanism", "10x", "disrupts"]
+  },
+  "proof_types": ["logo wall you have rights to", "metric from case study", "product UI demo"],
+  "cta_defaults": ["Start free", "Book demo", "See how it works"],
+  "landing_notes": "Demo the same workflow shown in the ad."
+}

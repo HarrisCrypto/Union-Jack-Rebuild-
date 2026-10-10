@@ -1,0 +1,22 @@
+{
+  "name": "ad-intelligence",
+  "displayName": "Ad Intelligence",
+  "version": "1.0.0",
+  "description": "Pattern-first high-performing ad blueprints for LLM agents. Retrieve hooks, flows, styles, and output contracts — not raw scraped creatives.",
+  "author": {
+    "name": "HarrisCrypto"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "ads",
+    "creative",
+    "marketing",
+    "meta",
+    "tiktok",
+    "ugc",
+    "swipe-file",
+    "llm",
+    "agent"
+  ],
+  "skills": ["./skills/ad-intelligence/SKILL.md"]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local/ad-intelligence/query.schema.json",
+  "title": "AdIntelligenceQuery",
+  "type": "object",
+  "properties": {
+    "platform": {
+      "type": "string",
+      "enum": ["meta", "tiktok", "youtube", "google_display", "linkedin", "organic_short", "any"]
+    },
+    "style": { "type": "string" },
+    "funnel_stage": {
+      "type": "string",
+      "enum": ["tof_awareness", "mof_consideration", "bof_conversion", "retargeting", "any"]
+    },
+    "niche": { "type": "string" },
+    "job": {
+      "type": "string",
+      "description": "What the ad must do, e.g. stop scroll with pain, prove craftsmanship, book a call"
+    },
+    "duration_max": { "type": "number" },
+    "limit": { "type": "integer", "minimum": 1, "maximum": 10, "default": 3 }
+  }
+}
