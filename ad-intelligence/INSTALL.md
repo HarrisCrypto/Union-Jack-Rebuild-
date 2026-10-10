@@ -1,8 +1,12 @@
 # How to get your agent to use Ad Intelligence
 
-This package is already on your GitHub via the `ad-intelligence/` folder
-(PR on `HarrisCrypto/Union-Jack-Rebuild-`). After merge — or from the PR
-branch — you can point Cursor and other agents at it several ways.
+**Own GitHub repo (recommended):** `https://github.com/HarrisCrypto/ad-intelligence`  
+(Create that empty repo if it does not exist yet — see [`PUBLISH.md`](./PUBLISH.md).)
+
+Until it is published there, the package also lives temporarily under
+`HarrisCrypto/Union-Jack-Rebuild-/ad-intelligence/` on branch
+`cursor/ad-intelligence-skill-3683` and will be removed from Union Jack once
+the standalone repo is live.
 
 ## Fastest path (this repo)
 
