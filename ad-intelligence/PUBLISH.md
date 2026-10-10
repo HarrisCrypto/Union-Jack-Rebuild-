@@ -1,41 +1,68 @@
-# Publish as its own GitHub repo (not inside Union Jack)
+# Publish to HarrisCrypto/ad-intelligence (own GitHub section)
 
-The Cloud Agent token for this workspace can only push to
-`HarrisCrypto/Union-Jack-Rebuild-`. To give Ad Intelligence **its own GitHub
-section**, create an empty repo and either:
+## Why “All repositories” is not enough for *this* agent
 
-- reply **repo ready** in the agent chat (preferred — agent will push + clean Union Jack), or
-- run the local commands below with your own GitHub login.
+Your Cursor GitHub App may have access to **all** repos, but **this Cloud Agent run** was started only against:
 
-## Option A — you create empty repo, agent finishes
+`HarrisCrypto/Union-Jack-Rebuild-`
 
-1. Create empty public repo: https://github.com/new  
-   - Name: `ad-intelligence`  
-   - **No** README / gitignore / license  
-2. Grant the Cursor GitHub App access to that repo.  
-3. Tell the agent: `repo ready`.
+Its install token only includes that repo. Pushing to `ad-intelligence` fails with:
 
-## Option B — publish yourself in one shot
+`Permission to HarrisCrypto/ad-intelligence.git denied to cursor[bot]`
 
-From your machine (GitHub CLI logged in as HarrisCrypto):
+You must either start an agent **on** `ad-intelligence`, or push from your own machine.
 
-```bash
-git clone https://github.com/HarrisCrypto/Union-Jack-Rebuild-.git
-cd Union-Jack-Rebuild-
-git checkout cursor/ad-intelligence-skill-3683
+---
 
-# Turn the package folder into its own repository root
-cd ad-intelligence
-git init -b main
-git add -A
-git commit -m "Initial commit: Ad Intelligence skill v2.1"
-gh repo create HarrisCrypto/ad-intelligence --public --source=. --remote=origin --push
+## Option A — new Cloud Agent on the new repo (recommended)
+
+1. Open [cursor.com/agents](https://cursor.com/agents) → **New agent**
+2. Select repository: **`HarrisCrypto/ad-intelligence`**
+3. Paste this prompt:
+
+```text
+This repo is empty. Publish the Ad Intelligence skill as the repo root.
+
+1. Clone or fetch from https://github.com/HarrisCrypto/Union-Jack-Rebuild-
+   branch cursor/ad-intelligence-skill-3683
+2. Copy the contents of the `ad-intelligence/` folder to THIS repo root
+   (so `.cursor-plugin/`, `skills/`, `README.md`, `INSTALL.md` are at root)
+3. Commit and push to main
+4. Confirm https://github.com/HarrisCrypto/ad-intelligence shows the files
 ```
 
-Then install in Cursor: **Customize → From GitHub Repository →**  
+4. After it’s live, tell the Union Jack agent to **remove** `ad-intelligence/` from Union Jack.
+
+---
+
+## Option B — add repo to environment, then new agent
+
+1. Open the environment:  
+   https://cursor.com/dashboard/cloud-agents/environments/e/ac36468b-a743-11f1-a7d1-d6b4613131ce  
+2. Add `github.com/HarrisCrypto/ad-intelligence` to the environment repos  
+3. Start a **new** agent from that environment (this running agent won’t pick up new repos)
+
+---
+
+## Option C — push yourself (fastest if you have `gh` locally)
+
+```bash
+git clone -b cursor/ad-intelligence-skill-3683 https://github.com/HarrisCrypto/Union-Jack-Rebuild-.git
+cd Union-Jack-Rebuild-/ad-intelligence
+git init -b main
+git add -A
+git commit -m "Initial commit: Ad Intelligence v3 one-stop ad maker"
+gh repo create HarrisCrypto/ad-intelligence --public --source=. --remote=origin --push
+# if repo already exists empty:
+git remote add origin https://github.com/HarrisCrypto/ad-intelligence.git
+git push -u origin main
+```
+
+---
+
+## After it’s published
+
+Cursor install: **Customize → From GitHub Repository →**  
 `https://github.com/HarrisCrypto/ad-intelligence`
 
-## After it’s live
-
-Delete `ad-intelligence/` (and the root marketplace entry) from
-`Union-Jack-Rebuild-` so the auto site stays separate.
+Then strip `ad-intelligence/` out of Union Jack so the site repo stays clean.
