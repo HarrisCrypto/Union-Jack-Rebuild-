@@ -48,16 +48,30 @@ Peers for exploration: `grok_video_v15`, `gemini_omni_flash_1_1`, `minimax_h3_ma
 - `ad_reference_id` recreates scenario — **mutually exclusive** with hook/setting
 - Always pass `avatar_ids` / `product_ids` explicitly when needed
 
+## Consistency systems (required before generate)
+
+1. Fill `product-sheet-template.md` for any packaged/physical/digital product shown.
+2. Fill `character-sheet-template.md` for any recurring talent / UGC avatar.
+3. Prefer Higgsfield `product-photoshoot` and/or `character-sheet` workflow to create missing stills.
+4. Pass multi-angle product + face refs into Seedance / UGC / Marketing Studio — **sheet wins** over free text.
+5. For Ad Multiplier, lock the same product sheet across variants; only change the intended variable.
+
 ## Handoff block (no MCP)
 
 ```markdown
 ### Higgsfield execution brief
-- Workflow: [ads-studio | ugc-video | ad-multiplier | product-photoshoot | marketing-studio | seedance generate_video | …]
-- Inputs to upload: [product stills, logo, script, reference ad]
+- Workflow: [ads-studio | ugc-video | ad-multiplier | product-photoshoot | marketing-studio | seedance generate_video | character-sheet | …]
+- Product sheet attached?: yes / gaps listed
+- Character sheet attached?: yes / n/a / gaps listed
+- Inputs to upload: [hero, ¾, label, macro, face refs, logo, script]
+- Style lock / Soul-ID notes: […]
 - Preset / model: […]
 - Aspect: 9:16 (+ 16:9 if hero)
 - Duration: […]
-- Prompt / script: (paste)
-- Variants to generate: A/B/C
+- Prompt / script: (paste — includes PRODUCT/CHARACTER SHEET LOCK)
+- Variants to generate: A/B/C (one variable each)
+- Disclosure: synthetic talent? paid partnership?
 - After: export → CapCut captions → Meta/TikTok upload checklist
 ```
+
+See `LAST-VERIFIED.md` before assuming model IDs.

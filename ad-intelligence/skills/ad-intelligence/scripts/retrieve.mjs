@@ -202,6 +202,27 @@ function main() {
     path.join(DB_ROOT, "trends/viral-operating-system.json")
   );
 
+  let swipeSignals = null;
+  const swipePath = path.join(__dirname, "..", "references", "swipe-signals.json");
+  if (fs.existsSync(swipePath)) {
+    const swipe = loadJson(swipePath);
+    const nicheKey = (q.niche || "").toLowerCase();
+    const nicheHints = (swipe.by_niche_hints || []).filter(
+      (n) =>
+        !nicheKey ||
+        n.niche.includes(nicheKey) ||
+        nicheKey.includes(n.niche)
+    );
+    swipeSignals = {
+      file: "references/swipe-signals.json",
+      note: "Anonymized longevity signals — optional; never invent metrics",
+      niche_hints: nicheHints.length ? nicheHints : swipe.by_niche_hints?.slice(0, 3),
+      formats_high_longevity: (swipe.by_format || [])
+        .filter((f) => f.longevity === "high")
+        .map((f) => f.format),
+    };
+  }
+
   console.log(
     JSON.stringify(
       {
@@ -209,11 +230,16 @@ function main() {
         count: results.length,
         results,
         niche: nichePack,
+        swipe_signals: swipeSignals,
         viral_os_summary: {
           id: viralOs.id,
           trend_classes: viralOs.trend_classes.map((t) => t.id),
           file: "database/trends/viral-operating-system.json",
         },
+        consistency_templates: [
+          "references/creative-stack/product-sheet-template.md",
+          "references/creative-stack/character-sheet-template.md",
+        ],
         anti_patterns_file: "database/anti-patterns.json",
         hooks_file: "database/hooks/library.json",
         flows_file: "database/flows/library.json",

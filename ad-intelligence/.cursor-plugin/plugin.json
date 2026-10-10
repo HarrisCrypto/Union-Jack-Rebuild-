@@ -1,8 +1,8 @@
 {
   "name": "ad-intelligence",
   "displayName": "Ad Intelligence",
-  "version": "3.0.0",
-  "description": "One-stop perfect advertisement maker for any company/niche — 47+ patterns plus Seedance, Higgsfield, and full creative-tool OS with prompt handoffs.",
+  "version": "3.1.0",
+  "description": "First-shot ad maker: patterns + consistency sheets + self-critique + Seedance/Higgsfield stack.",
   "author": {
     "name": "HarrisCrypto"
   },

@@ -1,14 +1,12 @@
 # One-stop perfect ad maker — master pipeline
 
-This is the default end-to-end path for **any company / any niche**.
+Default path for **any company / any niche**. Goal: **first-shot production packages** — no slop, no redo loops.
 
 ```
-BRIEF → RETRIEVE PATTERN → PICK STACK → ASSETS → GENERATE → FINISH → QA → DISTRIBUTE → SCALE
+BRIEF → RETRIEVE (+ swipe signals) → STACK → CONSISTENCY SHEETS → GENERATE → FINISH → SELF-CRITIQUE/VARIANTS → QA → DISTRIBUTE → SCALE
 ```
 
 ## 1) Brief (5 minutes)
-
-Collect or assume (state assumptions):
 
 | Field | Example |
 | --- | --- |
@@ -17,9 +15,10 @@ Collect or assume (state assumptions):
 | Goal | awareness / traffic / leads / purchases / app installs |
 | Platforms | TikTok, Meta, YT, CTV… |
 | Offer | … |
-| Proof on hand | stills, reviews, footage, URL |
+| Proof on hand | stills, reviews, footage, URL — never invent |
 | Budget posture | AI-only / hybrid / live shoot |
-| Dual-track? | viral + cinema (default YES for serious brands) |
+| Dual-track? | viral + cinema (**default YES** for serious brands) |
+| Tool access | Higgsfield MCP connected / prompt-handoff |
 
 ## 2) Retrieve intelligence
 
@@ -29,78 +28,86 @@ node scripts/retrieve.mjs --tag viral --limit 3
 node scripts/retrieve.mjs --production premium_cinema --limit 3
 ```
 
-Load: style catalog, viral OS, mistakes library, platform specs.
+Also load:
 
-Pick: **primary pattern + challenger + dual-track twin**.
+- `references/swipe-signals.json` (high-longevity formats + failure modes)
+- style catalog, viral OS, mistakes library, platform specs
+
+Pick: **primary + challenger + dual-track twin**. Prefer high-longevity formats when user wants evergreen.
 
 ## 3) Pick creative stack
 
-Use `references/creative-stack/pattern-to-pipeline.json`.
-
-**Quality default for “make it Seedance/Higgsfield-level”:**
+Use `references/creative-stack/pattern-to-pipeline.json`. Check `LAST-VERIFIED.md`.
 
 | Track | Stack |
 | --- | --- |
-| High-production | Product stills → **Seedance 2.5 omni_reference** (or Higgsfield generate_video seedance_*) → CapCut captions → aspect exports |
-| Viral / UGC | Higgsfield `ugc-video` **or** creator brief → CapCut → Spark/Meta |
-| Static | Higgsfield Ads Studio / product-photoshoot / Canva |
-| Scale winner | Higgsfield **Ad Multiplier** (edit/recreate) |
+| High-production | Sheets → stills → **Seedance 2.5 omni_reference** → CapCut → aspects |
+| Viral / UGC | Sheets → Higgsfield `ugc-video` or creator brief → CapCut → Spark/Meta |
+| Static | Ads Studio / product-photoshoot / Canva |
+| Scale winner | Ad Multiplier (one variable) |
 
-If tools **not connected**: still emit Seedance prompt contract + Higgsfield execution brief + CapCut finishing checklist.
+**Connected tools → call them. Not connected → same quality via handoff prompts.**
 
-## 4) Asset kit (before generate)
+## 4) Consistency systems / asset kit (BEFORE generate) — hard gate
 
-Minimum:
+Must complete or explicitly request gaps:
 
-- [ ] Product hero still (true color)
-- [ ] Detail / in-hand still
-- [ ] Logo (SVG/PNG) for endcard only
+- [ ] **Product sheet** (`product-sheet-template.md`) — hero, ¾, label, macro, Soul-ID
+- [ ] **Character sheet** (`character-sheet-template.md`) if talent/UGC avatar
+- [ ] Logo for endcard only
 - [ ] 1–2 real proof items or `[PLACEHOLDER]`
 - [ ] Brand palette + forbidden claims
+- [ ] Synthetic disclosure plan if AI talent
 
-Optional: talent ref, packaging, UI screenshots, competitor swipe notes (private).
+Do **not** generate film prompts until sheets exist or gaps are listed for the user.
 
 ## 5) Generate
 
-Emit timed script + **Seedance settings/prompt** + optional UGC script + static cards.
+Emit timed script + Seedance YAML/prompt **with sheet locks** + Higgsfield brief + static twin.
 
-Generation order:
+Order:
 
 1. Hook tests (5–8s) ×3  
-2. Full spot (15–30s) winner path  
+2. Full spot (15–30s)  
 3. Static/carousel twin  
-4. Cinema twin if dual-track  
+4. Cinema twin if dual-track (same locks)
 
 ## 6) Finish
 
-- Captions burned  
+- Captions burned (muted-first)  
 - One CTA  
 - Safe margins  
-- Original/licensed audio for paid  
-- Vertical + required placements  
+- Paid-safe audio path  
+- Required aspects  
 
-## 7) QA (mandatory)
+## 7) Self-critique & variants (mandatory — kills redo)
 
-`checklists/first-time-right.json` + `references/mistakes-library.json`  
-Tool-specific: Seedance quality bar in seedance-prompt-contract.md  
+1. Score every rubric dimension (incl. `consistency_lock`)  
+2. List **2–3** most likely failure modes for this niche/platform (use swipe-signals + mistakes library)  
+3. Emit **A/B/C** variants that each fix one failure (one variable each)  
 
-## 8) Distribute
+## 8) QA gate
 
-Meta / TikTok / YouTube checklists from platform-specs.json  
-Naming: `brand_pattern_posture_aspect_variant`  
+`checklists/first-time-right.json` — including consistency-sheets + self-critique-variants + rights-disclosure.  
+`references/mistakes-library.json`  
+Seedance quality bar  
 
-## 9) Scale
+## 9) Distribute
 
-- Whitelist/Spark winners  
-- Ad Multiplier for cast/market/product swaps  
-- Weekly trend ops from viral OS  
+Platform-specs native signals + synthetic disclosure + rights tree.  
+Naming: `brand_pattern_posture_aspect_variant`
+
+## 10) Scale
+
+Ad Multiplier / Spark / weekly trend ops — preserve product/character lock.
 
 ## Agent self-check before saying “done”
 
 - [ ] Pattern ids cited  
-- [ ] Tool stack named (Seedance / Higgsfield / etc.)  
-- [ ] Copy-paste prompts included  
-- [ ] Dual-track if quality+viral requested  
+- [ ] Sheets filled or gaps requested  
+- [ ] Tool stack named + prompts copy-pasteable  
+- [ ] Dual-track if serious brand  
 - [ ] No invented proof  
-- [ ] Output template filled  
-- [ ] QA passed  
+- [ ] Self-critique + variants present  
+- [ ] Output template complete  
+- [ ] All first-time-right gates PASS  
