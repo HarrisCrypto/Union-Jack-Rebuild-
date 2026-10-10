@@ -1,0 +1,1701 @@
+From 6f7917713f53a4ce9c9345860874ce1c67834de7 Mon Sep 17 00:00:00 2001
+From: Cursor Agent <cursoragent@cursor.com>
+Date: Sat, 10 Oct 2026 02:57:38 +0000
+Subject: [PATCH] Upgrade ad-intelligence to v3.1 first-shot production package
+
+Add consistency sheets, self-critique/variants gate, gold examples,
+swipe-signals retrieval, platform AI-disclosure notes, and creative-stack
+freshness tracking so agents ship production-ready ads with or without
+Higgsfield/Seedance tools connected.
+---
+ .cursor-plugin/marketplace.json               |   2 +-
+ .cursor-plugin/plugin.json                    |   4 +-
+ CHANGELOG.md                                  |  28 +++++
+ README.md                                     |  56 ++++-----
+ skills/ad-intelligence/SKILL.md               | 114 ++++++++---------
+ .../checklists/first-time-right.json          |  31 ++++-
+ .../examples/beauty-dtc-dual-track.md         |  91 ++++++++++++++
+ .../examples/entertainment-creator-series.md  |  46 +++++++
+ .../examples/local-service-trust.md           |  50 ++++++++
+ .../examples/physical-product-hero.md         |  44 +++++++
+ .../ad-intelligence/examples/saas-demo-pas.md |  49 ++++++++
+ .../pipelines/one-stop-ad-maker.md            |  95 +++++++-------
+ .../prompts/harness-system-prompt.md          |  54 +++-----
+ .../creative-stack/LAST-VERIFIED.md           |  11 ++
+ .../character-sheet-template.md               |  54 ++++++++
+ .../creative-stack/higgsfield-playbook.md     |  22 +++-
+ .../creative-stack/product-sheet-template.md  |  55 +++++++++
+ .../seedance-prompt-contract.md               |  60 ++++++---
+ .../references/output-template.md             |  64 +++++++---
+ .../references/platform-specs.json            |  86 ++++++++++---
+ .../references/swipe-signals.json             | 116 ++++++++++++++++++
+ skills/ad-intelligence/scripts/retrieve.mjs   |  26 ++++
+ 22 files changed, 918 insertions(+), 240 deletions(-)
+ create mode 100644 CHANGELOG.md
+ create mode 100644 skills/ad-intelligence/examples/beauty-dtc-dual-track.md
+ create mode 100644 skills/ad-intelligence/examples/entertainment-creator-series.md
+ create mode 100644 skills/ad-intelligence/examples/local-service-trust.md
+ create mode 100644 skills/ad-intelligence/examples/physical-product-hero.md
+ create mode 100644 skills/ad-intelligence/examples/saas-demo-pas.md
+ create mode 100644 skills/ad-intelligence/references/creative-stack/LAST-VERIFIED.md
+ create mode 100644 skills/ad-intelligence/references/creative-stack/character-sheet-template.md
+ create mode 100644 skills/ad-intelligence/references/creative-stack/product-sheet-template.md
+ create mode 100644 skills/ad-intelligence/references/swipe-signals.json
+
+diff --git a/.cursor-plugin/marketplace.json b/.cursor-plugin/marketplace.json
+index 97bc739..ceac1f3 100644
+--- a/.cursor-plugin/marketplace.json
++++ b/.cursor-plugin/marketplace.json
+@@ -11,7 +11,7 @@
+       "name": "ad-intelligence",
+       "source": ".",
+       "description": "One-stop ad maker: patterns + Seedance/Higgsfield creative stack for any niche.",
+-      "version": "3.0.0",
++      "version": "3.1.0",
+       "keywords": [
+         "ads",
+         "viral",
+diff --git a/.cursor-plugin/plugin.json b/.cursor-plugin/plugin.json
+index f926a8f..ffeeffe 100644
+--- a/.cursor-plugin/plugin.json
++++ b/.cursor-plugin/plugin.json
+@@ -1,8 +1,8 @@
+ {
+   "name": "ad-intelligence",
+   "displayName": "Ad Intelligence",
+-  "version": "3.0.0",
+-  "description": "One-stop perfect advertisement maker for any company/niche — 47+ patterns plus Seedance, Higgsfield, and full creative-tool OS with prompt handoffs.",
++  "version": "3.1.0",
++  "description": "First-shot ad maker: patterns + consistency sheets + self-critique + Seedance/Higgsfield stack.",
+   "author": {
+     "name": "HarrisCrypto"
+   },
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+new file mode 100644
+index 0000000..88827ce
+--- /dev/null
++++ b/CHANGELOG.md
+@@ -0,0 +1,28 @@
++# Changelog
++
++## 3.1.0 — 2026-10-10
++
++First-shot reliability upgrade (anti-slop / anti-redo).
++
++### Added
++- `skills/ad-intelligence/references/creative-stack/product-sheet-template.md`
++- `skills/ad-intelligence/references/creative-stack/character-sheet-template.md`
++- `skills/ad-intelligence/references/creative-stack/LAST-VERIFIED.md` (Seedance / Higgsfield freshness)
++- `skills/ad-intelligence/references/swipe-signals.json` (anonymized longevity + failure modes)
++- Mandatory **Self-critique & variants** section in output template
++- Hard gates in `checklists/first-time-right.json`: consistency-sheets, self-critique-variants, rights-disclosure, tool-freshness; rubric dim `consistency_lock`
++- Gold examples: beauty DTC, local service, SaaS, physical product, entertainment/creator
++- Platform specs: native signals, synthetic-media disclosure, rights decision tree
++- Output template: AI disclosure & rights block
++
++### Changed
++- Seedance prompt contract + Higgsfield playbook: explicit sheet / Soul-ID / multi-angle lock language
++- One-stop pipeline: sheets before generate; self-critique before ship
++- SKILL.md non-negotiables + workflow updated for consistency + critique loop
++- README positioning for harness-agnostic first-shot production
++
++### Preserved
++- Retrieve script + pattern/niche structure
++- Dual-path: connected generators vs prompt-handoff
++- Dual-track default for serious brands
++- No invented proof rule
+diff --git a/README.md b/README.md
+index b4aa360..75a405a 100644
+--- a/README.md
++++ b/README.md
+@@ -1,55 +1,45 @@
+ # Ad Intelligence — one-stop perfect ad maker
+ 
+-> **Install / point your agent:** [`INSTALL.md`](./INSTALL.md)  
+-> **Own GitHub repo (not Union Jack):** [`PUBLISH.md`](./PUBLISH.md)
++> **Install:** [`INSTALL.md`](./INSTALL.md) · **Changelog:** [`CHANGELOG.md`](./CHANGELOG.md)
+ 
+-Pattern database **plus** a full **creative-stack OS** so agents make
+-**Seedance / Higgsfield-quality** ads for **any company or niche** —
++A harness-agnostic skill (Cursor, Claude, Grok, Hermes, OpenClaw, …) that produces
++**Seedance / Higgsfield-quality ads on the first shot** for any niche —
+ 
+-- when tools **are** connected → call Higgsfield MCP / generators  
+-- when tools **are not** connected → still ship copy-paste Seedance prompts, Higgsfield execution briefs, CapCut finishing, and media-buy checklists  
++- **Connected tools** → call Higgsfield MCP / generators  
++- **Not connected** → emit the same quality as Seedance YAML, Higgsfield briefs, CapCut finishing, media-buy checklists  
+ 
+-## Who this is for
++**Leverage = patterns + consistency sheets + QA/self-critique**, not model vibes.
+ 
+-Any brand, agency, app, local service, DTC, B2B, creator, entertainment, nonprofit — **not** tied to one client.
+-
+-## What’s inside (v3)
++## What’s inside (v3.1)
+ 
+ | Layer | Contents |
+ | --- | --- |
+-| Patterns | **47** blueprints (viral, share, cinema, DR) |
+-| Creative stack | **Seedance 2.0/2.5**, **Higgsfield** workflows, Kling, Runway, Sora/Veo, CapCut, Symphony, Meta, ElevenLabs, Suno… |
+-| Pipelines | Pattern → tool route + one-stop master pipeline |
+-| Prompt contracts | Seedance YAML+prompt, cross-tool recipes |
+-| Viral OS | Trend classes + weekly ops |
+-| Niches | 23 vertical packs |
+-| QA | Mistakes library + first-time-right checklist/rubric |
+-| Retrieval | `retrieve.mjs` (`--tag viral`, `--production`, `--virality`, …) |
+-
+-### Creative stack highlights
+-
+-- **Seedance** — 15–30s single-pass spots, omni-reference product lock, native audio, region edits  
+-- **Higgsfield** — Ads Studio, UGC video, Marketing Studio, Ad Multiplier, Katana, product photoshoot, brand assets  
+-- **Peers** — Kling, Runway, Sora/Veo, Midjourney/FLUX, CapCut, TikTok Symphony, Meta Advantage+, ElevenLabs, Suno  
+-
+-See `skills/ad-intelligence/references/creative-stack/` and  
+-`skills/ad-intelligence/pipelines/one-stop-ad-maker.md`.
++| Patterns | 47 blueprints (viral, share, cinema, DR) |
++| Consistency | Product sheet + character sheet templates (Soul-ID / multi-angle locks) |
++| Creative stack | Seedance 2.0/2.5, Higgsfield workflows, Kling, Runway, CapCut, Meta/TikTok… |
++| Self-critique | Rubric → failure modes → A/B/C variants (hard gate) |
++| Swipe signals | Anonymized high-longevity formats + common failures |
++| Examples | 5 gold filled packages |
++| QA | First-time-right checklist + mistakes library |
++| Retrieval | `skills/ad-intelligence/scripts/retrieve.mjs` |
+ 
+ ## Quick start
+ 
+ ```bash
+ cd skills/ad-intelligence
+ node scripts/retrieve.mjs --niche beauty --tag viral --limit 5
+-node scripts/retrieve.mjs --production premium_cinema --limit 5
+ ```
+ 
+-Ask: *Using ad-intelligence, make Seedance/Higgsfield-quality dual-track ads for [brand].*
++Ask: *Using ad-intelligence, make a first-shot dual-track package for [brand] with product/character sheets, Seedance prompts, self-critique, and variants.*
+ 
+-## Package & sell
++## Design principles
+ 
+-Copy this `ad-intelligence/` folder to its **own** GitHub repo (see `PUBLISH.md`).  
+-Cursor: **Customize → From GitHub Repository →** that URL.
++1. Never invent proof — user-supplied or `[PLACEHOLDER]`  
++2. Sheets before generate  
++3. Muted-first, one CTA, timed beats, product/character lock  
++4. Dual-track default for serious brands  
++5. Self-critique before delivery  
+ 
+ ## Legal
+ 
+-See [`LICENSE`](./LICENSE). Do not redistribute scraped competitor creatives.
++See [`LICENSE`](./LICENSE). No scraped competitor creatives in this package.
+diff --git a/skills/ad-intelligence/SKILL.md b/skills/ad-intelligence/SKILL.md
+index fff9f33..e12b6dc 100644
+--- a/skills/ad-intelligence/SKILL.md
++++ b/skills/ad-intelligence/SKILL.md
+@@ -1,111 +1,93 @@
+ ---
+ name: ad-intelligence
+ description: >-
+-  One-stop perfect advertisement maker for any company or niche. Combines 47+
+-  ad pattern blueprints with a full creative-stack OS (Seedance 2.0/2.5,
+-  Higgsfield Marketing/Ads Studio/UGC/Ad Multiplier/Katana, Kling, Runway,
+-  Sora/Veo, CapCut, TikTok Symphony, Meta, ElevenLabs, Suno, and more). Use for
+-  any ads, viral content, cinematic spots, UGC, static Meta ads, or launch
+-  films — even when those tools are not connected: emit Seedance/Higgsfield-grade
+-  prompts, pipelines, and QA so work still ships at that quality bar.
++  One-stop advertisement maker for any company or niche. Patterns + consistency
++  sheets + self-critique/variants + Seedance/Higgsfield creative stack so LLM
++  harnesses (Cursor, Claude, Grok, Hermes, OpenClaw, etc.) hit production quality
++  on the first shot — calling generators when connected, or emitting the same
++  grade as prompt handoffs when not. Use for ads, UGC, viral, cinema, static Meta,
++  launch films; eliminates slop, redo loops, hallucinated proof, and weak locks.
+ ---
+ 
+ # Ad Intelligence — one-stop ad maker
+ 
+-You are the **perfect advertisement maker**: strategist + creative director +
+-tool router. You know the patterns **and** the systems (Seedance, Higgsfield,
+-etc.). If tools are connected, call them. If not, still deliver
+-**executable, film-quality prompts and pipelines**.
++You are strategist + creative director + tool router. **Patterns, QA gates, and
++consistency systems are the leverage** — not vibes.
+ 
+ ## Non-negotiables
+ 
+ 1. Follow `pipelines/one-stop-ad-maker.md`.
+-2. Retrieve patterns before writing.
+-3. Name a **creative stack** (Seedance / Higgsfield / peers) every time.
+-4. Emit **copy-paste Seedance (or peer) prompts** using
+-   `references/creative-stack/seedance-prompt-contract.md`.
+-5. Deliver `references/output-template.md` fully.
+-6. Pass `checklists/first-time-right.json` + `references/mistakes-library.json`.
+-7. Never invent proof. Never logo-first cold. One CTA. Muted-first.
+-8. Default to **dual-track** (viral/native + high-production) for serious brands.
++2. Retrieve patterns (+ optional `references/swipe-signals.json`).
++3. **Consistency first:** fill or request `product-sheet-template.md` /
++   `character-sheet-template.md` before generation prompts.
++4. Name a **creative stack**; emit Seedance YAML/prompts via
++   `seedance-prompt-contract.md` (sheet-lock language required).
++5. If Higgsfield MCP / generators available → **call them**. If not → same-quality handoffs.
++6. Deliver `references/output-template.md` fully — including **Self-critique & variants**.
++7. Pass `checklists/first-time-right.json` (consistency + self-critique are hard gates).
++8. Never invent proof. Never logo-first cold. One CTA. Muted-first.
++9. Default **dual-track** (viral/native + high-production) for serious brands.
++10. Check `references/creative-stack/LAST-VERIFIED.md` for tool freshness.
+ 
+ ## When to use
+ 
+-Any request to make/improve ads, creatives, hooks, UGC, TikTok/Meta/YouTube/CTV
+-spots, launch films, static ads, carousels, influencer briefs, or “Higgsfield /
+-Seedance quality” work — for **any** niche or company.
++Any ads/creatives/hooks/UGC/TikTok/Meta/YouTube/CTV/launch/static/influencer work
++for **any** niche — especially when prior AI output was slop or needed endless redos.
+ 
+ ## Master workflow
+ 
+ ### 0) Orient
+ - `pipelines/one-stop-ad-maker.md`
+-- `references/creative-stack/tool-catalog.json`
+-- `references/creative-stack/higgsfield-playbook.md`
+-- `references/creative-stack/pattern-to-pipeline.json`
+-- `references/creative-stack/prompt-recipes.md`
++- `references/creative-stack/*` (tools, Seedance contract, Higgsfield, sheets, LAST-VERIFIED)
++- `references/swipe-signals.json`
+ - `references/style-catalog.md`
++- `examples/*` (gold packages)
+ - `database/trends/viral-operating-system.json`
+ 
+ ### 1) Brief
+-Company, niche, offer, platforms, goal, proof, tool access (connected / handoff).
++Company, niche, offer, platforms, goal, proof, tool access.
+ 
+-### 2) Retrieve patterns
++### 2) Retrieve
+ ```bash
+ node scripts/retrieve.mjs --niche <niche> --platform <platform> --limit 5
+ node scripts/retrieve.mjs --tag viral --limit 3
+ node scripts/retrieve.mjs --production premium_cinema --limit 3
+ ```
++Pull high-longevity hints from swipe-signals for the niche/format.
+ 
+-### 3) Route tools
+-Map pattern → pipeline via `pattern-to-pipeline.json`.
++### 3) Consistency sheets (hard gate)
++Produce or request product/character sheets + multi-angle refs before prompts.
+ 
+-| Need | Default route |
+-| --- | --- |
+-| Seedance / cinema quality video | Seedance 2.5 omni_reference (Higgsfield model or BytePlus/CapCut/Symphony) |
+-| UGC | Higgsfield `ugc-video` or creator brief |
+-| Static Meta ads | Higgsfield `ads-studio` |
+-| Scale a winner | Higgsfield `ad-multiplier` |
+-| Packshots | `product-photoshoot` / MJ+FLUX |
+-| Trend native | CapCut + cleared paid twin |
+-| VO / music | ElevenLabs + Suno (paid-safe) |
+-
+-**If Higgsfield MCP is available:**  
+-`get_workflow_instructions` → correct workflow → `models_explore` when picking raw models → generate.  
+-**If not:** emit Higgsfield execution brief + Seedance prompt contract anyway.
++### 4) Route tools
++`pattern-to-pipeline.json`. Connected → call. Else → handoff briefs.
+ 
+-### 4) Write package
+-Fill output template: script, stack, Seedance YAML+prompt, other recipes, copy, A/B, dual-track, scale plan.
++### 5) Write package
++Full output template: script, stack, Seedance/Higgsfield with locks, rights/disclosure.
+ 
+-### 5) QA & ship
+-First-time-right checklist + mistakes library + Seedance quality bar.  
+-Then distribution notes (Meta/TikTok/YouTube).
++### 6) Self-critique & variants (hard gate)
++Score rubric (incl. consistency_lock) → 2–3 failure modes → A/B/C fixes.
+ 
+-## Quality bar = “Seedance / Higgsfield grade”
++### 7) QA & ship
++First-time-right + mistakes library + Seedance bar → distribute → scale.
+ 
+-Even without those tools connected, your prompts must specify:
++## Quality bar = Seedance / Higgsfield grade
+ 
+-- Product reference lock  
+-- Timed beats  
+-- Camera / grade / physics  
+-- Aspect + duration + audio flags  
+-- Negatives (melted logos, fake metrics)  
+-- Caption/endcard in post  
++Must include: product/character lock, timed beats, camera/grade/physics, aspect/duration/audio, negatives, captions/endcard in post, disclosure/rights.
+ 
+-## Database & references map
++## Map
+ 
+ | Path | Purpose |
+ | --- | --- |
+-| `database/patterns/` | 47 style blueprints |
++| `database/patterns/` | 47 blueprints |
+ | `database/niches/` | 23 verticals |
+-| `database/trends/` | Viral OS |
+-| `references/creative-stack/` | **Tool OS** (Seedance, Higgsfield, peers) |
+-| `pipelines/one-stop-ad-maker.md` | End-to-end path |
++| `references/creative-stack/` | Tools + sheets + Seedance/Higgsfield |
++| `references/swipe-signals.json` | Longevity signals |
+ | `references/output-template.md` | Required deliverable |
+-| `checklists/first-time-right.json` | Ship gate |
+-| `references/mistakes-library.json` | Mistake → fix |
+-| `prompts/harness-system-prompt.md` | Non-Cursor agents |
+-| `../../INSTALL.md` | How to point agents / GitHub |
++| `checklists/first-time-right.json` | Ship gates |
++| `examples/` | Gold filled packages |
++| `pipelines/one-stop-ad-maker.md` | E2E path |
++| `../../CHANGELOG.md` | What changed |
+ 
+ ## Install
+ 
+-See `../../INSTALL.md` and `../../PUBLISH.md` (standalone GitHub repo recommended).
++`../../INSTALL.md`
+diff --git a/skills/ad-intelligence/checklists/first-time-right.json b/skills/ad-intelligence/checklists/first-time-right.json
+index a9bc355..f20e399 100644
+--- a/skills/ad-intelligence/checklists/first-time-right.json
++++ b/skills/ad-intelligence/checklists/first-time-right.json
+@@ -18,6 +18,11 @@
+       "ask": "One job-to-be-done stated in one sentence?",
+       "fail_if": "Multiple jobs or feature laundry"
+     },
++    {
++      "id": "consistency-sheets",
++      "ask": "Product sheet and/or character sheet filled or gaps explicitly requested before generation prompts?",
++      "fail_if": "Generating product/talent ads with no sheet and no request for refs"
++    },
+     {
+       "id": "hook-window",
+       "ask": "0–3s works muted (text or pure visual) and does not open on logo?",
+@@ -50,9 +55,9 @@
+       "fail_if": "Offer/SKU/geo mismatch"
+     },
+     {
+-      "id": "rights",
+-      "ask": "Audio, faces, footage rights called out for paid use?",
+-      "fail_if": "Assumes trending sound is free for ads"
++      "id": "rights-disclosure",
++      "ask": "Audio/faces/footage rights + synthetic-media disclosure addressed via rights decision tree?",
++      "fail_if": "Assumes trending sound is free for ads OR hides AI talent as real customer"
+     },
+     {
+       "id": "anti-pattern-scan",
+@@ -66,7 +71,7 @@
+     },
+     {
+       "id": "dual-track",
+-      "ask": "If user asked viral AND quality: both postures delivered with same JTBD?",
++      "ask": "If user asked viral AND quality: both postures delivered with same JTBD + same locks?",
+       "fail_if": "Only one track when both requested",
+       "when": "user asked for viral + cinematic/high-production"
+     },
+@@ -74,6 +79,16 @@
+       "id": "platform-native",
+       "ask": "Aspect ratio, caption style, and length fit the platform?",
+       "fail_if": "16:9 letterbox dumped into TikTok without vertical cut"
++    },
++    {
++      "id": "self-critique-variants",
++      "ask": "Rubric scored, 2–3 niche/platform failure modes listed, and A/B/C variants that attack those failures emitted?",
++      "fail_if": "Package delivered without self-critique section or with empty variant table"
++    },
++    {
++      "id": "tool-freshness",
++      "ask": "Checked creative-stack/LAST-VERIFIED.md (or warned if stale >90 days)?",
++      "fail_if": "Blindly assumed outdated model IDs with no note"
+     }
+   ],
+   "score_rubric": {
+@@ -114,8 +129,14 @@
+         "name": "Production truth",
+         "5": "Tier matches brief; craft choices intentional",
+         "1": "Wrong tier (cheap CGI, over-polished fake UGC, etc.)"
++      },
++      {
++        "id": "consistency_lock",
++        "name": "Product/character consistency",
++        "5": "Sheets + multi-angle refs + Soul-ID language in prompts",
++        "1": "Text-only product/talent with drift risk"
+       }
+     ],
+-    "ship_rule": "Ship only if all dimensions ≥4, or user explicitly accepts a draft with listed risks."
++    "ship_rule": "Ship only if all dimensions ≥4, or user explicitly accepts a draft with listed risks. Self-critique & variants section is mandatory either way."
+   }
+ }
+diff --git a/skills/ad-intelligence/examples/beauty-dtc-dual-track.md b/skills/ad-intelligence/examples/beauty-dtc-dual-track.md
+new file mode 100644
+index 0000000..90fac63
+--- /dev/null
++++ b/skills/ad-intelligence/examples/beauty-dtc-dual-track.md
+@@ -0,0 +1,91 @@
++# Gold example — Beauty DTC (dual-track)
++
++Filled against the current output template. Synthetic teaching example — not a real brand scrape.
++
++## Ad package
++
++### Brief (locked or assumed)
++- Brand / offer: AuraBarrier Serum — barrier-repair serum, 30ml
++- Niche: beauty
++- Platforms: tiktok, meta
++- Funnel: tof_awareness → mof
++- Production tier: hybrid_polished + premium_cinema twin
++- Virality posture: trend_reactive + brand_film
++- Proof available: [PLACEHOLDER: 2 real reviews]; pack photos assumed on hand
++- Tool access: prompt-handoff (Seedance + CapCut)
++- Assumptions: US English; shade/texture claims cosmetic only
++
++### Retrieval
++- Primary: `pov-day-in-life`
++- Challenger: `beauty-macro-tabletop`
++- Flow: `pov-ritual-benefit-follow`
++- Hooks: pov-identity, macro-lust, confession
++- Trend class: format_meme
++- Niche pack: beauty
++- Swipe-signals: high longevity = before_after + macro + ugc; avoid unsubstantiated clinical claims
++
++### Job-to-be-done
++Make “makeup that lasts a double shift” feel inevitable, then soft-shop the serum.
++
++### Consistency systems
++- Product sheet: filled — frosted glass 30ml, soft dropper, soft sage label, matte cap; no logo melt
++- Character sheet: filled — 20s creator, natural skin, gold hoops, white tee; Soul-ID: candid tired-to-relieved
++- Refs: hero, ¾, label, macro, face front/¾
++
++### Creative stack
++- Pipeline: viral POV + macro cinema twin
++- Primary: Seedance 2.5 omni_reference; CapCut captions
++- Connected: no → handoff
++- LAST-VERIFIED checked: 2026-10-10
++
++### Hooks
++1. POV: your base finally survives a 10-hour shift
++2. BEFORE: midday crease map
++3. Macro: serum catching window light mid-drop
++
++### Timed script (viral 28s)
++| t | Visual | VO / text | Purpose |
++| --- | --- | --- | --- |
++| 0–2 | Mirror selfie, AM light | POV overlay | Hook |
++| 2–12 | Commute/desk; serum briefly in bag | sparse | Ritual |
++| 12–22 | Apply + texture macro (sheet lock) | “Only step I don’t skip” | Mechanism |
++| 22–28 | End-of-day mirror | Link in bio | Soft CTA |
++
++### Seedance execution (abbrev)
++```yaml
++tool: seedance
++model: seedance_2_5
++mode: omni_reference
++duration_s: 28
++aspect_ratio: "9:16"
++generate_audio: true
++consistency: { product_sheet: true, character_sheet: true }
++```
++Prompt includes PRODUCT/CHARACTER SHEET LOCK; no clinical claims on screen.
++
++### Dual-track twin
++- Viral: POV ritual
++- Cinema: 12s macro tabletop → pack hero
++- Same JTBD + same product sheet
++
++### AI disclosure & rights
++- Synthetic talent?: no (or disclose if AI)
++- Audio: original bed for paid; trend sound organic-only
++- Proof: [PLACEHOLDER] only
++
++### Self-critique & variants
++| Dimension | Score | Why |
++| --- | --- | --- |
++| thumbstop | 5 | POV identity instant |
++| clarity | 4 | Benefit clear by 12s |
++| native_fit | 5 | Feed-native |
++| desire_or_proof | 4 | Texture desire; proof placeholder |
++| cta_hygiene | 5 | One soft CTA |
++| production_truth | 4 | Hybrid honest |
++| consistency_lock | 5 | Sheets + refs |
++
++Failure modes: (1) clinical claim creep (2) shade/SKU landing mismatch (3) overfiltered skin  
++Variants: A silent captions · B add [PLACEHOLDER] review beat · C cinema-first hook for Meta 4:5
++
++### First-time-right QA
++Gates PASS · mistakes rewritten · self-critique yes
+diff --git a/skills/ad-intelligence/examples/entertainment-creator-series.md b/skills/ad-intelligence/examples/entertainment-creator-series.md
+new file mode 100644
+index 0000000..727dea6
+--- /dev/null
++++ b/skills/ad-intelligence/examples/entertainment-creator-series.md
+@@ -0,0 +1,46 @@
++# Gold example — Entertainment / creator (series cliffhanger)
++
++## Ad package
++
++### Brief
++- Brand / offer: Night Circuit — indie game wishlist / Part 1 trailer cutdown
++- Niche: entertainment / gaming / creator
++- Platforms: tiktok, youtube_shorts, organic_short
++- Posture: share_engineered
++- Proof: gameplay capture owned
++- Tool access: handoff (edit + optional Seedance polish)
++
++### Retrieval
++- Primary: `series-cliffhanger`
++- Challenger: `launch-teaser`
++- Swipe-signals: cliff without Part 2 plan = fail; music rights critical
++
++### Job-to-be-done
++Earn follows with Part 1 unresolved tension; wishlist in Part 3 plan.
++
++### Consistency systems
++- Product sheet: game art bible — palette neon violet/cyan, protagonist silhouette lock
++- Character sheet: protagonist face lock if shown
++- Series bible: Part1 hook → Part2 mechanism → Part3 offer
++
++### Creative stack
++- Owned gameplay → CapCut → Seedance only for interstitial spectacle with art refs
++- Original/Suno bed for paid; trend audio organic-only
++
++### Timed script (35s Part 1)
++| t | Purpose |
++| --- | --- |
++| 0–3 | Cold open best 3s gameplay |
++| 3–25 | Rising stakes — no logo spam |
++| 25–35 | Cliff freeze + Follow for Part 2 |
++
++### AI disclosure & rights
++- Gameplay owned
++- No uncleared commercial track on paid
++
++### Self-critique & variants
++Failures: no Part 2 planned, spoiling twist, hard sell in Part 1  
++Variants: A colder open · B creator react stitch bait · C 10s teaser-only
++
++### First-time-right QA
++PASS — series outline attached
+diff --git a/skills/ad-intelligence/examples/local-service-trust.md b/skills/ad-intelligence/examples/local-service-trust.md
+new file mode 100644
+index 0000000..8b3c726
+--- /dev/null
++++ b/skills/ad-intelligence/examples/local-service-trust.md
+@@ -0,0 +1,50 @@
++# Gold example — Local service (geo trust)
++
++## Ad package
++
++### Brief
++- Brand / offer: Northside Plumbing — same-day leak diagnosis, Austin metro
++- Niche: local_services
++- Platforms: meta, youtube
++- Funnel: bof_conversion
++- Production tier: native_ugc
++- Virality posture: evergreen_dr
++- Proof: [PLACEHOLDER: Google review quote]; real bay footage requested
++- Tool access: prompt-handoff + phone shoot brief
++
++### Retrieval
++- Primary: `local-service-trust`
++- Challenger: `before-after-reveal`
++- Swipe-signals: high longevity local_service_trust; fails on stock city footage / wrong NAP
++
++### Job-to-be-done
++Get high-intent local calls with city + specialty + phone held 3 seconds.
++
++### Consistency systems
++- Product sheet: n/a (service) — facility kit: exterior, van, tech on job
++- Character sheet: optional tech — if AI face used, disclose; prefer real crew
++- Style lock: honest workshop light, no cinematic gloom
++
++### Creative stack
++- Phone shoot → CapCut captions → Meta click-to-call
++- Seedance optional B-roll only with real facility refs
++
++### Timed script (20s)
++| t | Visual | Text | Purpose |
++| --- | --- | --- | --- |
++| 0–3 | Shop exterior / van | Austin leak diagnosis | Geo hook |
++| 3–8 | Work-in-progress | Real bay | Trust |
++| 8–14 | Review overlay [PLACEHOLDER] | Stars + quote | Proof |
++| 14–20 | Endcard phone | (512) 555-0142 ×3s | CTA |
++
++### AI disclosure & rights
++- Real crew preferred; no fake reviews
++- NAP must match GBP
++
++### Self-critique & variants
++Scores: thumbstop 4, clarity 5, native_fit 4, desire_or_proof 4, cta 5, production 4, consistency 4  
++Failures: stock footage, tiny phone text, multi-CTA  
++Variants: A exterior-first · B before/after pipe · C founder VO unpopular-belief on “cheap fixes”
++
++### First-time-right QA
++PASS with placeholders noted
+diff --git a/skills/ad-intelligence/examples/physical-product-hero.md b/skills/ad-intelligence/examples/physical-product-hero.md
+new file mode 100644
+index 0000000..e3b7f5f
+--- /dev/null
++++ b/skills/ad-intelligence/examples/physical-product-hero.md
+@@ -0,0 +1,44 @@
++# Gold example — Physical product (hero film + loop)
++
++## Ad package
++
++### Brief
++- Brand / offer: NestBrew kettle — temperature-precise pour
++- Niche: ecommerce / home
++- Platforms: youtube, meta, tiktok
++- Dual-track: premium_cinema + product_loop
++- Proof: [PLACEHOLDER]; pack + pour refs on hand
++- Tool access: Seedance handoff
++
++### Retrieval
++- Primary: `hero-product-film`
++- Challenger: `product-loop-demo`
++- Swipe-signals: product_loop high longevity; hero fails if pretty with no JTBD
++
++### Job-to-be-done
++Make precise-temp pour feel craft-inevitable; shop CTA on twin.
++
++### Consistency systems
++- Product sheet: matte black body, brushed steel spout, white temp ring, no logo warp
++- Character sheet: hands-only OK — skin tone consistent across cuts
++- Refs: hero, ¾, label/ring macro, pour stream
++
++### Creative stack
++- Seedance 2.5 30s 16:9 + 9:16 crop twin
++- 10s loop for TikTok/Meta
++- CapCut captions; Suno original bed
++
++### Timed script (30s hero)
++| t | Purpose |
++| --- | --- |
++| 0–3 | Macro steam / light streak — no logo |
++| 3–18 | Desire world + pour physics matching sheet |
++| 18–26 | Capability: temp ring settles on 205° |
++| 26–30 | Signature endcard Explore |
++
++### Self-critique & variants
++Failures: melted branding, no capability beat, wrong SKU on PDP  
++Variants: A silent spectacle · B UGC pour confession · C offer-first retarget
++
++### First-time-right QA
++PASS with sheet lock emphasized
+diff --git a/skills/ad-intelligence/examples/saas-demo-pas.md b/skills/ad-intelligence/examples/saas-demo-pas.md
+new file mode 100644
+index 0000000..8a03f92
+--- /dev/null
++++ b/skills/ad-intelligence/examples/saas-demo-pas.md
+@@ -0,0 +1,49 @@
++# Gold example — SaaS (PAS + UI demo)
++
++## Ad package
++
++### Brief
++- Brand / offer: RelayHQ — handoff tracker for product ops (free trial)
++- Niche: saas
++- Platforms: meta, linkedin, youtube_shorts
++- Funnel: mof_consideration
++- Tiers: hybrid_polished
++- Proof: [PLACEHOLDER: case metric]; real UI screenshots required
++- Tool access: handoff (screen record + Seedance B-roll optional)
++
++### Retrieval
++- Primary: `pas-pain-stack`
++- Challenger: `app-demo-ui`
++- Swipe-signals: avoid feature laundry + fake dashboards
++
++### Job-to-be-done
++Name the handoff tax, show the aha in-UI, CTA start free trial.
++
++### Consistency systems
++- Product sheet: UI chrome lock — sidebar indigo, card radius 12, font Inter→use actual product font from screenshots
++- Character sheet: n/a (UI-led) or optional talking head with sheet
++- Soul-ID: “calm ops tool, not sci-fi AI cockpit”
++
++### Creative stack
++- Screen record core loop → CapCut → LinkedIn 1:1 + Meta 4:5
++- Optional Seedance office B-roll under VO with no fake UI
++
++### Timed script (35s)
++| t | Purpose |
++| --- | --- |
++| 0–3 | Consequence: missed launch ping |
++| 3–10 | Agitate: Slack archaeology |
++| 10–22 | Reframe + 3-step process in UI (real screens) |
++| 22–30 | Aha tap: handoff turns green |
++| 30–35 | Start free trial |
++
++### AI disclosure & rights
++- No invented “47% faster” unless user supplies
++- UI must be real product
++
++### Self-critique & variants
++Failures: feature laundry, fake UI, weak CTA  
++Variants: A green-screen myth-bust · B pure UI silent · C founder hot-take LinkedIn cut
++
++### First-time-right QA
++PASS pending real screenshots
+diff --git a/skills/ad-intelligence/pipelines/one-stop-ad-maker.md b/skills/ad-intelligence/pipelines/one-stop-ad-maker.md
+index 2025d75..5d19429 100644
+--- a/skills/ad-intelligence/pipelines/one-stop-ad-maker.md
++++ b/skills/ad-intelligence/pipelines/one-stop-ad-maker.md
+@@ -1,15 +1,13 @@
+ # One-stop perfect ad maker — master pipeline
+ 
+-This is the default end-to-end path for **any company / any niche**.
++Default path for **any company / any niche**. Goal: **first-shot production packages** — no slop, no redo loops.
+ 
+ ```
+-BRIEF → RETRIEVE PATTERN → PICK STACK → ASSETS → GENERATE → FINISH → QA → DISTRIBUTE → SCALE
++BRIEF → RETRIEVE (+ swipe signals) → STACK → CONSISTENCY SHEETS → GENERATE → FINISH → SELF-CRITIQUE/VARIANTS → QA → DISTRIBUTE → SCALE
+ ```
+ 
+ ## 1) Brief (5 minutes)
+ 
+-Collect or assume (state assumptions):
+-
+ | Field | Example |
+ | --- | --- |
+ | Company / product | … |
+@@ -17,9 +15,10 @@ Collect or assume (state assumptions):
+ | Goal | awareness / traffic / leads / purchases / app installs |
+ | Platforms | TikTok, Meta, YT, CTV… |
+ | Offer | … |
+-| Proof on hand | stills, reviews, footage, URL |
++| Proof on hand | stills, reviews, footage, URL — never invent |
+ | Budget posture | AI-only / hybrid / live shoot |
+-| Dual-track? | viral + cinema (default YES for serious brands) |
++| Dual-track? | viral + cinema (**default YES** for serious brands) |
++| Tool access | Higgsfield MCP connected / prompt-handoff |
+ 
+ ## 2) Retrieve intelligence
+ 
+@@ -29,78 +28,86 @@ node scripts/retrieve.mjs --tag viral --limit 3
+ node scripts/retrieve.mjs --production premium_cinema --limit 3
+ ```
+ 
+-Load: style catalog, viral OS, mistakes library, platform specs.
++Also load:
+ 
+-Pick: **primary pattern + challenger + dual-track twin**.
++- `references/swipe-signals.json` (high-longevity formats + failure modes)
++- style catalog, viral OS, mistakes library, platform specs
+ 
+-## 3) Pick creative stack
++Pick: **primary + challenger + dual-track twin**. Prefer high-longevity formats when user wants evergreen.
+ 
+-Use `references/creative-stack/pattern-to-pipeline.json`.
++## 3) Pick creative stack
+ 
+-**Quality default for “make it Seedance/Higgsfield-level”:**
++Use `references/creative-stack/pattern-to-pipeline.json`. Check `LAST-VERIFIED.md`.
+ 
+ | Track | Stack |
+ | --- | --- |
+-| High-production | Product stills → **Seedance 2.5 omni_reference** (or Higgsfield generate_video seedance_*) → CapCut captions → aspect exports |
+-| Viral / UGC | Higgsfield `ugc-video` **or** creator brief → CapCut → Spark/Meta |
+-| Static | Higgsfield Ads Studio / product-photoshoot / Canva |
+-| Scale winner | Higgsfield **Ad Multiplier** (edit/recreate) |
++| High-production | Sheets → stills → **Seedance 2.5 omni_reference** → CapCut → aspects |
++| Viral / UGC | Sheets → Higgsfield `ugc-video` or creator brief → CapCut → Spark/Meta |
++| Static | Ads Studio / product-photoshoot / Canva |
++| Scale winner | Ad Multiplier (one variable) |
+ 
+-If tools **not connected**: still emit Seedance prompt contract + Higgsfield execution brief + CapCut finishing checklist.
++**Connected tools → call them. Not connected → same quality via handoff prompts.**
+ 
+-## 4) Asset kit (before generate)
++## 4) Consistency systems / asset kit (BEFORE generate) — hard gate
+ 
+-Minimum:
++Must complete or explicitly request gaps:
+ 
+-- [ ] Product hero still (true color)
+-- [ ] Detail / in-hand still
+-- [ ] Logo (SVG/PNG) for endcard only
++- [ ] **Product sheet** (`product-sheet-template.md`) — hero, ¾, label, macro, Soul-ID
++- [ ] **Character sheet** (`character-sheet-template.md`) if talent/UGC avatar
++- [ ] Logo for endcard only
+ - [ ] 1–2 real proof items or `[PLACEHOLDER]`
+ - [ ] Brand palette + forbidden claims
++- [ ] Synthetic disclosure plan if AI talent
+ 
+-Optional: talent ref, packaging, UI screenshots, competitor swipe notes (private).
++Do **not** generate film prompts until sheets exist or gaps are listed for the user.
+ 
+ ## 5) Generate
+ 
+-Emit timed script + **Seedance settings/prompt** + optional UGC script + static cards.
++Emit timed script + Seedance YAML/prompt **with sheet locks** + Higgsfield brief + static twin.
+ 
+-Generation order:
++Order:
+ 
+ 1. Hook tests (5–8s) ×3  
+-2. Full spot (15–30s) winner path  
++2. Full spot (15–30s)  
+ 3. Static/carousel twin  
+-4. Cinema twin if dual-track  
++4. Cinema twin if dual-track (same locks)
+ 
+ ## 6) Finish
+ 
+-- Captions burned  
++- Captions burned (muted-first)  
+ - One CTA  
+ - Safe margins  
+-- Original/licensed audio for paid  
+-- Vertical + required placements  
++- Paid-safe audio path  
++- Required aspects  
++
++## 7) Self-critique & variants (mandatory — kills redo)
++
++1. Score every rubric dimension (incl. `consistency_lock`)  
++2. List **2–3** most likely failure modes for this niche/platform (use swipe-signals + mistakes library)  
++3. Emit **A/B/C** variants that each fix one failure (one variable each)  
+ 
+-## 7) QA (mandatory)
++## 8) QA gate
+ 
+-`checklists/first-time-right.json` + `references/mistakes-library.json`  
+-Tool-specific: Seedance quality bar in seedance-prompt-contract.md  
++`checklists/first-time-right.json` — including consistency-sheets + self-critique-variants + rights-disclosure.  
++`references/mistakes-library.json`  
++Seedance quality bar  
+ 
+-## 8) Distribute
++## 9) Distribute
+ 
+-Meta / TikTok / YouTube checklists from platform-specs.json  
+-Naming: `brand_pattern_posture_aspect_variant`  
++Platform-specs native signals + synthetic disclosure + rights tree.  
++Naming: `brand_pattern_posture_aspect_variant`
+ 
+-## 9) Scale
++## 10) Scale
+ 
+-- Whitelist/Spark winners  
+-- Ad Multiplier for cast/market/product swaps  
+-- Weekly trend ops from viral OS  
++Ad Multiplier / Spark / weekly trend ops — preserve product/character lock.
+ 
+ ## Agent self-check before saying “done”
+ 
+ - [ ] Pattern ids cited  
+-- [ ] Tool stack named (Seedance / Higgsfield / etc.)  
+-- [ ] Copy-paste prompts included  
+-- [ ] Dual-track if quality+viral requested  
++- [ ] Sheets filled or gaps requested  
++- [ ] Tool stack named + prompts copy-pasteable  
++- [ ] Dual-track if serious brand  
+ - [ ] No invented proof  
+-- [ ] Output template filled  
+-- [ ] QA passed  
++- [ ] Self-critique + variants present  
++- [ ] Output template complete  
++- [ ] All first-time-right gates PASS  
+diff --git a/skills/ad-intelligence/prompts/harness-system-prompt.md b/skills/ad-intelligence/prompts/harness-system-prompt.md
+index 2bab02e..dde53a8 100644
+--- a/skills/ad-intelligence/prompts/harness-system-prompt.md
++++ b/skills/ad-intelligence/prompts/harness-system-prompt.md
+@@ -1,40 +1,26 @@
+-# System prompt — perfect one-stop ad maker
++# System prompt — first-shot one-stop ad maker
+ 
+ ```text
+-You are the perfect advertisement maker for ANY company or niche. You combine:
+-(1) Ad Intelligence pattern database, (2) creative-stack OS for Seedance 2.0/2.5,
+-Higgsfield (Ads Studio, UGC, Marketing Studio, Ad Multiplier, Katana, product
+-photoshoot), Kling, Runway, Sora/Veo, CapCut, TikTok Symphony, Meta, ElevenLabs,
+-Suno, and peers.
++You are the perfect advertisement maker for ANY company or niche (Cursor/Claude/Grok/Hermes/OpenClaw harnesses).
+ 
+-For EVERY ads/creative request:
+-1. Read SKILL.md and pipelines/one-stop-ad-maker.md
+-2. Retrieve patterns via scripts/retrieve.mjs (or index.json)
+-3. Select creative stack from references/creative-stack/*
+-4. If Higgsfield MCP (or other generators) are connected — CALL them after
+-   get_workflow_instructions / models_explore. If not connected — still emit
+-   Seedance prompt contract + Higgsfield execution brief + CapCut finishing
+-   so the work is Seedance/Higgsfield quality when pasted into those tools.
+-5. Deliver references/output-template.md completely (stack + prompts required)
+-6. Pass checklists/first-time-right.json and mistakes-library.json
+-7. Default dual-track: viral/native + high-production cinema twin
+-8. Never invent proof; never logo-first cold; one CTA; muted-first hooks
++You combine: (1) pattern database, (2) product/character consistency sheets,
++(3) Seedance/Higgsfield creative-stack OS, (4) swipe-signals, (5) mandatory
++self-critique + variants, (6) first-time-right QA.
+ 
+-You know the tools even when you cannot run them. Your job is a one-stop shop:
+-strategy → pattern → tool route → executable prompts → copy → QA → distribution → scale.
+-```
+-
+-## One-shot user message
+-
+-```text
+-/ad-intelligence
+-Make perfect ads for:
+-- Company / product:
+-- Niche:
+-- Platforms:
+-- Goal (viral / conversions / cinema / dual-track):
+-- Assets I have (stills, URL, footage, reviews):
+-- Tools I can run (Higgsfield, Seedance/CapCut, none — prompt handoff OK):
++Rules:
++- If Higgsfield MCP / generators are available → CALL them after get_workflow_instructions.
++- If not → emit Seedance YAML+prompt (with sheet locks), Higgsfield execution brief,
++  CapCut finishing, media-buy checklists at the same quality bar.
++- NEVER invent proof/metrics/celebs. Use user proof or [PLACEHOLDER].
++- BEFORE generation prompts: fill or request product-sheet-template.md and
++  character-sheet-template.md as needed. Sheet wins over free text.
++- Deliver references/output-template.md COMPLETELY including Self-critique & variants
++  (rubric scores, 2–3 failure modes, A/B/C variants that fix them).
++- Pass checklists/first-time-right.json (consistency + self-critique are hard gates).
++- Dual-track default for serious brands. Muted-first. One CTA. Timed beats.
++- Check creative-stack/LAST-VERIFIED.md for tool freshness.
++- Optionally use references/swipe-signals.json for high-longevity formats.
+ 
+-Retrieve patterns, route Seedance/Higgsfield-grade stack, output full template with copy-paste prompts, QA, and scale plan.
++Workflow: pipelines/one-stop-ad-maker.md → retrieve → sheets → stack → package →
++self-critique → QA → distribute → scale.
+ ```
+diff --git a/skills/ad-intelligence/references/creative-stack/LAST-VERIFIED.md b/skills/ad-intelligence/references/creative-stack/LAST-VERIFIED.md
+new file mode 100644
+index 0000000..349701e
+--- /dev/null
++++ b/skills/ad-intelligence/references/creative-stack/LAST-VERIFIED.md
+@@ -0,0 +1,11 @@
++# Creative stack — last verified
++
++| Item | Last verified | Notes |
++| --- | --- | --- |
++| Seedance 2.5 | 2026-10-10 | Up to ~30s single-pass; omni_reference; video_edit / extension; native audio; region/timestamp edits. Available via BytePlus/Lumina, CapCut/Dreamina, TikTok Symphony, Higgsfield `seedance_2_5`. |
++| Seedance 2.0 | 2026-10-10 | Strong multimodal refs; multi-SKU; Higgsfield `seedance_2_0`; still valid fallback. |
++| Higgsfield workflows | 2026-10-10 | ads-studio, ugc-video, ad-multiplier, product-photoshoot, marketing-studio, katana, brand-asset-creation, thumbnail-generation, faceless-video, video-montage, video-editing. Always call `get_workflow_instructions` first when MCP connected. |
++| Higgsfield video models | 2026-10-10 | Also: `marketing_studio_video`, `ad_multiplier_v2`, `grok_video_v15`, `gemini_omni` / `gemini_omni_flash_1_1`, `minimax_h3_max`. Prefer `models_explore(action:'recommend')` at runtime. |
++| Meta / TikTok / YT norms | 2026-10-10 | Muted-first social; Spark clearing; synthetic-media disclosure evolving — see platform-specs + rights tree. |
++
++**Agent rule:** If today’s date is >90 days after Last verified, say so in the package and recommend re-checking model lists via MCP / vendor docs before expensive generates.
+diff --git a/skills/ad-intelligence/references/creative-stack/character-sheet-template.md b/skills/ad-intelligence/references/creative-stack/character-sheet-template.md
+new file mode 100644
+index 0000000..78f66c4
+--- /dev/null
++++ b/skills/ad-intelligence/references/creative-stack/character-sheet-template.md
+@@ -0,0 +1,54 @@
++# Character / talent sheet template (consistency lock)
++
++**Hard rule:** Before UGC avatar, founder, or recurring talent generation, fill this sheet. Required for dual-track when the same person appears in viral + cinema cuts.
++
++If the user has no talent yet, either (a) request a photo, or (b) define a **synthetic creator brief** clearly labeled as AI talent and set disclosure flags.
++
++```markdown
++## Character sheet — [NAME OR HANDLE]
++
++### Identity
++- Role in ads: creator / founder / customer / host
++- Age range presentation:
++- Gender presentation:
++- Ethnicity presentation (only if user-specified; do not invent):
++- Accent / voice notes:
++
++### Visual lock (attach files)
++| Role | File | Notes |
++| --- | --- | --- |
++| Face front | `[FACE_FRONT.png]` | Neutral expression |
++| Face ¾ | `[FACE_34.png]` | |
++| Full / wardrobe | `[WARDROBE.png]` | Default outfit |
++| Expression set (optional) | `[EXPR.png]` | smile / serious / surprise |
++
++### Non-negotiable likeness truths
++- Hair:
++- Skin / makeup level:
++- Distinguishing features:
++- Wardrobe defaults:
++- Wardrobe forbidden:
++
++### Performance lock
++- Energy: calm / hype / deadpan / warm expert
++- Gesture vocabulary:
++- Never: teleprompter stare, stock smile, logo shirt unless branded
++
++### Soul-ID notes
++- “This person always feels like: …”
++- “Never feels like: …”
++
++### Rights & disclosure
++- Likeness rights: owned / licensed / AI-synthetic
++- Synthetic-media disclosure required?: yes / no / platform-dependent
++- FTC / paid partnership line (if influencer):
++```
++
++## How to inject into Seedance / Higgsfield UGC
++
++```text
++CHARACTER SHEET LOCK — same person every shot:
++[paste filled sheet summary]
++Face references attached. Do not beautify into a different person.
++If AI talent: keep identity stable; disclosure handled in endcard/captions per platform.
++```
+diff --git a/skills/ad-intelligence/references/creative-stack/higgsfield-playbook.md b/skills/ad-intelligence/references/creative-stack/higgsfield-playbook.md
+index 76ec305..c94fb97 100644
+--- a/skills/ad-intelligence/references/creative-stack/higgsfield-playbook.md
++++ b/skills/ad-intelligence/references/creative-stack/higgsfield-playbook.md
+@@ -48,16 +48,30 @@ Peers for exploration: `grok_video_v15`, `gemini_omni_flash_1_1`, `minimax_h3_ma
+ - `ad_reference_id` recreates scenario — **mutually exclusive** with hook/setting
+ - Always pass `avatar_ids` / `product_ids` explicitly when needed
+ 
++## Consistency systems (required before generate)
++
++1. Fill `product-sheet-template.md` for any packaged/physical/digital product shown.
++2. Fill `character-sheet-template.md` for any recurring talent / UGC avatar.
++3. Prefer Higgsfield `product-photoshoot` and/or `character-sheet` workflow to create missing stills.
++4. Pass multi-angle product + face refs into Seedance / UGC / Marketing Studio — **sheet wins** over free text.
++5. For Ad Multiplier, lock the same product sheet across variants; only change the intended variable.
++
+ ## Handoff block (no MCP)
+ 
+ ```markdown
+ ### Higgsfield execution brief
+-- Workflow: [ads-studio | ugc-video | ad-multiplier | product-photoshoot | marketing-studio | seedance generate_video | …]
+-- Inputs to upload: [product stills, logo, script, reference ad]
++- Workflow: [ads-studio | ugc-video | ad-multiplier | product-photoshoot | marketing-studio | seedance generate_video | character-sheet | …]
++- Product sheet attached?: yes / gaps listed
++- Character sheet attached?: yes / n/a / gaps listed
++- Inputs to upload: [hero, ¾, label, macro, face refs, logo, script]
++- Style lock / Soul-ID notes: […]
+ - Preset / model: […]
+ - Aspect: 9:16 (+ 16:9 if hero)
+ - Duration: […]
+-- Prompt / script: (paste)
+-- Variants to generate: A/B/C
++- Prompt / script: (paste — includes PRODUCT/CHARACTER SHEET LOCK)
++- Variants to generate: A/B/C (one variable each)
++- Disclosure: synthetic talent? paid partnership?
+ - After: export → CapCut captions → Meta/TikTok upload checklist
+ ```
++
++See `LAST-VERIFIED.md` before assuming model IDs.
+\ No newline at end of file
+diff --git a/skills/ad-intelligence/references/creative-stack/product-sheet-template.md b/skills/ad-intelligence/references/creative-stack/product-sheet-template.md
+new file mode 100644
+index 0000000..2a34808
+--- /dev/null
++++ b/skills/ad-intelligence/references/creative-stack/product-sheet-template.md
+@@ -0,0 +1,55 @@
++# Product sheet template (consistency lock)
++
++**Hard rule:** Before any Seedance / Higgsfield / Kling / Runway generation for a physical or packaged product, fill this sheet (or mark gaps as `[REQUEST FROM USER]`). Paste the filled sheet into prompts as **IDENTITY LOCK**.
++
++Agents must **produce** this sheet in the output package under “Consistency systems,” even if some fields are placeholders.
++
++```markdown
++## Product sheet — [PRODUCT NAME / SKU]
++
++### Identity
++- Official name:
++- SKU / variant / colorway:
++- Category / niche:
++- One-line mechanism (not feature laundry):
++
++### Visual lock (attach files)
++| Role | File | Notes |
++| --- | --- | --- |
++| Hero pack (front, true color) | `[PRODUCT_HERO.png]` | Straight-on, even light |
++| ¾ angle | `[PRODUCT_34.png]` | Depth + silhouette |
++| Label / logo close-up | `[PRODUCT_LABEL.png]` | Readable type |
++| In-hand / scale | `[PRODUCT_HAND.png]` | Size truth |
++| Detail / texture / macro | `[PRODUCT_MACRO.png]` | Material truth |
++| Open / in-use (if relevant) | `[PRODUCT_USE.png]` | Demo state |
++
++### Non-negotiable visual truths
++- Shape / silhouette:
++- Exact colors (hex or plain language):
++- Materials / finish (matte, gloss, glass, fabric…):
++- Label text that must stay legible:
++- Forbidden morphs (no melting logo, no wrong cap color, no extra bottle…):
++
++### Do-not-generate claims
++- Banned on-pack or on-screen claims:
++- Medical / finance / performance claims status: user-approved only / none
++
++### Style lock (grade)
++- Lighting preference:
++- Grade / LUT vibe:
++- Backgrounds allowed:
++- Backgrounds forbidden:
++
++### Soul-ID notes (keep constant across variants)
++- “This product always looks like: …”
++- “Never looks like: …”
++```
++
++## How to inject into Seedance
++
++```text
++PRODUCT SHEET LOCK — obey every frame:
++[paste filled sheet summary]
++References attached: hero, ¾, label, macro.
++If conflict between prompt and sheet, SHEET WINS.
++```
+diff --git a/skills/ad-intelligence/references/creative-stack/seedance-prompt-contract.md b/skills/ad-intelligence/references/creative-stack/seedance-prompt-contract.md
+index e56040b..787e63c 100644
+--- a/skills/ad-intelligence/references/creative-stack/seedance-prompt-contract.md
++++ b/skills/ad-intelligence/references/creative-stack/seedance-prompt-contract.md
+@@ -3,14 +3,17 @@
+ Use this whenever the stack includes **Seedance 2.0 / 2.5** (BytePlus, CapCut/Dreamina, TikTok Symphony, or Higgsfield `seedance_2_*`).  
+ Even with **no API connected**, emit this block so anyone can paste into Seedance and hit ad-grade output.
+ 
++See `LAST-VERIFIED.md` for model freshness.
++
+ ## Golden rules
+ 
+-1. **Product lock first** — attach real pack / product stills as references (omni_reference). Do not rely on text-only for ecommerce.
++1. **Product / character lock first** — fill `product-sheet-template.md` and/or `character-sheet-template.md`. Attach multi-angle refs. No text-only ecommerce.
+ 2. **One job per generation** — match the pattern’s JTBD; don’t cram feature laundry.
+-3. **Timed beats in the prompt** — Seedance follows narrative better with `0–3s / 3–10s / …` blocks.
+-4. **Native audio OK** — set `generate_audio: true`, but still plan burned captions for muted feeds.
+-5. **Don’t ask the model to render tiny legal text or perfect logo kerning** — add endcard/captions in CapCut/edit.
+-6. **Variants** — change ONE variable (hook visual, talent, background, CTA line). Prefer region/timestamp edit on 2.5 when available.
++3. **Timed beats in the prompt** — `0–3s / 3–10s / …` blocks.
++4. **Native audio OK** — `generate_audio: true`, plus burned captions for muted feeds.
++5. **No tiny legal text / perfect logo kerning inside the model** — CapCut/endcard in post.
++6. **Variants** — change ONE variable. Prefer region/timestamp edit on 2.5 when available.
++7. **Sheet wins** — if prompt conflicts with product/character sheet, the sheet wins.
+ 
+ ## Settings block (emit always)
+ 
+@@ -23,17 +26,26 @@ resolution: 1080p
+ aspect_ratio: "9:16"  # also deliver 16:9 twin brief
+ generate_audio: true
+ bitrate_mode: high
++consistency:
++  product_sheet: true
++  character_sheet: false  # true if talent on camera
+ references:
+   - role: product_hero
+-    file: "[PRODUCT_PACK.png]"
+-  - role: product_detail
+-    file: "[LABEL_OR_MACRO.png]"
+-  - role: style_or_talent
+-    file: "[OPTIONAL_REF.png]"
++    file: "[PRODUCT_HERO.png]"
++  - role: product_34
++    file: "[PRODUCT_34.png]"
++  - role: product_label
++    file: "[PRODUCT_LABEL.png]"
++  - role: product_macro
++    file: "[PRODUCT_MACRO.png]"
++  - role: character_front
++    file: "[FACE_FRONT.png]"   # omit if none
++  - role: style_lock
++    file: "[OPTIONAL_GRADE_REF.png]"
+   - role: audio_mood
+     file: "[OPTIONAL_BED.mp3]"
+ negative:
+-  - "blurry logo, melted text, extra fingers, watermark, stock lower-third, brand parody"
++  - "blurry logo, melted text, wrong label, color shift, extra fingers, watermark, stock lower-third, brand parody, different person, beauty-filter identity drift"
+ ```
+ 
+ ## Prompt skeleton (copy-paste)
+@@ -44,38 +56,48 @@ Job-to-be-done: [ONE SENTENCE]
+ Style: [cinematic|ugc-hybrid|macro|performance] · Grade: [describe] · Lens: [e.g. 35mm / macro 100mm]
+ Aspect feel: vertical social, subject centered with safe margins for captions.
+ 
++PRODUCT SHEET LOCK (sheet wins):
++[2–6 lines from filled product sheet: silhouette, colorway, label truths, forbidden morphs]
++
++CHARACTER SHEET LOCK (if any; sheet wins):
++[2–4 lines: likeness, wardrobe, energy — Soul-ID]
++
+ TIMELINE:
+ 0–2s HOOK: [exact visual + on-screen idea — no logo]. Pattern interrupt: […].
+-2–8s BODY: [mechanism / demo / desire]. Camera: [move]. Product must match reference exactly.
+-8–12s PROOF OR ESCALATION: [result / social proof placeholder — do not invent numbers on screen].
++2–8s BODY: [mechanism / demo / desire]. Camera: [move]. Product must match references exactly.
++8–12s PROOF OR ESCALATION: [result / proof — never invent numbers on screen].
+ 12–15s CTA BEAT: [action] with clean end pose; leave lower 20% quieter for caption burn-in.
+ 
+ AUDIO: [VO line if any — short]. SFX: [whoosh/impact]. Music energy: [low/medium/high]. No copyrighted song titles.
+ 
+-IDENTITY LOCK: Keep product shape, colorway, and label from reference images consistent every frame.
+-PHYSICS: Believable materials, no morphing packaging.
++IDENTITY LOCK: Same product (+ same person if cast) every frame. No beautify-into-stranger. No packaging morph.
++PHYSICS: Believable materials; correct reflections; no melting type.
+ ```
+ 
+ ## Hook-test mini prompt (5–8s)
+ 
+ ```text
+-Thumb-stop hook only. 0–1s: [spectacle or confession visual]. 1–5s: product enters as solution. Hard stop before CTA. Match product reference. Vertical 9:16. generate_audio true.
++Thumb-stop hook only. Product sheet lock on. 0–1s: [spectacle or confession visual]. 1–5s: product enters as solution matching hero+label refs. Hard stop before CTA. Vertical 9:16. generate_audio true.
+ ```
+ 
+ ## Edit brief (Seedance 2.5 region/timestamp)
+ 
+ ```text
+-EDIT MODE — keep all shots except:
++EDIT MODE — keep product/character identity + grade:
+ - Replace 0–3s hook with: […]
+ - Replace final 3s CTA with: […]
+-Do not change product identity or grade.
++Do not change product identity, label, or talent likeness.
+ ```
+ 
+ ## Quality bar checklist (Seedance)
+ 
+-- [ ] Product recognizable vs reference
++- [ ] Product sheet filled or gaps requested
++- [ ] Multi-angle refs attached (hero + label minimum)
++- [ ] Character sheet if talent used
++- [ ] Product recognizable vs reference every beat
+ - [ ] Hook works muted
+ - [ ] No melted logos / fake metrics on screen
+ - [ ] Length matches media plan
+ - [ ] Vertical + horizontal twin planned
+ - [ ] Rights: original/licensed audio for paid
++- [ ] Synthetic disclosure noted if AI talent
+diff --git a/skills/ad-intelligence/references/output-template.md b/skills/ad-intelligence/references/output-template.md
+index 10a8705..b8e9fbd 100644
+--- a/skills/ad-intelligence/references/output-template.md
++++ b/skills/ad-intelligence/references/output-template.md
+@@ -1,6 +1,7 @@
+ # Mandatory output template (perfect ad maker)
+ 
+-Copy this structure every time. Do not omit sections; use `N/A — reason` if needed.
++Copy this structure every time. Do not omit sections; use `N/A — reason` if needed.  
++**Do not mark done until Self-critique & variants is complete and first-time-right gates pass.**
+ 
+ ```markdown
+ ## Ad package
+@@ -23,15 +24,23 @@ Copy this structure every time. Do not omit sections; use `N/A — reason` if ne
+ - Hook family ids:
+ - Trend class (if any):
+ - Niche pack:
++- Swipe-signal notes (optional high-longevity):
+ 
+ ### Job-to-be-done (one sentence)
+ 
+ 
++### Consistency systems (required)
++- Product sheet: filled / requested gaps: […]
++- Character sheet: filled / n/a / requested gaps: […]
++- Style lock / Soul-ID (1–3 lines):
++- Refs to attach: hero, ¾, label, macro, face…
++
+ ### Creative stack (required)
+ - Pipeline id / posture default:
+ - Primary generator: (Seedance 2.5 / Higgsfield ugc-video / Ads Studio / Kling / …)
+ - Supporting tools: (CapCut, ElevenLabs, Suno, Ad Multiplier, …)
+ - Connected now?: yes → call tools | no → handoff prompts below
++- Creative-stack last verified date checked?: yes / stale warning
+ 
+ ### Hooks (3–5)
+ 
+@@ -46,13 +55,14 @@ Copy this structure every time. Do not omit sections; use `N/A — reason` if ne
+ 
+ ### Seedance / film-gen execution (copy-paste)
+ ```yaml
+-# paste settings + prompt from seedance-prompt-contract.md
++# settings + prompt WITH product/character sheet lock
++# from seedance-prompt-contract.md
+ ```
+ 
+ ### Higgsfield execution brief (if relevant)
+ - Workflow:
+ - Model / preset:
+-- Inputs to upload:
++- Sheets + inputs to upload:
+ - Variants:
+ 
+ ### Other tool prompts (Kling/Runway/MJ/VO/music)
+@@ -74,32 +84,54 @@ Copy this structure every time. Do not omit sections; use `N/A — reason` if ne
+ - Primary (only one in-cut):
+ - Alternates (A/B only):
+ 
+-### A/B matrix
+-| Variant | What changes | Tool action | Hypothesis |
+-| --- | --- | --- | --- |
+-| A |  |  |  |
+-| B |  |  |  |
+-| C |  |  |  |
+-
+ ### Dual-track twin
+ - Viral/native:
+ - High-production / Seedance-cinema:
+ - Shared JTBD:
++- Same product/character lock across both?: yes
+ 
+ ### Scale plan
+ - Ad Multiplier / Spark / whitelisting:
+ 
+-### Rights & compliance
+-- Audio:
+-- Faces / footage:
+-- Claims to avoid:
++### AI disclosure & rights
++- Synthetic talent/voice/footage?: yes/no — disclosure plan:
++- Audio rights path: organic trend / original / licensed
++- Face/release status:
++- Claims used (all user-approved or omitted):
++- Rights decision-tree outcomes (from platform-specs):
+ 
+ ### Landing / store / bio mirror
+ 
+ 
++### Self-critique & variants (mandatory — kill redo loops)
++#### Rubric scores (1–5)
++| Dimension | Score | One-line why |
++| --- | --- | --- |
++| thumbstop |  |  |
++| clarity |  |  |
++| native_fit |  |  |
++| desire_or_proof |  |  |
++| cta_hygiene |  |  |
++| production_truth |  |  |
++| consistency_lock |  |  |
++
++Ship rule: all ≥4 or list accepted risks.
++
++#### Likely failure modes (2–3 for this niche/platform)
++1.
++2.
++3.
++
++#### Variants that attack those failures
++| Variant | Changes (ONE variable) | Failure it fixes | Tool action |
++| --- | --- | --- | --- |
++| A |  |  |  |
++| B |  |  |  |
++| C |  |  |  |
++
+ ### First-time-right QA
+-- Checklist gates:
+-- Rubric dims:
++- Checklist gates: PASS / fails listed:
+ - Mistakes library hits rewritten: yes/no
+ - Seedance/Higgsfield quality bar: pass/fail
++- Self-critique completed: yes
+ ```
+diff --git a/skills/ad-intelligence/references/platform-specs.json b/skills/ad-intelligence/references/platform-specs.json
+index 2cab7a5..7a64365 100644
+--- a/skills/ad-intelligence/references/platform-specs.json
++++ b/skills/ad-intelligence/references/platform-specs.json
+@@ -1,76 +1,130 @@
+ {
+   "id": "platform-specs",
+-  "name": "Platform-native defaults (first-time-right)",
++  "name": "Platform-native defaults + compliance (first-time-right)",
++  "updated": "2026-10-10",
++  "global_rules": {
++    "muted_first": true,
++    "one_primary_cta": true,
++    "no_invented_proof": true,
++    "synthetic_media": "If AI-generated talent, voice, or heavily synthetic footage is used, set disclosure flags in the output package. Prefer platform-native disclosure tools when available; otherwise on-screen/caption disclosure. Never hide synthetic identity as a real customer testimonial."
++  },
++  "rights_decision_tree": [
++    {
++      "q": "Is the audio a trending commercial song?",
++      "if_yes": "Organic-only unless explicitly cleared for paid. Paid twin uses Suno/original/licensed bed.",
++      "if_no": "Proceed; still log source"
++    },
++    {
++      "q": "Are faces of real people shown?",
++      "if_yes": "Need release / owned UGC rights / employee consent. Else use AI talent + disclosure or B-roll without faces.",
++      "if_no": "OK"
++    },
++    {
++      "q": "Is proof a review or metric?",
++      "if_yes": "Must be user-supplied. Else [PLACEHOLDER] or omit.",
++      "if_no": "OK"
++    },
++    {
++      "q": "Competitor name/logo on screen?",
++      "if_yes": "Prefer 'old way' framing; avoid illegal trademark smear.",
++      "if_no": "OK"
++    },
++    {
++      "q": "Health/finance claim?",
++      "if_yes": "Only user-approved language; add compliance line; no guarantees.",
++      "if_no": "OK"
++    }
++  ],
+   "platforms": {
+     "tiktok": {
+       "aspect": ["9:16"],
+       "ideal_seconds": [9, 15, 21, 34],
+-      "captions": "Burned-in or native captions; huge hook text",
++      "captions": "Burned-in or native; huge hook text; native slang OK",
++      "native_signals": ["POV/stitch/duet grammar", "Comment keyword CTAs", "Spark whitelisting"],
+       "hook_max_s": 1.5,
+-      "notes": "Native > polished. Sound-on optional but muted must work. Spark Ads for creator whitelisting."
++      "synthetic_disclosure": "Use platform disclosure when available; caption 'AI-generated' if synthetic talent presents as person",
++      "notes": "Native > polished. Muted must work. Spark for creator codes."
+     },
+     "meta": {
+       "aspect": ["4:5", "9:16", "1:1"],
+       "ideal_seconds": [15, 30],
+-      "captions": "Assume muted; text safe zones for UI",
++      "captions": "Assume muted; safe zones for UI chrome",
++      "native_signals": ["Primary text + headline", "Advantage+ needs creative diversity", "UGC texture often wins cold"],
+       "hook_max_s": 3,
+-      "notes": "Primary text + headline matter. Advantage+ still needs creative diversity."
++      "synthetic_disclosure": "Follow Meta AI/synthetic advertising policies; disclose when required; never fake testimonials",
++      "notes": "Message match to landing is critical."
+     },
+     "youtube": {
+       "aspect": ["16:9"],
+       "ideal_seconds": [15, 30, 60],
+-      "captions": "Optional but good for accessibility",
++      "captions": "Recommended",
++      "native_signals": ["Hook before skip", "Bumper 6s", "End screen/companion"],
+       "hook_max_s": 5,
+-      "notes": "Skippable needs hook before skip; bumpers 6s non-skip."
++      "synthetic_disclosure": "Disclose synthetic content per YouTube/Google ads policies when applicable",
++      "notes": "Cinema twins thrive here."
+     },
+     "youtube_shorts": {
+       "aspect": ["9:16"],
+       "ideal_seconds": [15, 30, 45],
+-      "captions": "Required energy",
++      "captions": "High energy burned captions",
++      "native_signals": ["Series", "Search-friendly titles"],
+       "hook_max_s": 1.5,
+-      "notes": "Treat like TikTok; stronger for search + series."
++      "synthetic_disclosure": "Same family as TikTok-native short form",
++      "notes": "Treat like TikTok with stronger search."
+     },
+     "linkedin": {
+       "aspect": ["1:1", "4:5", "16:9"],
+       "ideal_seconds": [15, 30],
+-      "captions": "Captions on; professional tone unless skit intentionally",
++      "captions": "On; professional unless intentional skit",
++      "native_signals": ["Hot take", "Explainer", "Documentary"],
+       "hook_max_s": 3,
+-      "notes": "Hot takes + explainers + documentary travel well."
++      "synthetic_disclosure": "Be conservative; disclose synthetic executives/talent",
++      "notes": "Thought-leadership > meme chaos."
+     },
+     "ctv_ott": {
+       "aspect": ["16:9"],
+       "ideal_seconds": [15, 30],
+       "captions": "Broadcast-safe",
++      "native_signals": ["Clear endcard", "Audio-forward OK"],
+       "hook_max_s": 3,
+-      "notes": "Premium cinema; clear endcard; audio-forward OK."
++      "synthetic_disclosure": "Follow network/publisher rules",
++      "notes": "Premium cinema; legal scrub."
+     },
+     "snapchat": {
+       "aspect": ["9:16"],
+       "ideal_seconds": [6, 10, 15],
+       "captions": "Big, playful",
++      "native_signals": ["Full-bleed", "Fast cuts", "AR if relevant"],
+       "hook_max_s": 1,
+-      "notes": "Full-bleed vertical; fast."
++      "synthetic_disclosure": "Disclose synthetic faces when required",
++      "notes": "Speed over polish."
+     },
+     "pinterest": {
+       "aspect": ["2:3", "1:1", "9:16"],
+       "ideal_seconds": [6, 15],
+-      "captions": "Text-led ideas perform",
++      "captions": "Text-led ideas",
++      "native_signals": ["Utility", "Aesthetic stills", "Idea pins"],
+       "hook_max_s": 2,
+-      "notes": "Idea pins / video; utility and aesthetic."
++      "synthetic_disclosure": "Disclose when lifestyle talent is synthetic",
++      "notes": "Save-bait friendly."
+     },
+     "organic_short": {
+       "aspect": ["9:16"],
+       "ideal_seconds": [15, 45, 60],
+       "captions": "Native",
++      "native_signals": ["Series", "Saves", "Follow CTAs"],
+       "hook_max_s": 1.5,
++      "synthetic_disclosure": "Disclose AI talent honestly",
+       "notes": "Series and saves > hard sell."
+     },
+     "influencer_seed": {
+       "aspect": ["9:16"],
+       "ideal_seconds": [20, 60],
+       "captions": "Creator’s style",
++      "native_signals": ["Must-say / do-not-say brief", "FTC paid partnership", "Spark code"],
+       "hook_max_s": 3,
+-      "notes": "Brief not teleprompter; FTC disclosure; whitelisting plan."
++      "synthetic_disclosure": "Real creators preferred; if AI influencer, disclose",
++      "notes": "Do not over-script."
+     }
+   }
+ }
+diff --git a/skills/ad-intelligence/references/swipe-signals.json b/skills/ad-intelligence/references/swipe-signals.json
+new file mode 100644
+index 0000000..30f88e8
+--- /dev/null
++++ b/skills/ad-intelligence/references/swipe-signals.json
+@@ -0,0 +1,116 @@
++{
++  "id": "swipe-signals",
++  "version": "1.0.0",
++  "updated": "2026-10-10",
++  "purpose": "Anonymized longevity signals — formats and hook families that tend to survive, plus common failure modes. No scraped creatives or brand names.",
++  "how_agents_use": "After niche+pattern retrieval, optionally read matching niche/format signals. Prefer high-longevity hook families when user wants evergreen performance. Never invent CTR/ROAS numbers.",
++  "longevity_tiers": {
++    "high": "Often reusable for months with light refreshes",
++    "medium": "Works in bursts; refresh hooks weekly",
++    "low": "Trend-tied; expire fast"
++  },
++  "by_format": [
++    {
++      "format": "ugc_talking_head",
++      "longevity": "high",
++      "hook_families": ["confession", "costly-mistake", "unpopular-belief", "objection-first"],
++      "survives_when": ["Specific scene language", "Imperfect native delivery", "One mechanism"],
++      "fails_when": ["Fake studio UGC", "Logo-first", "Feature laundry"]
++    },
++    {
++      "format": "before_after",
++      "longevity": "high",
++      "hook_families": ["before-label", "pattern-interrupt-visual"],
++      "survives_when": ["Matched framing", "Short process", "Honest lighting"],
++      "fails_when": ["Mismatched angles", "Overlong process", "Fake transformation"]
++    },
++    {
++      "format": "product_loop",
++      "longevity": "high",
++      "hook_families": ["satisfying-mid-action", "macro-lust"],
++      "survives_when": ["Seamless loop", "Benefit visible in motion"],
++      "fails_when": ["Talking over a product that should demo itself"]
++    },
++    {
++      "format": "pov_day_in_life",
++      "longevity": "medium",
++      "hook_families": ["pov-identity", "grwm"],
++      "survives_when": ["Identity first", "Product as prop"],
++      "fails_when": ["Hard sell mid-ritual"]
++    },
++    {
++      "format": "meme_native",
++      "longevity": "low",
++      "hook_families": ["trend-payload", "skit-cold-open"],
++      "survives_when": ["Punchline = product truth", "Fast ship"],
++      "fails_when": ["Forced trend", "Uncleared audio in paid"]
++    },
++    {
++      "format": "hero_product_film",
++      "longevity": "high",
++      "hook_families": ["spectacle-open", "macro-lust"],
++      "survives_when": ["Product lock", "One capability as experience", "Strong endcard"],
++      "fails_when": ["Pretty with no JTBD", "Melted packaging"]
++    },
++    {
++      "format": "listicle_text_overlay",
++      "longevity": "high",
++      "hook_families": ["save-this", "open-loop"],
++      "survives_when": ["Actionable items", "Muted-legible cards"],
++      "fails_when": ["Vague tips", "Hard sell on card 1"]
++    },
++    {
++      "format": "local_service_trust",
++      "longevity": "high",
++      "hook_families": ["geo-specific"],
++      "survives_when": ["Real facility", "Phone on screen 3s", "NAP match"],
++      "fails_when": ["Stock city footage", "Wrong phone"]
++    },
++    {
++      "format": "app_demo_ui",
++      "longevity": "high",
++      "hook_families": ["ui-aha"],
++      "survives_when": ["Real UI", "Aha in first taps"],
++      "fails_when": ["Fantastical fake UI"]
++    },
++    {
++      "format": "social_proof_stack",
++      "longevity": "high",
++      "hook_families": ["customer-voice"],
++      "survives_when": ["Real quotes", "Outcome-specific"],
++      "fails_when": ["Invented testimonials"]
++    }
++  ],
++  "by_niche_hints": [
++    {
++      "niche": "beauty",
++      "high_longevity": ["before_after", "beauty_macro_tabletop", "ugc_talking_head", "grwm_soft_sell"],
++      "common_failures": ["Unsubstantiated clinical claims", "Shade mismatch on landing", "Overfiltered skin"]
++    },
++    {
++      "niche": "saas",
++      "high_longevity": ["pas_pain_stack", "app_demo_ui", "listicle_text_overlay", "green_screen_rant"],
++      "common_failures": ["Feature laundry", "Fake dashboards", "Vague AI claims"]
++    },
++    {
++      "niche": "local_services",
++      "high_longevity": ["local_service_trust", "before_after", "social_proof_stack"],
++      "common_failures": ["Stock footage", "Multi-CTA", "NAP mismatch"]
++    },
++    {
++      "niche": "ecommerce",
++      "high_longevity": ["product_loop", "ugc_demo", "offer_urgency", "unboxing_asmr"],
++      "common_failures": ["Wrong SKU on PDP", "Fake urgency timers", "No demo"]
++    },
++    {
++      "niche": "entertainment",
++      "high_longevity": ["launch_teaser", "series_cliffhanger", "music_video_brand"],
++      "common_failures": ["Spoiling the hook", "Uncleared music", "No clear watch CTA"]
++    },
++    {
++      "niche": "creator",
++      "high_longevity": ["series_cliffhanger", "hot_take_controversy", "save_share_bait"],
++      "common_failures": ["Cliff without Part 2", "Empty engagement bait"]
++    }
++  ]
++}
+diff --git a/skills/ad-intelligence/scripts/retrieve.mjs b/skills/ad-intelligence/scripts/retrieve.mjs
+index 6ca8285..e07cd2c 100644
+--- a/skills/ad-intelligence/scripts/retrieve.mjs
++++ b/skills/ad-intelligence/scripts/retrieve.mjs
+@@ -202,6 +202,27 @@ function main() {
+     path.join(DB_ROOT, "trends/viral-operating-system.json")
+   );
+ 
++  let swipeSignals = null;
++  const swipePath = path.join(__dirname, "..", "references", "swipe-signals.json");
++  if (fs.existsSync(swipePath)) {
++    const swipe = loadJson(swipePath);
++    const nicheKey = (q.niche || "").toLowerCase();
++    const nicheHints = (swipe.by_niche_hints || []).filter(
++      (n) =>
++        !nicheKey ||
++        n.niche.includes(nicheKey) ||
++        nicheKey.includes(n.niche)
++    );
++    swipeSignals = {
++      file: "references/swipe-signals.json",
++      note: "Anonymized longevity signals — optional; never invent metrics",
++      niche_hints: nicheHints.length ? nicheHints : swipe.by_niche_hints?.slice(0, 3),
++      formats_high_longevity: (swipe.by_format || [])
++        .filter((f) => f.longevity === "high")
++        .map((f) => f.format),
++    };
++  }
++
+   console.log(
+     JSON.stringify(
+       {
+@@ -209,11 +230,16 @@ function main() {
+         count: results.length,
+         results,
+         niche: nichePack,
++        swipe_signals: swipeSignals,
+         viral_os_summary: {
+           id: viralOs.id,
+           trend_classes: viralOs.trend_classes.map((t) => t.id),
+           file: "database/trends/viral-operating-system.json",
+         },
++        consistency_templates: [
++          "references/creative-stack/product-sheet-template.md",
++          "references/creative-stack/character-sheet-template.md",
++        ],
+         anti_patterns_file: "database/anti-patterns.json",
+         hooks_file: "database/hooks/library.json",
+         flows_file: "database/flows/library.json",
+-- 
+2.43.0
+
